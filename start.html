@@ -131,10 +131,9 @@ function callMSGraph(theUrl, accessToken, callback, setClientCredsInHeader) {
 
         function LoadAllProductsInMemory() {
             //get sheets in RunningLedger workbook
-            //https://graph.microsoft.com/v1.0/me/drive/items/4C73F0C301C5A18A!19081/workbook/worksheets
 
             var gphCallReadLedger = {
-                graphScopes: ["https://graph.microsoft.com/file.readwrite.all"],
+                graphScopes: ["https://graph.microsoft.com/user.read"],
                 graphEndpoint: 'https://graph.microsoft.com/v1.0/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange',
                 setClientCredsInHeader: true
             };
