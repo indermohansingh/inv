@@ -18,13 +18,18 @@
 
     var gphCallSampleMe = {
         graphScopes: ["user.read"],
-        graphEndpoint: "https://graph.microsoft.com/v1.0/me"
+        graphEndpoint: "https://graph.microsoft.com/v1.0/me",
+        setClientCredsInHeader: false
     };
         
     var appMSClientID = '';
     let urlParams = new URLSearchParams(window.location.search);
     appMSClientID = urlParams.get('clientID');
-                
+
+    var appMSClientSecret = '';
+    urlParams = new URLSearchParams(window.location.search);
+    appMSClientSecret = urlParams.get('clientSecret');
+
         //Pass null for default authority (https://login.microsoftonline.com/common)
 var myMSALObj = new Msal.UserAgentApplication(appMSClientID, null, acquireTokenRedirectCallBack,
     {storeAuthStateInCookie: true, cacheLocation: "localStorage"});
@@ -42,13 +47,13 @@ function signIn() {
 function acquireTokenPopupAndCallMSGraph(gphCall) {
     //Call acquireTokenSilent (iframe) to obtain a token for Microsoft Graph
     myMSALObj.acquireTokenSilent(gphCall.graphScopes).then(function (accessToken) {
-        callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback);
+        callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback, gphCall.setClientCredsInHeader);
     }, function (error) {
         console.log(error);
         // Call acquireTokenPopup (popup window) in case of acquireTokenSilent failure due to consent or interaction required ONLY
         if (error.indexOf("consent_required") !== -1 || error.indexOf("interaction_required") !== -1 || error.indexOf("login_required") !== -1) {
             myMSALObj.acquireTokenPopup(gphCall.graphScopes).then(function (accessToken) {
-                callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback);
+                callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback, gphCall.setClientCredsInHeader);
             }, function (error) {
                 console.log(error);
             });
@@ -75,7 +80,7 @@ function showWelcomeMessage() {
 function acquireTokenRedirectAndCallMSGraph(gphCall) {
     //Call acquireTokenSilent (iframe) to obtain a token for Microsoft Graph
     myMSALObj.acquireTokenSilent(gphCall.graphScopes).then(function (accessToken) {
-      callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback);
+      callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback, gphCall.setClientCredsInHeader);
     }, function (error) {
         console.log(error);
         //Call acquireTokenRedirect in case of acquireToken Failure
@@ -89,13 +94,13 @@ function acquireTokenRedirectCallBack(errorDesc, token, error, tokenType)
 {
  if(tokenType === "access_token")
  {
-     callMSGraph(gphCallSampleMe.graphEndpoint, accessToken, graphAPICallback);
+     callMSGraph(gphCallSampleMe.graphEndpoint, accessToken, graphAPICallback, false);
  } else {
      console.log("token type is:"+tokenType);
  }
 }
 
-function callMSGraph(theUrl, accessToken, callback) {
+function callMSGraph(theUrl, accessToken, callback, setClientCredsInHeader) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200)
@@ -103,6 +108,13 @@ function callMSGraph(theUrl, accessToken, callback) {
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+    if (setClientCredsInHeader) {
+            xmlHttp.setRequestHeader("grant_type", "client_credentials");
+            xmlHttp.setRequestHeader("client_id", appMSClientID);
+            xmlHttp.setRequestHeader("client_secret", appMSClientSecret);
+            xmlHttp.setRequestHeader("resource", "https://graph.microsoft.com");
+            xmlHttp.setRequestHeader("Accept","text/plain");
+    }
     xmlHttp.send();
 }
         
@@ -123,7 +135,8 @@ function callMSGraph(theUrl, accessToken, callback) {
 
             var gphCallReadLedger = {
                 graphScopes: ["user.read"],
-                graphEndpoint: 'https://graph.microsoft.com/v1.0/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange'
+                graphEndpoint: 'https://graph.microsoft.com/v1.0/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange',
+                setClientCredsInHeader: true
             };
             acquireTokenPopupAndCallMSGraph(gphCallReadLedger);
         }
