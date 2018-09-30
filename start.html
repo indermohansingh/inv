@@ -123,7 +123,7 @@ function callMSGraph(theUrl, accessToken, callback) {
 
             var gphCallReadLedger = {
                 graphScopes: ["user.read"],
-                graphEndpoint: '/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange'
+                graphEndpoint: 'https://graph.microsoft.com/v1.0/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange'
             };
             acquireTokenPopupAndCallMSGraph(gphCallReadLedger);
         }
