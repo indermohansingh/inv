@@ -21,7 +21,7 @@
         
     var appMSClientID = '';
     let urlParams = new URLSearchParams(window.location.search);
-    let appMSClientID = urlParams.get('clientID');
+    appMSClientID = urlParams.get('clientID');
                 
         //Pass null for default authority (https://login.microsoftonline.com/common)
 var myMSALObj = new Msal.UserAgentApplication(appMSClientID, null, acquireTokenRedirectCallBack,
