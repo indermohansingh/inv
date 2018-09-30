@@ -10,6 +10,8 @@
     <h2>Welcome to MSAL.js Quickstart</h2><br/>
     <h4 id="WelcomeMessage"></h4>
     <button id="SignIn" onclick="signIn()">Sign In</button><br/><br/>
+    <button id="LoadPdts" onclick="LoadAllProductsInMemory()">Load Products</button><br/><br/>
+    
     <pre id="json"></pre>
     <script>
         //JS code
@@ -110,6 +112,21 @@ function callMSGraph(theUrl, accessToken, callback) {
  function signOut() {
      myMSALObj.logout();
  }
+
+    var appDBSheetID = '';
+    let urlParams = new URLSearchParams(window.location.search);
+    appDBSheetID = urlParams.get('DBsheetID');
+
+        function LoadAllProductsInMemory() {
+            //get sheets in RunningLedger workbook
+            //https://graph.microsoft.com/v1.0/me/drive/items/4C73F0C301C5A18A!19081/workbook/worksheets
+
+            var gphCallReadLedger = {
+                graphScopes: ["user.read"],
+                graphEndpoint: '/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange'
+            };
+            acquireTokenPopupAndCallMSGraph(gphCallReadLedger);
+        }
         
 
 // Browser check variables
