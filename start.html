@@ -114,7 +114,7 @@ function callMSGraph(theUrl, accessToken, callback) {
  }
 
     var appDBSheetID = '';
-    let urlParams = new URLSearchParams(window.location.search);
+    urlParams = new URLSearchParams(window.location.search);
     appDBSheetID = urlParams.get('DBsheetID');
 
         function LoadAllProductsInMemory() {
