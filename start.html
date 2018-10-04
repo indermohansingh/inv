@@ -1399,6 +1399,7 @@ $.fn.editableTableWidget.defaultOptions = {
 
 </script>
 
+<pre id="content"></pre>
 
     <table id="tblAction" class="pure-table pure-table-bordered">
         <tbody>
@@ -1945,7 +1946,7 @@ $.fn.editableTableWidget.defaultOptions = {
             // Query the data 
             var akey = 'SheetID';
             var getAROWForAkey;
-            getAROWForAkey = store.get(akey);
+            getAROWForAkey = store.getKey(akey);
             getAROWForAkey.onsuccess = function() {
                 console.log('getting by id (' + akey + '): '+ JSON.stringify( getAROWForAkey ) ) ;
                 return getAROWForAkey['ConfigValue'];
