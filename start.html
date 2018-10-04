@@ -1,17 +1,912 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Google Sheets API Quickstart</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <p>Google Sheets API Quickstart</p>
+<!doctype html>
+<html lang="en">
 
-    <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" . href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 
-    <pre id="content"></pre>
+    <title>Giggly Kangaroos Invoicing</title>
+
+    <style>
+        body {
+            padding: 1% 3%;
+            color: rgb(119, 119, 119);
+        }
+        h1 {
+            color: #333
+        }
+        .button {
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button-rounded {
+            background-color: #4CAF50;
+            /* Green */
+            
+            border-radius: 12px;
+        }
+        .button-rounded-Pay {
+            background-color: #0000FF;
+            /* Green */
+            
+            border-radius: 12px;
+        }
+        /* The Modal (background) */
+        
+        .modal {
+            display: none;
+            /* Hidden by default */
+            
+            position: fixed;
+            /* Stay in place */
+            
+            z-index: 1;
+            /* sit on top */
+            
+            padding-top: 100px;
+            /* Location of the box */
+            
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            
+            height: 100%;
+            /* Full height */
+            
+            overflow: auto;
+            /* Enable scroll if needed */
+            
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+        /* Modal content */
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            .html width: 80%;
+        }
+        /* The close Button */
+        
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .pagination li {
+            display: inline-block;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Giggly Kangaroos Invoicing</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+    <script>
+/*global $, window*/
+$.fn.editableTableWidget = function (options) {
+	'use strict';
+	return $(this).each(function () {
+		var buildDefaultOptions = function () {
+				var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
+				opts.editor = opts.editor.clone();
+				return opts;
+			},
+			activeOptions = $.extend(buildDefaultOptions(), options),
+			ARROW_LEFT = 37, ARROW_UP = 38, ARROW_RIGHT = 39, ARROW_DOWN = 40, ENTER = 13, ESC = 27, TAB = 9,
+			element = $(this),
+			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
+			active,
+			showEditor = function (select) {
+				active = element.find('td:focus');
+				if (active.length) {
+					editor.val(active.text())
+						.removeClass('error')
+						.show()
+						.offset(active.offset())
+						.css(active.css(activeOptions.cloneProperties))
+						.width(active.width())
+						.height(active.height())
+						.focus();
+					if (select) {
+						editor.select();
+					}
+				}
+			},
+			setActiveText = function () {
+				var text = editor.val(),
+					evt = $.Event('change'),
+					originalContent;
+				if (active.text() === text || editor.hasClass('error')) {
+					return true;
+				}
+				originalContent = active.html();
+				active.text(text).trigger(evt, text);
+				if (evt.result === false) {
+					active.html(originalContent);
+				}
+			},
+			movement = function (element, keycode) {
+				if (keycode === ARROW_RIGHT) {
+					return element.next('td');
+				} else if (keycode === ARROW_LEFT) {
+					return element.prev('td');
+				} else if (keycode === ARROW_UP) {
+					return element.parent().prev().children().eq(element.index());
+				} else if (keycode === ARROW_DOWN) {
+					return element.parent().next().children().eq(element.index());
+				}
+				return [];
+			};
+		editor.blur(function () {
+			setActiveText();
+			editor.hide();
+		}).keydown(function (e) {
+			if (e.which === ENTER) {
+				setActiveText();
+				editor.hide();
+				active.focus();
+				e.preventDefault();
+				e.stopPropagation();
+			} else if (e.which === ESC) {
+				editor.val(active.text());
+				e.preventDefault();
+				e.stopPropagation();
+				editor.hide();
+				active.focus();
+			} else if (e.which === TAB) {
+				active.focus();
+			} else if (this.selectionEnd - this.selectionStart === this.value.length) {
+				var possibleMove = movement(active, e.which);
+				if (possibleMove.length > 0) {
+					possibleMove.focus();
+					e.preventDefault();
+					e.stopPropagation();
+				}
+			}
+		})
+		.on('input paste', function () {
+			var evt = $.Event('validate');
+			active.trigger(evt, editor.val());
+			if (evt.result === false) {
+				editor.addClass('error');
+			} else {
+				editor.removeClass('error');
+			}
+		});
+		element.on('click keypress dblclick', showEditor)
+		.css('cursor', 'pointer')
+		.keydown(function (e) {
+			var prevent = true,
+				possibleMove = movement($(e.target), e.which);
+			if (possibleMove.length > 0) {
+				possibleMove.focus();
+			} else if (e.which === ENTER) {
+				showEditor(false);
+			} else if (e.which === 17 || e.which === 91 || e.which === 93) {
+				showEditor(true);
+				prevent = false;
+			} else {
+				prevent = false;
+			}
+			if (prevent) {
+				e.stopPropagation();
+				e.preventDefault();
+			}
+		});
+
+		element.find('td').prop('tabindex', 1);
+
+		$(window).on('resize', function () {
+			if (editor.is(':visible')) {
+				editor.offset(active.offset())
+				.width(active.width())
+				.height(active.height());
+			}
+		});
+	});
+
+};
+$.fn.editableTableWidget.defaultOptions = {
+	cloneProperties: ['padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
+					  'text-align', 'font', 'font-size', 'font-family', 'font-weight',
+					  'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
+	editor: $('<input>')
+};
+
+</script>
+
+
+    <table id="tblAction" class="pure-table pure-table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <button id="authorize_button" class="button button-rounded">Sign On to Google Account</button>
+                </td>
+            </tr>
+            </thead>
+    </table>
+    <BR>
+    <table id="tblAction" class="pure-table pure-table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <button class="button button-rounded">New Invoice</button>
+                </td>
+                <td>
+                    <button class="button button-rounded" onclick="showDiv('modalPdtInventory');">List of Inventory</button>
+                </td>
+            </tr>
+            </thead>
+    </table>
+    <BR>
+    <table id="tblaction" class="pure-table pure-table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <B>Total:</B>
+                    <input type="text" id="txtTotal" style="text-align: right">
+                </td>
+                <td>
+                    <button class="button button-rounded-Pay">Paid by Cash</button>
+                </td>
+                <td>
+                    <button class="button button-rounded-Pay">Paid by Credit Card</button>
+                </td>
+            </tr>
+            </thead>
+    </table>
+    <BR>
+    <table id="tb7customerInfo" class="pure-table pure-table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <B>Customer Name:</B>
+                    <input type="text" name="txtName">
+                </td>
+                <td>
+                    <B>Number:</B>
+                    <input type="text" name="txtNumber">
+                </td>
+                <td>
+                    <B>Email:</B>
+                    <input type="text" name="txtEmail">
+                </td>
+                <td>
+                    <B>Address:</B>
+                    <input type="text" name="txtAddress">
+                </td>
+            </tr>
+            </thead>
+    </table>
+    <BR>
+    <table id="tblPurchaseInvoice" class="pure-table pure-table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product Code</th>
+                <th>Product Desc</th>
+                <th>Qty</th>
+                <th>MRP</th>
+                <th>% discount Applied</th>
+                <th>Sale Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <B><U>Only when needed: </U></B>
+    <BR>
+    <table id="tblAdminActions" class="pure-table pure-table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <button id="signout_button" class="button button-rounded">Sign Off of Google Account</button>
+                </td>
+                <td>
+                    <button class="button button-rounded" onclick="LoadProductInfo();">Reload Inventory from Local</button>
+                </td>
+                <td>
+                    <button class="button button-rounded" onclick="showDiv('modalUpdateInventory');">Reload Inventory</button>
+                </td>
+            </tr>
+            </thead>
+    </table>
+
+    <!-- The Modal -->
+    <div id="modalPdtInventory" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="hideDiv('modalPdtInventory');">&times;</span>
+            <div id="divLstPdtInv">
+                <B>Search: </B>
+                <input type="text" class="search" />
+                <ul id="ulPdtList" class="list"> </ul>
+                <ul class="pagination"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="modalUpdateInventory" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="hideDiv('modalUpdateInventory');">&times;</span>
+            <div id="divUpdInv">
+                <B>Enter inventory: </B>
+                <P>
+                    <textarea id="txtUpdatedInv" rows="10" cols="100"></textarea>
+                    <P>
+                        <P>
+                            <button class="button button-rounded" onclick="GetDataFromServerAndStoreLocally();">Reload</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var arrPdtInfo = new Object();
+
+        function GetProductFromDetails(lPdtCode, lPdtDesc, lPdtMRP) {
+            var arrPdtDet = new Object();
+            arrPdtDet['pdtCode'] = lPdtCode;
+            arrPdtDet['pdtDesc'] = lPdtDesc;
+            arrPdtDet['pdtMRP'] = lPdtMRP;
+            return arrPdtDet;
+        }
+
+        function LoadProductInfo() {
+            console.log('Loading From LocalDB');
+            arrPdtInfo = new Object();
+            var store;
+            var DBIndex;
+            var tx;
+            tx = db.transaction(GKinvObjStoreName, "readwrite");
+            store = tx.objectStore(GKinvObjStoreName);
+            DBIndex = store.index(GKinvIdxName);
+            var countRequest = DBIndex.count();
+            countRequest.onsuccess = function() {
+                console.log('Total ROWS: ' + countRequest.result);
+            }
+            DBIndex.openCursor().onsuccess = function(event) {
+                var cursor = event.target.result;
+                if (cursor) {
+                    //console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' value: ' + JSON.stringify(cursor.value));
+                    var pdtInfoJSON = cursor.value; 
+                    arrPdtInfo[pdtInfoJSON["pdtCode"]] = GetProductFromDetails(pdtInfoJSON["pdtCode"], pdtInfoJSON["pdtDesc"], pdtInfoJSON["pdtMRP"]);
+                    cursor.continue();
+                } else {
+                    console.log('Entries all loaded.');
+                };
+            };
+        }
+
+        function AddNewEmptyRow() {
+            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+
+            var row = tbl.insertRow();
+
+            var cell;
+            cell = row.insertCell();
+            cell.className = "uneditable";
+            cell.innerText = tbl.rows.length - 1;
+
+            cell = row.insertCell();
+            cell.className = "pdtCode";
+
+            cell = row.insertCell();
+            cell.className = "uneditable";
+
+            cell = row.insertCell();
+            cell.className = "pdtQty";
+            cell.style, textAlign = 'right';
+
+            cell = row.insertCell();
+            cell.className = "uneditable";
+            cell.style.textAlign = 'right';
+
+            cell = row.insertCell();
+            cell.className = "pdtDiscAppl";
+            cell.style.textAlign = 'right';
+
+            cell = row.insertCell();
+            cell.className = "pdtSP";
+            cell.style.textAlign = 'right';
+
+            cell = row.insertCell();
+            cell.innerText = "Delete";
+
+            row.offsetHeight = tbl.rows[0].offsetHeight;
+
+            //set events for new rows... 
+            SetTableForUse();
+        }
+
+        function HandleNewPdtBought(pdtCodeCell, lPdtCode) {
+            pdtDet = arrPdtInfo[lPdtCode];
+            var pdtDesc = 'Generic',
+                pdtMRP = '1';
+            if (pdtDet != undefined) {
+                pdtDesc = pdtDet['pdtDesc'];
+                pdtMRP = pdtDet['pdtMRP'];
+            }
+            var parentRow = pdtCodeCell.parentNode;
+            parentRow.cells[2].innerText = pdtDesc;
+            parentRow.cells[3].innerText = '1';
+            parentRow.cells[4].innerText = pdtMRP;
+            parentRow.cells[5].innerText = '0';
+            parentRow.cells[6].innerText = pdtMRP;
+            parentRow.cells[7].innerText = 'Delete';
+
+            UpdateInvoiceTotal();
+            //only add new row when the one being worked upon is the last row...
+            var lastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
+            if (lastrow == parentRow) {
+                AddNewEmptyRow();
+                Tastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
+            }
+            setTimeout(function() {
+                lastrow.cells[1].focus();
+            }, 100);
+        }
+
+        function HandleQtyChanged(pdtcodecell, lNewQty) {
+            var parentRow = pdtcodecell.parentNode;
+            var lPdtQty = Number(lNewQty);
+            var lPdtMRP = Number(parentRow.cells[4].innerText);
+            var lPdtdisc = Number(parentRow.cells[5].innerText);
+
+            parentRow.cells[6].innerText = Math.round(lPdtQty * lPdtMRP * ((100 - lPdtdisc) / 100));
+            UpdateInvoiceTotal();
+        }
+
+        function HandleDiscApplChanged(pdtcodecell, lNewDisc) {
+            var parentRow = pdtcodecell.parentNode;
+            var lPdtQty = Number(parentRow.cells[3].innerText);
+            var lPdtMRP = Number(parentRow.cells[4].innerText);
+            var lPdtdisc = Number(lNewDisc);
+            parentRow.cells[6].innerText = Math.round(lPdtQty * lPdtMRP * ((100 - lPdtdisc) / 100));
+            UpdateInvoiceTotal();
+        }
+
+        function HandleSPChanged(pdtCodeCell, lNewsP) {
+            var parentRow = pdtCodeCell.parentNode;
+            var lPdtQty = Number(parentRow.cells[3].innerText);
+            var lPdtMRP = Number(parentRow.cells[4].innerText);
+            var lPdtSP = Number(lNewsP);
+            parentRow.cells[5].innerText = Math.round((lPdtMRP - (lPdtSP / lPdtQty)) / lPdtMRP * 100);
+            UpdateInvoiceTotal();
+        }
+
+        function UpdateInvoiceTotal() {
+            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+                var i, totofInvoice = 0;
+
+                for (i = 0; i < tbl.rows.length; i++) {
+
+                    totofInvoice += Number(tbl.rows[i].cells[6].innerText);
+
+                }
+
+                var txtTotal = document.getElementById("txtTotal"); txtTotal.value = totofInvoice;
+
+            }
+
+            function Init() {
+                StartGoogleSignOnAPIs();
+                
+                let create_promise = new Promise(function(resolve, reject) {
+                    CreateDB(resolve, reject);
+                });
+                create_promise.then(
+                        function() {
+                            LoadProductInfo();
+                            AddNewEmptyRow();
+                            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0]; setTimeout(function() {
+                            tbl.rows[0].cells[1].focus();
+                        }, 100);
+                    },
+                    function() {
+                        console.log('DB Creation failed at Init. FATAL..');
+                    }
+            )
+        }
+
+        function SetTableForUse() {
+            //make table editable 
+            $('#tblPurchaseInvoice').editableTableWidget();
+            //make cells marked as uneditable - uneditable
+            $('#tblPurchaseInvoice td.uneditable').on('change', function(evt, newvalue) {
+                return false;
+            });
+            //change Qty, MRP, Discount, SP on product change
+            $('#tblPurchaseInvoice td.pdtCode').on('change', function(evt, newValue) {
+                HandleNewPdtBought(evt.target, newValue);
+            });
+            //change Qty, MRP, Discount, SP on product change
+            $('#tblPurchaseInvoice td.pdtQty').on('change', function(evt, newvalue) {
+                HandleQtyChanged(evt.target, newvalue);
+            }); //change Qty, MRP, Discount, SP on product change
+            $('#tblPurchaseInvoice td.pdtDiscAppl').on('change', function(evt, newvalue) {
+                HandleDiscApplChanged(evt.target, newvalue);
+            });
+            //change Qty, MRP, Discount, SP on product change
+            $('#tblPurchaseInvoice td.pdtSP').on('change', function(evt, newvalue) {
+                HandleSPChanged(evt.target, newvalue); 
+            });
+        }
+    </script>
+
+
+    <script>
+        var db;
+        var GKdbName = "GKInventoryDB";
+        
+        var GKinvObjStoreName = "GKInventory";
+        var GKinvIdxName = "pdtCode";
+        var GKinvIdxColName = "pdtCode";
+
+        var GKconfigObjStoreName = "GKConfig";
+        var GKconfigIdxName = "configKeyIdx";
+        var GKconfigIdxColName = "configKey";
+
+        function deleteAllObjStrs() {
+            db.deleteObjectStore(GKinvObjStoreName);
+            db.deleteObjectStore(GKconfigObjStoreName);
+        }
+        
+        function createAllObjStrs() {
+            var store;
+            var DBIndex;
+
+            store = db.createObjectStore(GKinvObjStoreName, {
+                keyPath: GKinvIdxColName
+            });
+            DBIndex = store.createIndex(GKinvIdxName, [GKinvIdxColName]);
+
+            store = db.createObjectStore(GKconfigObjStoreName, {
+                keyPath: GKconfigIdxColName
+            });
+            DBIndex = store.createIndex(GKconfigIdxName, [GKconfigIdxColName]);
+        }
+        
+        function CreateDB(resolve, reject) {
+            console.log('Starting DB creation');
+            // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
+            var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+            // Open (or create) the database 
+            var open = indexedDB.open(GKdbName, 4);
+            // Create the schema 
+            open.onupgradeneeded = function() {
+                console.log('DB being upgraded');
+                //create new db... 
+                db = open.result;
+                try {
+                    deleteAllObjStrs();
+                } catch (e) {}
+                
+                createAllObjStrs();
+
+                console.log('DB upgrade Done');
+                //resolve();
+            }
+            open.onsuccess = function() {
+                console.log('DB Exists');
+                db = open.result;
+                console.log('DB Opened for use');
+                resolve();
+            }
+        }
+
+        function DeletedB(resolve, reject) {
+            console.log('Deleting DB');
+            // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
+            var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+            // Open (or create) the database 
+            try {
+                db.close();
+            } catch (e) {}
+            var DBDeleteRequest = indexedDB.deleteDatabase(GKdbName);
+            DBDeleteRequest.onerror = function(event) {
+                console.log("Error deleting database.");
+                resolve();
+            };
+
+            DBDeleteRequest.onsuccess = function(event) {
+                console.log("Database deleted successfully ");
+                resolve();
+            }
+        }
+
+        function resets(open) {
+            //create new db... 
+            db = open.result;
+            try {
+                deleteAllObjStrs();
+            } catch (e) {}
+            
+            createAllObjStrs();
+            console.log('DB reset Done');
+        }
+
+        function InsertProductInfoIntoDB(lPdtcode, lPdtDesc, lPdtMRP, resolve, reject) {
+            console.log('Starting to Store Data: ');
+            var allDataFieldsForJSON = {};
+            allDataFieldsForJSON["pdtCode"] = lPdtcode;
+            allDataFieldsForJSON["pdtDesc"] = lPdtDesc;
+            allDataFieldsForJSON["pdtMRP"] = lPdtMRP;
+            console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
+            var store;
+            var DBIndex;
+            var tx;
+            tx = db.transaction(GKinvObjStoreName, "readwrite");
+            store = tx.objectStore(GKinvObjStoreName);
+            DBIndex = store.index(GKinvIdxName);
+            var newDataAdded = store.put(allDataFieldsForJSON);
+            console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
+            newDataAdded.onsuccess = function() {
+                console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
+                resolve();
+            };
+            newDataAdded.onerror = function(event) {
+                console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
+                resolve();
+            }
+        };
+
+        function DoDataLoadFromArray(Arrofdata, currentCounterToProcess) {
+            console.log('Now Starting with Row: ' + currentCounterToProcess);
+            if (Arrofdata.length > currentCounterToProcess) {
+                var rowBeingProcessed = Arrofdata[currentCounterToProcess];
+                console.log('Data Available. Storing in DB: ' + rowBeingProcessed['pdtCode'] + " FOR ROW " + currentCounterToProcess);
+                let promise_InsertToDB = new Promise(function(resolve, reject) {
+                    InsertProductInfoIntoDB(rowBeingProcessed['pdtCode'], rowBeingProcessed['pdtDesc'], rowBeingProcessed['pdtMRP'], resolve, reject);
+                });
+                promise_InsertToDB.then(
+                    function() {
+                        currentCounterToProcess++;
+                        DoDataLoadFromArray(Arrofdata, currentCounterToProcess);
+                    },
+                    function() {}
+                )
+            } else {
+                console.log('COMMENT THIS LINE --- Testing for what is in DB right now');
+                displayDataByIndex();
+                LoadProductInfo(); //to load the fresh inventory into memory for use immediately...
+                //also clear inventory div list... so it can refresh later
+                var ulFordtInventory = document.getElementById('ulPdtList');
+                ulFordtInventory.innerHTML = "";
+            }
+        }
+
+        function GetDataFromServerAndStoreLocally() {
+            console.log('setting DB'); //Create DB
+            let del_promise = new Promise(function(resolve, reject) {
+                DeletedB(resolve, reject);
+            });
+            del_promise.then(
+
+                function () {
+                    let create_promise = new Promise(function(resolve, reject) {
+                        CreateDB(resolve, reject);
+                    });
+                    create_promise.then(
+
+                        function() {
+                            //Load Data from server
+                            console.log('Getting data from server');
+                            var arrPdtInfo = new Array();
+                            var txtNewInv = document.getElementById("txtUpdatedInv").value;
+                            var totInvRows = txtNewInv.split("\n");
+                            var eachInvRowDtl;
+                            for (i = 1; i < totInvRows.length; i++) {
+                                eachInvRowDtl = totInvRows[i].split("\t");
+                                arrPdtInfo[i - 1] = GetProductFromDetails(eachInvRowDtl[0], eachInvRowDtl[3], eachInvRowDtl[1]);
+                            }
+                            console.log('Received data from server ');
+                            DoDataLoadFromArray(
+                                arrPdtInfo, 0);
+                        },
+                        function() {
+                            console.log('DB Creation failed.FATAL.. ');
+                        }
+                    )
+                },
+                function() {
+                    console.log('DB Deletion failed. FATAL..');
+                }
+            )
+        }
+
+
+        function InsertSheetInfoInConfigIntoDB(lSheetID, resolve, reject) {
+            console.log('Starting to Store Sheet ID: ');
+            var allDataFieldsForJSON = {};
+            allDataFieldsForJSON[GKconfigIdxColName] = 'SheetID';
+            allDataFieldsForJSON['ConfigValue'] = lSheetID;
+            console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
+            var store;
+            var DBIndex;
+            var tx;
+
+            tx = db.transaction(GKconfigObjStoreName, "readwrite");
+            store = tx.objectStore(GKconfigObjStoreName);
+            DBIndex = store.index(GKconfigIdxName);
+            var newDataAdded = store.put(allDataFieldsForJSON);
+            console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
+            newDataAdded.onsuccess = function() {
+                console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
+                resolve();
+            };
+            newDataAdded.onerror = function(event) {
+                console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
+                resolve();
+            }
+        };        
+
+        function GetSheetInfoInConfigFromDB() {
+            console.log('Loading SheetInfo From LocalDB');
+            arrPdtInfo = new Object();
+            var store;
+            var DBIndex;
+            var tx;
+            tx = db.transaction(GKconfigObjStoreName, "readwrite");
+            store = tx.objectStore(GKconfigObjStoreName);
+            DBIndex = store.index(GKconfigIdxName);
+
+            // Query the data 
+            var akey = 'SheetID';
+            var getAROWForAkey;
+            getAROWForAkey = store.get(akey);
+            getAROWForAkey.onsuccess = function() {
+                console.log('getting by id (' + akey + '): '+ JSON.stringify( getArowForAkey ) ) ;
+                return getArowForAkey['ConfigValue'];
+            };
+            getARowForAkey.onerror = function() {
+                console.log('getting by id. (' + akey + ') Failed ');
+            };
+        }
+        
+        // for testing/debugging... 
+        function displayDataByIndex() {
+            console.log('Testing for what is in DB right now');
+            var store;
+            var DBIndex;
+            var tx;
+            tx = db.transaction(GKinvObjStoreName, "readwrite");
+            store = tx.objectStore(GKinvObjStoreName);
+            DBIndex = store.index(GKinvIdxName);
+            //store.clear();
+            var countRequest = DBIndex.count();
+            countRequest.onsuccess = function() {
+                console.log('Total Rows: ' + countRequest.result);
+            }
+            console.log(store.keyPath);
+            DBIndex.openCursor().onsuccess = function(event) {
+                var cursor = event.target.result;
+                if (cursor) {
+                    console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' Value: ' + JSON.stringify(cursor.value));
+                    //RandomRowTest (cursor.value.DataDate);
+                    cursor.continue();
+                } else {
+                    console.log('Entries all displayed.');
+                }
+            };
+        };
+
+        function RandomRowTest(someCursorkeyForTest) {
+            var store;
+            var DBIndex;
+            var tx;
+            tx = db.transaction(GKinvObjStoreName, "readwrite");
+            store = tx.objectStore(GKinvObjStoreName);
+            DBIndex = store.index(GKinvIdxName);
+            // Query the data 
+            var áDate;
+            akey = someCursorkeyForTest;
+            akey = "125";
+            var aJSONForKey = {};
+            aJSONForkey[GKinvIdxColName] = akey;
+            var getAROWForAkey;
+            getAROWForAkey = DBÍndex.get(akey);
+            getAROWFOCAKey = store.get(akey);
+            getArowForAkey.onsuccess = function() {
+                console.log('getting by id (' + akey + '): '+ JSON.stringify( getArowForAkey ) ) ;
+            };
+            getARowForAkey.onerror = function() {
+                console.log('getting by id. (' + akey + ') Failed ');
+            };
+        }
+    </script>
+    <script>
+        // Get the <span> element that closes the modal
+        var btnDivclose = document.getElementsByClassName("close")[0];
+        // when the user clicks the button, open the modal 
+
+        function showDiv(divID) {
+            var divModalPdtInventory = document.getElementById(divID);
+            divModalPdtInventory.style.display = "block";
+            PrepareListForDisplay();
+        }
+
+        function PrepareListForDisplay() {
+                //load list
+                var ulForPdtInventory = document.getElementById('ulPdtList');
+                var ulLength = ulForPdtInventory.getElementsByTagName("li").length;
+                if (ulLength > 0) return;
+                var pdtDet, li, p, lstItmtxt;
+                for (var property in arrPdtInfo) {
+                    if (arrPdtInfo.hasOwnProperty(property)) {
+                        // create list... 
+                        pdtDet = arrPdtInfo[property];
+                        if (pdtDet != undefined) {
+                            lstItmtxt = "<B>Code: </B>";
+                            lstItmtxt += property;
+                            lstItmtxt += " <B>Qty: </B>";
+                            lstItmtxt += "?";
+                            lstItmtxt += " <B>MRP: </B>";
+                            lstItmtxt += pdtDet['pdtMRP'];
+                            lstItmtxt += " <B>Desc: </B>"
+                            lstItmtxt += pdtDet['pdtDesc'];
+                            li = document.createElement("li");
+                            p = document.createElement("p");
+                            p.innerHTML = lstItmtxt;
+                            p.className = "pdtDescForSearch";
+                            li.appendChild(p);
+                            ulForPdtInventory.appendChild(li);
+                        }
+                    }
+                }
+                //make list searchable... 
+                var searchableListPdtiny = new List('divLstPdtInv', {
+                    valueNames: ['pdtDescForSearch'],
+                    page: 10,
+                    pagination: true
+                });
+            }
+            // when the user clicks on <span> (x), close the modal 
+        function hideDiv(diVID) {
+                var divModalPdtInventory = document.getElementById(diVID);
+                divModalPdtInventory.style.display = "none";
+            }
+            // when the user clicks anywhere outside of the modal, close it
+            // window.onclick = function(event) {
+            //        if (event.target == modal) {
+            //            divmodal PdtInventory.style.display = "none";
+            //}
+            //}
+    </script>
+
+                
 
     <script type="text/javascript">
       
@@ -28,7 +923,7 @@
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
       //var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
-      var SCOPES = "https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file";
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
@@ -36,15 +931,15 @@
       /**
        *  On load, called to load the auth2 library and API client library.
        */
-      function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
+      function StartGoogleSignOnAPIs() {
+        gapi.load('client:auth2', initGoogleSignOnAPIs);
       }
 
       /**
        *  Initializes the API client library and sets up sign-in state
        *  listeners.
        */
-      function initClient() {
+      function initGoogleSignOnAPIs() {
         gapi.client.init({
           apiKey: API_KEY,
           clientId: CLIENT_ID,
@@ -75,6 +970,94 @@
         gapi.auth2.getAuthInstance().signOut();
       }
 
+      
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.
+       */
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'block';
+          startWorkPostLogon();
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+        }
+      }
+       
+      function startWorkPostLogon() {
+        var sheetID = '';
+        sheetID = GetSheetInfoInConfigFromDB();
+        if (sheetID != undefined) {
+           //use already existing sheet.. and append to it...
+            alert (sheetID);
+        }
+        else {
+           //create new sheet and append to it...
+            sheetID =  createSheet();
+            //store sheetID in DB for use for next time...
+            let promise_InsertToDB = new Promise(function(resolve, reject) {
+                InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
+            });
+            promise_InsertToDB.then(
+                function() {
+                    listMajors(sheetID);
+                },
+                function() {}
+            )
+        }
+      }
+        
+    function createSheet() {
+      var spreadsheetBody = {
+        // TODO: Add desired properties to the request body.
+      };
+
+      var newSSProps = {
+          "sheets": [
+            {
+              "properties": {
+                "gridProperties": {
+                  "columnCount": 6,
+                  "rowCount": 1
+                }
+              },
+            "data": 
+              [
+                {
+                  "rowData": 
+                  [
+                    {
+                      "values": 
+                      [
+                        {"userEnteredValue": {"numberValue": 1}},
+                        {"userEnteredValue": {"numberValue": 2}},
+                        {"userEnteredValue": {"numberValue": 3}}
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "title": "filename"
+          }
+        };
+
+        var request = gapi.client.sheets.spreadsheets.create(newSSProps, spreadsheetBody);
+      
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        console.log(response.result);
+        return response.spreadsheetId;
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
+
+        
       /**
        * Append a pre element to the body containing the given message
        * as its text node. Used to display the results of the API call.
@@ -113,103 +1096,11 @@
       }
 
     </script>
-
-    <script  type="text/javascript">
-      function startWorkPostLogon() {
-         var arrSheetIDs = getFileId(urlParams.get('SheetName'));
-        var sheetID = '';
-        if (arrSheetIDs.length > 0) sheetID= arrSheetIDs[0]; else sheetID =  createSheet();
-         listMajors(sheetID);
-      }
-      
-    
-  function getFileId(fileName){
-	var query = "trashed=false and name='" + fileName + "'";
-    var request = gapi.client.drive.files.list({
-        'maxResults': 1,
-        'q': query
-    });
-
-    request.execute(function (resp) {
-       if (!resp.error) {
-            return resp.items.length;
-       }else{
-            console.log("Error: " + resp.error.message);
-       }
-    });
-}
-      
-      
-    function createSheet() {
-      var spreadsheetBody = {
-        // TODO: Add desired properties to the request body.
-      };
-
-      var newSSProps = {
-  "sheets": [
-    {
-      "properties": {
-        "gridProperties": {
-          "columnCount": 6,
-          "rowCount": 1
-        }
-      },
-    "data": 
-      [
-        {
-          "rowData": 
-          [
-            {
-              "values": 
-              [
-                {"userEnteredValue": {"numberValue": 1}},
-                {"userEnteredValue": {"numberValue": 2}},
-                {"userEnteredValue": {"numberValue": 3}}
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "properties": {
-    "title": "filename"
-  }
-};
-      var request = gapi.client.sheets.spreadsheets.create(newSSProps, spreadsheetBody);
-      
-      request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result);
-        return response.spreadsheetId;
-      }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-      });
-    }
-    </script>
-    
-    <script>
-      
-      /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.
-       */
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          startWorkPostLogon();
-        } else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
-        }
-      }
-
-    </script>
-    
+                
     <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
+      onload="this.onload=function(){};Init()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
-  </body>
+</body>
+
 </html>
