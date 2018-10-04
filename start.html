@@ -2154,17 +2154,24 @@ $.fn.editableTableWidget.defaultOptions = {
         }
         else {
            //create new sheet and append to it...
-            sheetID =  createSheet();
-            //store sheetID in DB for use for next time...
-            let promise_InsertToDB = new Promise(function(resolve, reject) {
-                InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
+
+            var request = createSheet();
+
+            request.then(function(response) {
+                sheetID =  response;
+                
+                //store sheetID in DB for use for next time...
+                let promise_InsertToDB = new Promise(function(resolve, reject) {
+                    InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
+                });
+                promise_InsertToDB.then(
+                    function() {
+                        listMajors(sheetID);
+                    },
+                    function() {}
+                )
+            }, function(reason) {
             });
-            promise_InsertToDB.then(
-                function() {
-                    listMajors(sheetID);
-                },
-                function() {}
-            )
         }
       }
         
