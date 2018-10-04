@@ -2209,8 +2209,8 @@ $.fn.editableTableWidget.defaultOptions = {
       
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
-        console.log(response.result);
-        return response.spreadsheetId;
+        console.log(response.result.spreadsheetId);
+        return response.result.spreadsheetId;
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
