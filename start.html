@@ -106,9 +106,9 @@
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
        */
-      function listMajors() {
+      function listMajors(sheetID) {
         gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+          spreadsheetId: sheetID; //'1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
           range: 'Class Data!A2:E',
         }).then(function(response) {
           var range = response.result;
@@ -131,20 +131,58 @@
 
     <script>
       function startWorkPostLogon() {
-         createSheet();
-         listMajors();
+         var arrSheetIDs = getFileId(urlParams.get('SheetName'));
+        var sheetID = '';
+        if (sheetName.length > 0) sheetID= arrSheetIDs[0]; else sheetID =  createSheet();
+         listMajors(sheetID);
       }
       
+      function getFileId(name){
+  return [i.id for each (i in Drive.Files.list({q: "title='" + name + "' and trashed=false"}).items)];
+}
       
     function createSheet() {
       var spreadsheetBody = {
         // TODO: Add desired properties to the request body.
       };
 
-      var request = gapi.client.sheets.spreadsheets.create({}, spreadsheetBody);
+      var newSSProps = {
+  "sheets": [
+    {
+      "properties": {
+        "gridProperties": {
+          "columnCount": 6,
+          "rowCount": 1
+        }
+      },
+    "data": 
+      [
+        {
+          "rowData": 
+          [
+            {
+              "values": 
+              [
+                {"userEnteredValue": {"numberValue": 1}},
+                {"userEnteredValue": {"numberValue": 2}},
+                {"userEnteredValue": {"numberValue": 3}}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "title": "filename"
+  }
+};
+      var request = gapi.client.sheets.spreadsheets.create(newSSProps, spreadsheetBody);
+      
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
+        return response.spreadsheetId;
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
