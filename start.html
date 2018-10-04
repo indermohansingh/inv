@@ -1930,9 +1930,9 @@ $.fn.editableTableWidget.defaultOptions = {
             console.log('Starting to Store Sheet ID: ');
             
             //first delete existing keys...
-            let promise_deleteOldSheetIDsFromCOnfig = new promise (resolve, reject) {
+            let promise_deleteOldSheetIDsFromCOnfig = new Promise (function (resolve, reject) {
                 deleteOldSheetIDsFromCOnfig(resolve, reject);
-            }
+            });
             promise_deleteOldSheetIDsFromCOnfig.then (function () {
                 var allDataFieldsForJSON = {};
                 allDataFieldsForJSON[GKconfigIdxColName] = 'SheetID';
