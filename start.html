@@ -1954,7 +1954,7 @@ $.fn.editableTableWidget.defaultOptions = {
                     var cursor = event.target.result;
                     if(cursor) {
                         console.log('sheetid found: ' + cursor.value.ConfigValue);    
-                        return cursor.value.ConfigValue;
+                        resolve(cursor.value.ConfigValue);
                     } else {
                       console.log('no sheetid found.');    
                     }
