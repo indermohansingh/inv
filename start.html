@@ -1933,7 +1933,7 @@ $.fn.editableTableWidget.defaultOptions = {
             }
         };        
 
-        function GetSheetInfoInConfigFromDB() {
+        function GetSheetInfoInConfigFromDB(resolve, reject) {
             console.log('Loading SheetInfo From LocalDB');
             arrPdtInfo = new Object();
             var store;
@@ -2157,34 +2157,42 @@ $.fn.editableTableWidget.defaultOptions = {
        
       function startWorkPostLogon() {
         var sheetID = '';
-        sheetID = GetSheetInfoInConfigFromDB();
-        if (sheetID != undefined) {
-           //use already existing sheet.. and append to it...
-            alert (sheetID);
-        }
-        else {
-           //create new sheet and append to it...
+        
+        let promise_GetSheetInfoInConfigFromDB = new Promise(function(resolve, reject) {
+            GetSheetInfoInConfigFromDB(resolve, reject);
+        });
+        
+        promise_GetSheetInfoInConfigFromDB.then(function(response) {
+            sheetID = response;
+            if (sheetID != undefined) {
+               //use already existing sheet.. and append to it...
+                alert (sheetID);
+            }
+            else {
+               //create new sheet and append to it...
 
-            let promise_createSheet = new Promise(function(resolve, reject) {
-                createSheet(resolve, reject);
-            });
-
-            promise_createSheet.then(function(response) {
-                sheetID =  response;
-                
-                //store sheetID in DB for use for next time...
-                let promise_InsertToDB = new Promise(function(resolve, reject) {
-                    InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
+                let promise_createSheet = new Promise(function(resolve, reject) {
+                    createSheet(resolve, reject);
                 });
-                promise_InsertToDB.then(
-                    function() {
-                        listMajors(sheetID);
-                    },
-                    function() {}
-                )
-            }, function(reason) {
-            });
-        }
+
+                promise_createSheet.then(function(response) {
+                    sheetID =  response;
+
+                    //store sheetID in DB for use for next time...
+                    let promise_InsertToDB = new Promise(function(resolve, reject) {
+                        InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
+                    });
+                    promise_InsertToDB.then(
+                        function() {
+                            listMajors(sheetID);
+                        },
+                        function() {}
+                    )
+                }, function(reason) {
+                });
+            }
+        }, function(reason) {
+        });
       }
         
     function createSheet(resolve, reject) {
