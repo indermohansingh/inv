@@ -2198,13 +2198,20 @@ $.fn.editableTableWidget.defaultOptions = {
                 });
                 promise_doesFileExistOnGoogle.then (function (response) {
                    fileExistsOnGoogle = response;
+                    handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
                 }, function () {
                 });
             }
             else {
                 fileExistsOnGoogle = false;
+                handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
             }
             
+        }, function(reason) {
+        });
+      }
+
+        function handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle ) {
             if ( fileExistsOnGoogle ) {
                 //use already existing sheet.. and append to it...
                 ReadAndDisplaySheetContents (sheetID);
@@ -2232,10 +2239,7 @@ $.fn.editableTableWidget.defaultOptions = {
                 }, function(reason) {
                 });
             }
-        }, function(reason) {
-        });
-      }
-        
+        }
     function createSheet(resolve, reject) {
       var spreadsheetBody = {
         // TODO: Add desired properties to the request body.
