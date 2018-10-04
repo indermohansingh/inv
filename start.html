@@ -118,7 +118,7 @@
       function startWorkPostLogon() {
          var arrSheetIDs = getFileId(urlParams.get('SheetName'));
         var sheetID = '';
-        if (sheetName.length > 0) sheetID= arrSheetIDs[0]; else sheetID =  createSheet();
+        if (arrSheetIDs.length > 0) sheetID= arrSheetIDs[0]; else sheetID =  createSheet();
          listMajors(sheetID);
       }
       
