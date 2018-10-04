@@ -1946,10 +1946,19 @@ $.fn.editableTableWidget.defaultOptions = {
             // Query the data 
             var akey = 'SheetID';
             var getAROWForAkey;
-            getAROWForAkey = store.getKey(akey);
+            getAROWForAkey = DBIndex.getKey(akey);
             getAROWForAkey.onsuccess = function() {
-                console.log('getting by id (' + akey + '): '+ JSON.stringify( getAROWForAkey ) ) ;
-                return getAROWForAkey['ConfigValue'];
+                console.log('getting by id (' + akey + '): '+ JSON.stringify( getAROWForAkey.result ) ) ;
+
+                DBIndex.openCursor().onsuccess = function(event) {
+                    var cursor = event.target.result;
+                    if(cursor) {
+                        console.log('sheetid found: ' + cursor.value.ConfigValue);    
+                        return cursor.value.ConfigValue;
+                    } else {
+                      console.log('no sheetid found.');    
+                    }
+                  };
             };
             getAROWForAkey.onerror = function() {
                 console.log('getting by id. (' + akey + ') Failed ');
