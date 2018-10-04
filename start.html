@@ -1907,30 +1907,56 @@ $.fn.editableTableWidget.defaultOptions = {
             )
         }
 
+        function deleteOldSheetIDsFromCOnfig(resolve, reject) {
+            var tx = db.transaction(GKconfigObjStoreName,"readwrite");
+            var estore = tx.objectStore(GKconfigObjStoreName);
+            var tagIndex = estore.index(GKconfigIdxName);
+            
+            var pdestroy = tagIndex.openKeyCursor(IDBKeyRange.only('SheetID')); 
+            pdestroy.onsuccess = function() {
+                var cursor = pdestroy.result;
+                if (cursor) {
+                    pstore.delete(cursor.primaryKey);
+                    cursor.continue;
+                }
+            }
+            pdestroy.onerror = function() {
+                console.log("Deletion attempt NG");
+            }
+            resolve();
+        }
 
         function InsertSheetInfoInConfigIntoDB(lSheetID, resolve, reject) {
             console.log('Starting to Store Sheet ID: ');
-            var allDataFieldsForJSON = {};
-            allDataFieldsForJSON[GKconfigIdxColName] = 'SheetID';
-            allDataFieldsForJSON['ConfigValue'] = lSheetID;
-            console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
-            var store;
-            var DBIndex;
-            var tx;
-
-            tx = db.transaction(GKconfigObjStoreName, "readwrite");
-            store = tx.objectStore(GKconfigObjStoreName);
-            DBIndex = store.index(GKconfigIdxName);
-            var newDataAdded = store.put(allDataFieldsForJSON);
-            console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
-            newDataAdded.onsuccess = function() {
-                console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
-                resolve();
-            };
-            newDataAdded.onerror = function(event) {
-                console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
-                resolve();
+            
+            //first delete existing keys...
+            let promise_deleteOldSheetIDsFromCOnfig = new promise (resolve, reject) {
+                deleteOldSheetIDsFromCOnfig(resolve, reject);
             }
+            promise_deleteOldSheetIDsFromCOnfig.then (function () {
+                var allDataFieldsForJSON = {};
+                allDataFieldsForJSON[GKconfigIdxColName] = 'SheetID';
+                allDataFieldsForJSON['ConfigValue'] = lSheetID;
+                console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
+                var store;
+                var DBIndex;
+                var tx;
+
+                tx = db.transaction(GKconfigObjStoreName, "readwrite");
+                store = tx.objectStore(GKconfigObjStoreName);
+                DBIndex = store.index(GKconfigIdxName);
+                var newDataAdded = store.put(allDataFieldsForJSON);
+                console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
+                newDataAdded.onsuccess = function() {
+                    console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
+                    resolve();
+                };
+                newDataAdded.onerror = function(event) {
+                    console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
+                    resolve();
+                }
+            }, function () {
+            });
         };        
 
         function GetSheetInfoInConfigFromDB(resolve, reject) {
