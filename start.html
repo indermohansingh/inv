@@ -2302,7 +2302,7 @@ $.fn.editableTableWidget.defaultOptions = {
       function doesFileExistOnGoogle(sheetID, resolve, reject) {
           gapi.client.sheets.spreadsheets.values.get({
               spreadsheetId: sheetID , 
-              range: 'Sales!A1:A2'
+              range: 'Sales!A1:B1'
           }).then(function(response) {
               resolve(true);
           }, function(response) {
@@ -2317,7 +2317,7 @@ $.fn.editableTableWidget.defaultOptions = {
       function ReadAndDisplaySheetContents(sheetID) {
         gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: sheetID , 
-          range: 'Sales!A1:A2'
+          range: 'Sales!A1:B1'
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
