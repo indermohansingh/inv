@@ -2154,7 +2154,7 @@ $.fn.editableTableWidget.defaultOptions = {
           signoutButton.style.display = 'none';
         }
       }
-       
+        
       function startWorkPostLogon() {
         var sheetID = '';
         
@@ -2164,9 +2164,24 @@ $.fn.editableTableWidget.defaultOptions = {
         
         promise_GetSheetInfoInConfigFromDB.then(function(response) {
             sheetID = response;
+            var fileExistsOnGoogle = false;
             if (sheetID != undefined) {
-               //use already existing sheet.. and append to it...
-                alert (sheetID);
+                //file id is in DB... But does it exist on Google?
+                let promise_doesFileExistOnGoogle = new Promise(function(resolve, reject) {
+                    doesFileExistOnGoogle(sheetID, resolve, reject);
+                });
+                promise_doesFileExistOnGoogle.then (function (response) {
+                   fileExistsOnGoogle = response;
+                }, function () {
+                });
+            }
+            else {
+                fileExistsOnGoogle = false;
+            }
+            
+            if ( fileExistsOnGoogle ) {
+                //use already existing sheet.. and append to it...
+                ReadAndDisplaySheetContents (sheetID);
             }
             else {
                //create new sheet and append to it...
@@ -2184,7 +2199,7 @@ $.fn.editableTableWidget.defaultOptions = {
                     });
                     promise_InsertToDB.then(
                         function() {
-                            listMajors(sheetID);
+                            ReadAndDisplaySheetContents(sheetID);
                         },
                         function() {}
                     )
@@ -2256,15 +2271,26 @@ $.fn.editableTableWidget.defaultOptions = {
         var textContent = document.createTextNode(message + '\n');
         pre.appendChild(textContent);
       }
+      
+      function doesFileExistOnGoogle(sheetID, resolve, reject) {
+          gapi.client.sheets.spreadsheets.values.get({
+              spreadsheetId: sheetID //, //'1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+              //range: 'Class Data!A2:E',
+          }).then(function(response) {
+              resolve(true);
+          }, function(response) {
+              resolve(false);
+          });
+      }
 
       /**
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
        */
-      function listMajors(sheetID) {
+      function ReadAndDisplaySheetContents(sheetID) {
         gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: sheetID, //'1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-          range: 'Class Data!A2:E',
+          spreadsheetId: sheetID //, //'1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+          //range: 'Class Data!A2:E',
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
