@@ -62,21 +62,6 @@
       }
 
       /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.
-       */
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          startWorkPostLogon();
-        } else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
-        }
-      }
-
-      /**
        *  Sign in the user upon button click.
        */
       function handleAuthClick(event) {
@@ -187,6 +172,25 @@
         console.error('error: ' + reason.result.error.message);
       });
     }
+    </script>
+    
+    <script>
+      
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.
+       */
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'block';
+          startWorkPostLogon();
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+        }
+      }
+
     </script>
     
     <script async defer src="https://apis.google.com/js/api.js"
