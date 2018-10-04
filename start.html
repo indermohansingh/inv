@@ -2155,9 +2155,11 @@ $.fn.editableTableWidget.defaultOptions = {
         else {
            //create new sheet and append to it...
 
-            var request = createSheet();
+            let promise_createSheet = new Promise(function(resolve, reject) {
+                createSheet(resolve, reject);
+            });
 
-            request.then(function(response) {
+            promise_createSheet.then(function(response) {
                 sheetID =  response;
                 
                 //store sheetID in DB for use for next time...
@@ -2175,7 +2177,7 @@ $.fn.editableTableWidget.defaultOptions = {
         }
       }
         
-    function createSheet() {
+    function createSheet(resolve, reject) {
       var spreadsheetBody = {
         // TODO: Add desired properties to the request body.
       };
@@ -2217,9 +2219,10 @@ $.fn.editableTableWidget.defaultOptions = {
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result.spreadsheetId);
-        return response.result.spreadsheetId;
+        resolve(response.result.spreadsheetId);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
+        resolve();
       });
     }
 
