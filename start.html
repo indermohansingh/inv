@@ -14,9 +14,13 @@
     <pre id="content"></pre>
 
     <script type="text/javascript">
+      
+      let urlParams = new URLSearchParams(window.location.search);
+      urlParams = new URLSearchParams(window.location.search);
+
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = '565594489349-h5b2ksf5lgg6j3kupg3q3p3tdrtt4531.apps.googleusercontent.com';
-      var API_KEY = 'YqHmsP4n4oniKIZF2laFEHjH';
+      var CLIENT_ID = = urlParams.get('ClientID');
+      var API_KEY = urlParams.get('APIKey');
 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
