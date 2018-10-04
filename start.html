@@ -1,171 +1,132 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Quickstart for MSAL JS</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/0.2.3/js/msal.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-</head>
-<body>
-    <h2>Welcome to MSAL.js Quickstart</h2><br/>
-    <h4 id="WelcomeMessage"></h4>
-    <button id="SignIn" onclick="signIn()">Sign In</button><br/><br/>
-    <button id="LoadPdts" onclick="LoadAllProductsInMemory()">Load Products</button><br/><br/>
-    
-    <pre id="json"></pre>
-    <script>
-        //JS code
+  <head>
+    <title>Google Sheets API Quickstart</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <p>Google Sheets API Quickstart</p>
 
-    var gphCallSampleMe = {
-        graphScopes: ["https://graph.microsoft.com/user.read"],
-        graphEndpoint: "https://graph.microsoft.com/v1.0/me",
-        setClientCredsInHeader: false
-    };
-        
-    var appMSClientID = '';
-    let urlParams = new URLSearchParams(window.location.search);
-    appMSClientID = urlParams.get('clientID');
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="signout_button" style="display: none;">Sign Out</button>
 
-    var appMSClientSecret = '';
-    urlParams = new URLSearchParams(window.location.search);
-    appMSClientSecret = urlParams.get('clientSecret');
+    <pre id="content"></pre>
 
-        //Pass null for default authority (https://login.microsoftonline.com/common)
-var myMSALObj = new Msal.UserAgentApplication(appMSClientID, null, acquireTokenRedirectCallBack,
-    {storeAuthStateInCookie: true, cacheLocation: "localStorage"});
+    <script type="text/javascript">
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '<YOUR_CLIENT_ID>';
+      var API_KEY = '<YOUR_API_KEY>';
 
-function signIn() {
-    myMSALObj.loginPopup(gphCallSampleMe.graphScopes).then(function (idToken) {
-        //Login Success
-        showWelcomeMessage();
-        acquireTokenPopupAndCallMSGraph(gphCallSampleMe);
-    }, function (error) {
-        console.log(error);
-    });
-}
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
-function acquireTokenPopupAndCallMSGraph(gphCall) {
-    //Call acquireTokenSilent (iframe) to obtain a token for Microsoft Graph
-    myMSALObj.acquireTokenSilent(gphCall.graphScopes).then(function (accessToken) {
-        callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback, gphCall.setClientCredsInHeader);
-    }, function (error) {
-        console.log(error);
-        // Call acquireTokenPopup (popup window) in case of acquireTokenSilent failure due to consent or interaction required ONLY
-        if (error.indexOf("consent_required") !== -1 || error.indexOf("interaction_required") !== -1 || error.indexOf("login_required") !== -1) {
-            myMSALObj.acquireTokenPopup(gphCall.graphScopes).then(function (accessToken) {
-                callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback, gphCall.setClientCredsInHeader);
-            }, function (error) {
-                console.log(error);
-            });
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+      var authorizeButton = document.getElementById('authorize_button');
+      var signoutButton = document.getElementById('signout_button');
+
+      /**
+       *  On load, called to load the auth2 library and API client library.
+       */
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.
+       */
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          authorizeButton.onclick = handleAuthClick;
+          signoutButton.onclick = handleSignoutClick;
+        });
+      }
+
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.
+       */
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'block';
+          listMajors();
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
         }
-    });
-}
+      }
 
-function graphAPICallback(data) {
-    //Display user data on DOM
-    var divWelcome = document.getElementById('WelcomeMessage');
-    divWelcome.innerHTML += " to Microsoft Graph API!!";
-    document.getElementById("json").innerHTML = JSON.stringify(data, null, 2);
-}
+      /**
+       *  Sign in the user upon button click.
+       */
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
 
-function showWelcomeMessage() {
-    var divWelcome = document.getElementById('WelcomeMessage');
-    divWelcome.innerHTML += 'Welcome ' + myMSALObj.getUser().name;
-    var loginbutton = document.getElementById('SignIn');
-    loginbutton.innerHTML = 'Sign Out';
-    loginbutton.setAttribute('onclick', 'signOut();');
-}
+      /**
+       *  Sign out the user upon button click.
+       */
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
 
-// This function can be removed if you do not need to support IE
-function acquireTokenRedirectAndCallMSGraph(gphCall) {
-    //Call acquireTokenSilent (iframe) to obtain a token for Microsoft Graph
-    myMSALObj.acquireTokenSilent(gphCall.graphScopes).then(function (accessToken) {
-      callMSGraph(gphCall.graphEndpoint, accessToken, graphAPICallback, gphCall.setClientCredsInHeader);
-    }, function (error) {
-        console.log(error);
-        //Call acquireTokenRedirect in case of acquireToken Failure
-        if (error.indexOf("consent_required") !== -1 || error.indexOf("interaction_required") !== -1 || error.indexOf("login_required") !== -1) {
-            myMSALObj.acquireTokenRedirect(gphCall.graphScopes);
-        }
-    });
-}
+      /**
+       * Append a pre element to the body containing the given message
+       * as its text node. Used to display the results of the API call.
+       *
+       * @param {string} message Text to be placed in pre element.
+       */
+      function appendPre(message) {
+        var pre = document.getElementById('content');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
 
-function acquireTokenRedirectCallBack(errorDesc, token, error, tokenType)
-{
- if(tokenType === "access_token")
- {
-     callMSGraph(gphCallSampleMe.graphEndpoint, accessToken, graphAPICallback, false);
- } else {
-     console.log("token type is:"+tokenType);
- }
-}
+      /**
+       * Print the names and majors of students in a sample spreadsheet:
+       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+       */
+      function listMajors() {
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+          range: 'Class Data!A2:E',
+        }).then(function(response) {
+          var range = response.result;
+          if (range.values.length > 0) {
+            appendPre('Name, Major:');
+            for (i = 0; i < range.values.length; i++) {
+              var row = range.values[i];
+              // Print columns A and E, which correspond to indices 0 and 4.
+              appendPre(row[0] + ', ' + row[4]);
+            }
+          } else {
+            appendPre('No data found.');
+          }
+        }, function(response) {
+          appendPre('Error: ' + response.result.error.message);
+        });
+      }
 
-function callMSGraph(theUrl, accessToken, callback, setClientCredsInHeader) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200)
-            callback(JSON.parse(this.responseText));
-    }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-    if (setClientCredsInHeader) {
-            xmlHttp.setRequestHeader("grant_type", "client_credentials");
-            xmlHttp.setRequestHeader("client_id", appMSClientID);
-            xmlHttp.setRequestHeader("client_secret", appMSClientSecret);
-            xmlHttp.setRequestHeader("resource", "https://graph.microsoft.com");
-            xmlHttp.setRequestHeader("Accept","text/plain");
-    }
-    xmlHttp.send();
-}
-        
-        /**
- * Sign out the user
- */
- function signOut() {
-     myMSALObj.logout();
- }
-
-    var appDBSheetID = '';
-    urlParams = new URLSearchParams(window.location.search);
-    appDBSheetID = urlParams.get('DBsheetID');
-
-        function LoadAllProductsInMemory() {
-            //get sheets in RunningLedger workbook
-
-            var gphCallReadLedger = {
-                graphScopes: ["https://graph.microsoft.com/user.read"],
-                graphEndpoint: 'https://graph.microsoft.com/v1.0/me/drive/items/' + appDBSheetID + '/workbook/worksheets(\'Ledger\')/usedRange',
-                setClientCredsInHeader: true
-            };
-            acquireTokenPopupAndCallMSGraph(gphCallReadLedger);
-        }
-        
-
-// Browser check variables
-var ua = window.navigator.userAgent;
-var msie = ua.indexOf('MSIE ');
-var msie11 = ua.indexOf('Trident/');
-var msedge = ua.indexOf('Edge/');
-var isIE = msie > 0 || msie11 > 0;
-var isEdge = msedge > 0;
-
-//If you support IE, our recommendation is that you sign-in using Redirect APIs
-//If you as a developer are testing using Edge InPrivate mode, please add "isEdge" to the if check
-if (!isIE) {
-    if (myMSALObj.getUser()) {// avoid duplicate code execution on page load in case of iframe and popup window.
-        showWelcomeMessage();
-        acquireTokenPopupAndCallMSGraph(gphCallSampleMe);
-    }
-}
-else {
-    document.getElementById("SignIn").onclick = function () {
-        myMSALObj.loginRedirect(gphCallSampleMe.graphScopes);
-    };
-    if (myMSALObj.getUser() && !myMSALObj.isCallback(window.location.hash)) {// avoid duplicate code execution on page load in case of iframe and popup window.
-        showWelcomeMessage();
-        acquireTokenRedirectAndCallMSGraph(gphCallSampleMe);
-    }
-}
     </script>
-</body>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
 </html>
