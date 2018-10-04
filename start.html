@@ -2301,8 +2301,8 @@ $.fn.editableTableWidget.defaultOptions = {
       
       function doesFileExistOnGoogle(sheetID, resolve, reject) {
           gapi.client.sheets.spreadsheets.values.get({
-              spreadsheetId: sheetID //, //'1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-              //range: 'Class Data!A2:E',
+              spreadsheetId: sheetID , 
+              range: 'Sales!A1:A2'
           }).then(function(response) {
               resolve(true);
           }, function(response) {
@@ -2316,8 +2316,8 @@ $.fn.editableTableWidget.defaultOptions = {
        */
       function ReadAndDisplaySheetContents(sheetID) {
         gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: sheetID //, //'1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-          range: 'Sales!A1:A2',
+          spreadsheetId: sheetID , 
+          range: 'Sales!A1:A2'
         }).then(function(response) {
           var range = response.result;
           if (range.values.length > 0) {
