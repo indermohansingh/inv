@@ -68,7 +68,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          listMajors();
+          startWorkPostLogon();
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -128,6 +128,28 @@
 
     </script>
 
+    <script>
+      function startWorkPostLogon() {
+         createSheet();
+         listMajors();
+      }
+      
+      
+    function createSheet() {
+      var spreadsheetBody = {
+        // TODO: Add desired properties to the request body.
+      };
+
+      var request = gapi.client.sheets.spreadsheets.create({}, spreadsheetBody);
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        console.log(response.result);
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
+    </script>
+    
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
