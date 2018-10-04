@@ -122,11 +122,23 @@
          listMajors(sheetID);
       }
       
-      function getFileId(name){
-        var s = Drive.Files.list({q: "title='" + name + "' and trashed=false"}).items;
-        console.log(s);
-  return ; // [i.id for each (i in Drive.Files.list({q: "title='" + name + "' and trashed=false"}).items)];
+    
+  function getFileId(fileName){
+	var query = "trashed=false and name='" + fileName + "'";
+    var request = gapi.client.drive.files.list({
+        'maxResults': 1,
+        'q': query
+    });
+
+    request.execute(function (resp) {
+       if (!resp.error) {
+            return resp.items.length;
+       }else{
+            console.log("Error: " + resp.error.message);
+       }
+    });
 }
+      
       
     function createSheet() {
       var spreadsheetBody = {
