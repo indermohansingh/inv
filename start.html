@@ -2273,7 +2273,7 @@ $.fn.editableTableWidget.defaultOptions = {
           }
         };
 
-        var request = gapi.client.sheets.spreadsheets.create(newSSProps, spreadsheetBody);
+        var request = gapi.client.sheets.spreadsheets.create(spreadsheetBody, newSSProps);
       
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
