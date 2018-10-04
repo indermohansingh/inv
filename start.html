@@ -123,7 +123,7 @@
       }
       
       function getFileId(name){
-  return [i.id for each (i in Drive.Files.list({q: "title='" + name + "' and trashed=false"}).items)];
+  return ; // [i.id for each (i in Drive.Files.list({q: "title='" + name + "' and trashed=false"}).items)];
 }
       
     function createSheet() {
