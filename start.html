@@ -1449,6 +1449,7 @@
              }
              AddNewEmptyRow();
              UpdateInvoiceTotal();
+             setTimeout(function() { tbl.rows[0].cells[1].focus();}, 100);
          }
          
          function HandleNewPdtBought(pdtCodeCell, lPdtCode) {
@@ -1523,46 +1524,46 @@
          function CreateSaleInvoice(paymentType) {
              var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
              var i, totofInvoice = 0;
-         	var fullSaleInvoice = {};
-	var saleRows = [];
-	fullSaleInvoice.saleID = '' + Math.round(+new Date()/1000) + Math.floor(100000 + Math.random() * 900000);
-	fullSaleInvoice.customer = {};
-	fullSaleInvoice.customer.Name = document.getElementById("txtName").value ;
-	fullSaleInvoice.customer.Number = document.getElementById("txtNumber").value
-	fullSaleInvoice.customer.Email = document.getElementById("txtEmail").value;
-	fullSaleInvoice.customer.Address = document.getElementById("txtAddress").value;
-	fullSaleInvoice.paymentType = paymentType;
-	fullSaleInvoice.saleRows = saleRows ;
-                 for (i = 0; i < tbl.rows.length-1; i++) {
-         		fullSaleInvoice.saleRows [i] = {};
-         		fullSaleInvoice.saleRows [i].ProductCode = tbl.rows[i].cells[1].innerText;
-         		fullSaleInvoice.saleRows [i].ProductDesc =tbl.rows[i].cells[2].innerText;
-         		fullSaleInvoice.saleRows [i].Qty = tbl.rows[i].cells[3].innerText;
-         		fullSaleInvoice.saleRows [i].MRP = tbl.rows[i].cells[4].innerText;
-         		fullSaleInvoice.saleRows [i].Disc = tbl.rows[i].cells[5].innerText;
-         		fullSaleInvoice.saleRows [i].SP = fullSaleInvoice.saleRows [i].MRP * (100- fullSaleInvoice.saleRows [i].Disc )/100 * fullSaleInvoice.saleRows [i].Qty ;
-                     totofInvoice += fullSaleInvoice.saleRows [i].SP ;
+             var fullSaleInvoice = {};
+             var saleRows = [];
+             fullSaleInvoice.saleID = '' + Math.round(+new Date()/1000) + Math.floor(100000 + Math.random() * 900000);
+             fullSaleInvoice.customer = {};
+             fullSaleInvoice.customer.Name = document.getElementById("txtName").value ;
+             fullSaleInvoice.customer.Number = document.getElementById("txtNumber").value
+             fullSaleInvoice.customer.Email = document.getElementById("txtEmail").value;
+             fullSaleInvoice.customer.Address = document.getElementById("txtAddress").value;
+             fullSaleInvoice.paymentType = paymentType;
+             fullSaleInvoice.saleRows = saleRows ;
+             for (i = 0; i < tbl.rows.length-1; i++) {
+                 fullSaleInvoice.saleRows [i] = {};
+                 fullSaleInvoice.saleRows [i].ProductCode = tbl.rows[i].cells[1].innerText;
+                 fullSaleInvoice.saleRows [i].ProductDesc =tbl.rows[i].cells[2].innerText;
+                 fullSaleInvoice.saleRows [i].Qty = tbl.rows[i].cells[3].innerText;
+                 fullSaleInvoice.saleRows [i].MRP = tbl.rows[i].cells[4].innerText;
+                 fullSaleInvoice.saleRows [i].Disc = tbl.rows[i].cells[5].innerText;
+                 fullSaleInvoice.saleRows [i].SP = fullSaleInvoice.saleRows [i].MRP * (100- fullSaleInvoice.saleRows [i].Disc )/100 * fullSaleInvoice.saleRows [i].Qty ;
+                 totofInvoice += fullSaleInvoice.saleRows [i].SP ;
+             }
+             fullSaleInvoice.saleDateTime = new Date();
+             fullSaleInvoice.finalAmount = document.getElementById("txtTotal").value;
+             fullSaleInvoice.topUpDisc= totofInvoice  - fullSaleInvoice.finalAmount;
+             console.log(fullSaleInvoice );
+             console.log(JSON.stringify(fullSaleInvoice));
+             let InsertSaleRecIntoDB_promise = new Promise(function(resolve, reject) {
+                 InsertSaleRecIntoDB(fullSaleInvoice, resolve, reject);
+             });
+             InsertSaleRecIntoDB_promise.then(
+                 function () {
+                     console.log('Sale inserted into DB..');
+                     //next store this in google as well...
+                     appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
+                     //prepare table for new sale...
+                     prepareTableForNewSale();
+                 },
+                 function () {
+                     alert('Could not save invoice. Take a screenshot, picture or duplicate this on a register to process later.');
                  }
-	fullSaleInvoice.saleDateTime = new Date();
-	fullSaleInvoice.finalAmount = document.getElementById("txtTotal").value;
-	fullSaleInvoice.topUpDisc= totofInvoice  - fullSaleInvoice.finalAmount;
-	console.log(fullSaleInvoice );
-console.log(JSON.stringify(fullSaleInvoice));
-	let InsertSaleRecIntoDB_promise = new Promise(function(resolve, reject) {
-	         InsertSaleRecIntoDB(fullSaleInvoice, resolve, reject);
-	});
-	InsertSaleRecIntoDB_promise.then(
-		function () {
-			 console.log('Sale inserted into DB..');
-			//next store this in google as well...
-			appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
-            //prepare table for new sale...
-            prepareTableForNewSale();
-		},
-		function () {
-            			alert('Could not save invoice. Take a screenshot, picture or duplicate this on a register to process later.');
-		}
-	);
+             );
 }
 function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
 	var i, strEachRow, strAllValues;
@@ -1634,7 +1635,8 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                          function() {
                              LoadProductInfo();
                              AddNewEmptyRow();
-                             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0]; setTimeout(function() {
+                             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0]; 
+                             setTimeout(function() {
                              tbl.rows[0].cells[1].focus();
                          }, 100);
                      },
