@@ -1609,10 +1609,16 @@
                  resolve();
              };
          
-             DBDeleteRequest.onsuccess = function(event) {
-                 console.log("Database deleted successfully ");
-                 resolve();
-             }
+         function DeleteAllProductInv(resolve, reject) {
+             console.log('Deleting Product Inventories');
+              var store;
+             var tx;
+             tx = db.transaction(GKinvObjStoreName, "readwrite");
+             store = tx.objectStore(GKinvObjStoreName);
+	var storeRequest = store.clear();
+  storeRequest.onsuccess = function(event) {
+    resolve();
+  };
          }
          
          function resets(open) {
@@ -1677,18 +1683,11 @@
          }
          
          function GetDataFromServerAndStoreLocally() {
-             console.log('setting DB'); //Create DB
+             console.log('deleting old inv'); //Create DB
              let del_promise = new Promise(function(resolve, reject) {
-                 DeletedB(resolve, reject);
+                 DeleteAllProductInv(resolve, reject);
              });
              del_promise.then(
-         
-                 function () {
-                     let create_promise = new Promise(function(resolve, reject) {
-                         CreateDB(resolve, reject);
-                     });
-                     create_promise.then(
-         
                          function() {
                              //Load Data from server
                              console.log('Getting data from server');
@@ -1703,11 +1702,6 @@
                              console.log('Received data from server ');
                              DoDataLoadFromArray(
                                  arrPdtInfo, 0);
-                         },
-                         function() {
-                             console.log('DB Creation failed.FATAL.. ');
-                         }
-                     )
                  },
                  function() {
                      console.log('DB Deletion failed. FATAL..');
