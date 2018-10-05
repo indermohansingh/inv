@@ -1473,11 +1473,11 @@
              var lastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
              if (lastrow == parentRow) {
                  AddNewEmptyRow();
+                 lastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
              }
              setTimeout(function() {
-                 Tastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
                  lastrow.cells[1].focus();
-             }, 1000);
+             }, 100);
          }
          
          function HandleQtyChanged(pdtcodecell, lNewQty) {
