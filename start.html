@@ -1,2350 +1,2155 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-
-    <title>Giggly Kangaroos Invoicing</title>
-
-	<style>
-
-html {
-	font-family: sans-serif;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%
-}
-
-body {
-	margin: 0
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-	display: block
-}
-
-audio,
-canvas,
-progress,
-video {
-	display: inline-block;
-	vertical-align: baseline
-}
-
-audio:not([controls]) {
-	display: none;
-	height: 0
-}
-
-[hidden],
-template {
-	display: none
-}
-
-a {
-	background-color: transparent
-}
-
-a:active,
-a:hover {
-	outline: 0
-}
-
-abbr[title] {
-	border-bottom: 1px dotted
-}
-
-b,
-strong {
-	font-weight: 700
-}
-
-dfn {
-	font-style: italic
-}
-
-h1 {
-	font-size: 2em;
-	margin: .67em 0
-}
-
-mark {
-	background: #ff0;
-	color: #000
-}
-
-small {
-	font-size: 80%
-}
-
-sub,
-sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline
-}
-
-sup {
-	top: -.5em
-}
-
-sub {
-	bottom: -.25em
-}
-
-img {
-	border: 0
-}
-
-svg:not(:root) {
-	overflow: hidden
-}
-
-figure {
-	margin: 1em 40px
-}
-
-hr {
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	height: 0
-}
-
-pre {
-	overflow: auto
-}
-
-code,
-kbd,
-pre,
-samp {
-	font-family: monospace, monospace;
-	font-size: 1em
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-	color: inherit;
-	font: inherit;
-	margin: 0
-}
-
-button {
-	overflow: visible
-}
-
-button,
-select {
-	text-transform: none
-}
-
-button,
-html input[type=button],
-input[type=reset],
-input[type=submit] {
-	-webkit-appearance: button;
-	cursor: pointer
-}
-
-button[disabled],
-html input[disabled] {
-	cursor: default
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-	border: 0;
-	padding: 0
-}
-
-input {
-	line-height: normal
-}
-
-input[type=checkbox],
-input[type=radio] {
-	box-sizing: border-box;
-	padding: 0
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-	height: auto
-}
-
-input[type=search] {
-	-webkit-appearance: textfield;
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box
-}
-
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration {
-	-webkit-appearance: none
-}
-
-fieldset {
-	border: 1px solid silver;
-	margin: 0 2px;
-	padding: .35em .625em .75em
-}
-
-legend {
-	border: 0;
-	padding: 0
-}
-
-textarea {
-	overflow: auto
-}
-
-optgroup {
-	font-weight: 700
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0
-}
-
-td,
-th {
-	padding: 0
-}
-
-.hidden,
-[hidden] {
-	display: none!important
-}
-
-.pure-img {
-	max-width: 100%;
-	height: auto;
-	display: block
-}
-
-.pure-g {
-	letter-spacing: -.31em;
-	*letter-spacing: normal;
-	*word-spacing: -.43em;
-	text-rendering: optimizespeed;
-	font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
-	display: -webkit-flex;
-	-webkit-flex-flow: row wrap;
-	display: -ms-flexbox;
-	-ms-flex-flow: row wrap;
-	-ms-align-content: flex-start;
-	-webkit-align-content: flex-start;
-	align-content: flex-start
-}
-
-.opera-only :-o-prefocus,
-.pure-g {
-	word-spacing: -.43em
-}
-
-.pure-u {
-	display: inline-block;
-	*display: inline;
-	zoom: 1;
-	letter-spacing: normal;
-	word-spacing: normal;
-	vertical-align: top;
-	text-rendering: auto
-}
-
-.pure-g [class *="pure-u"] {
-	font-family: sans-serif
-}
-
-.pure-u-1,
-.pure-u-1-1,
-.pure-u-1-2,
-.pure-u-1-3,
-.pure-u-2-3,
-.pure-u-1-4,
-.pure-u-3-4,
-.pure-u-1-5,
-.pure-u-2-5,
-.pure-u-3-5,
-.pure-u-4-5,
-.pure-u-5-5,
-.pure-u-1-6,
-.pure-u-5-6,
-.pure-u-1-8,
-.pure-u-3-8,
-.pure-u-5-8,
-.pure-u-7-8,
-.pure-u-1-12,
-.pure-u-5-12,
-.pure-u-7-12,
-.pure-u-11-12,
-.pure-u-1-24,
-.pure-u-2-24,
-.pure-u-3-24,
-.pure-u-4-24,
-.pure-u-5-24,
-.pure-u-6-24,
-.pure-u-7-24,
-.pure-u-8-24,
-.pure-u-9-24,
-.pure-u-10-24,
-.pure-u-11-24,
-.pure-u-12-24,
-.pure-u-13-24,
-.pure-u-14-24,
-.pure-u-15-24,
-.pure-u-16-24,
-.pure-u-17-24,
-.pure-u-18-24,
-.pure-u-19-24,
-.pure-u-20-24,
-.pure-u-21-24,
-.pure-u-22-24,
-.pure-u-23-24,
-.pure-u-24-24 {
-	display: inline-block;
-	*display: inline;
-	zoom: 1;
-	letter-spacing: normal;
-	word-spacing: normal;
-	vertical-align: top;
-	text-rendering: auto
-}
-
-.pure-u-1-24 {
-	width: 4.1667%;
-	*width: 4.1357%
-}
-
-.pure-u-1-12,
-.pure-u-2-24 {
-	width: 8.3333%;
-	*width: 8.3023%
-}
-
-.pure-u-1-8,
-.pure-u-3-24 {
-	width: 12.5%;
-	*width: 12.469%
-}
-
-.pure-u-1-6,
-.pure-u-4-24 {
-	width: 16.6667%;
-	*width: 16.6357%
-}
-
-.pure-u-1-5 {
-	width: 20%;
-	*width: 19.969%
-}
-
-.pure-u-5-24 {
-	width: 20.8333%;
-	*width: 20.8023%
-}
-
-.pure-u-1-4,
-.pure-u-6-24 {
-	width: 25%;
-	*width: 24.969%
-}
-
-.pure-u-7-24 {
-	width: 29.1667%;
-	*width: 29.1357%
-}
-
-.pure-u-1-3,
-.pure-u-8-24 {
-	width: 33.3333%;
-	*width: 33.3023%
-}
-
-.pure-u-3-8,
-.pure-u-9-24 {
-	width: 37.5%;
-	*width: 37.469%
-}
-
-.pure-u-2-5 {
-	width: 40%;
-	*width: 39.969%
-}
-
-.pure-u-5-12,
-.pure-u-10-24 {
-	width: 41.6667%;
-	*width: 41.6357%
-}
-
-.pure-u-11-24 {
-	width: 45.8333%;
-	*width: 45.8023%
-}
-
-.pure-u-1-2,
-.pure-u-12-24 {
-	width: 50%;
-	*width: 49.969%
-}
-
-.pure-u-13-24 {
-	width: 54.1667%;
-	*width: 54.1357%
-}
-
-.pure-u-7-12,
-.pure-u-14-24 {
-	width: 58.3333%;
-	*width: 58.3023%
-}
-
-.pure-u-3-5 {
-	width: 60%;
-	*width: 59.969%
-}
-
-.pure-u-5-8,
-.pure-u-15-24 {
-	width: 62.5%;
-	*width: 62.469%
-}
-
-.pure-u-2-3,
-.pure-u-16-24 {
-	width: 66.6667%;
-	*width: 66.6357%
-}
-
-.pure-u-17-24 {
-	width: 70.8333%;
-	*width: 70.8023%
-}
-
-.pure-u-3-4,
-.pure-u-18-24 {
-	width: 75%;
-	*width: 74.969%
-}
-
-.pure-u-19-24 {
-	width: 79.1667%;
-	*width: 79.1357%
-}
-
-.pure-u-4-5 {
-	width: 80%;
-	*width: 79.969%
-}
-
-.pure-u-5-6,
-.pure-u-20-24 {
-	width: 83.3333%;
-	*width: 83.3023%
-}
-
-.pure-u-7-8,
-.pure-u-21-24 {
-	width: 87.5%;
-	*width: 87.469%
-}
-
-.pure-u-11-12,
-.pure-u-22-24 {
-	width: 91.6667%;
-	*width: 91.6357%
-}
-
-.pure-u-23-24 {
-	width: 95.8333%;
-	*width: 95.8023%
-}
-
-.pure-u-1,
-.pure-u-1-1,
-.pure-u-5-5,
-.pure-u-24-24 {
-	width: 100%
-}
-
-.pure-button {
-	display: inline-block;
-	zoom: 1;
-	line-height: normal;
-	white-space: nowrap;
-	vertical-align: middle;
-	text-align: center;
-	cursor: pointer;
-	-webkit-user-drag: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box
-}
-
-.pure-button::-moz-focus-inner {
-	padding: 0;
-	border: 0
-}
-
-.pure-button {
-	font-family: inherit;
-	font-size: 100%;
-	padding: .5em 1em;
-	color: #444;
-	color: rgba(0, 0, 0, .8);
-	border: 1px solid #999;
-	border: 0 rgba(0, 0, 0, 0);
-	background-color: #E6E6E6;
-	text-decoration: none;
-	border-radius: 2px
-}
-
-.pure-button-hover,
-.pure-button:hover,
-.pure-button:focus {
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, .05)), to(rgba(0, 0, 0, .1)));
-	background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1));
-	background-image: -moz-linear-gradient(top, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .1));
-	background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1));
-	background-image: linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1))
-}
-
-.pure-button:focus {
-	outline: 0
-}
-
-.pure-button-active,
-.pure-button:active {
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, .15) inset, 0 0 6px rgba(0, 0, 0, .2) inset;
-	border-color: #000\9
-}
-
-.pure-button[disabled],
-.pure-button-disabled,
-.pure-button-disabled:hover,
-.pure-button-disabled:focus,
-.pure-button-disabled:active {
-	border: 0;
-	background-image: none;
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-	filter: alpha(opacity=40);
-	-khtml-opacity: .4;
-	-moz-opacity: .4;
-	opacity: .4;
-	cursor: not-allowed;
-	box-shadow: none
-}
-
-.pure-button-hidden {
-	display: none
-}
-
-.pure-button::-moz-focus-inner {
-	padding: 0;
-	border: 0
-}
-
-.pure-button-primary,
-.pure-button-selected,
-a.pure-button-primary,
-a.pure-button-selected {
-	background-color: #0078e7;
-	color: #fff
-}
-
-.pure-form input[type=text],
-.pure-form input[type=password],
-.pure-form input[type=email],
-.pure-form input[type=url],
-.pure-form input[type=date],
-.pure-form input[type=month],
-.pure-form input[type=time],
-.pure-form input[type=datetime],
-.pure-form input[type=datetime-local],
-.pure-form input[type=week],
-.pure-form input[type=number],
-.pure-form input[type=search],
-.pure-form input[type=tel],
-.pure-form input[type=color],
-.pure-form select,
-.pure-form textarea {
-	padding: .5em .6em;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-shadow: inset 0 1px 3px #ddd;
-	border-radius: 4px;
-	vertical-align: middle;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box
-}
-
-.pure-form input:not([type]) {
-	padding: .5em .6em;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-shadow: inset 0 1px 3px #ddd;
-	border-radius: 4px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box
-}
-
-.pure-form input[type=color] {
-	padding: .2em .5em
-}
-
-.pure-form input[type=text]:focus,
-.pure-form input[type=password]:focus,
-.pure-form input[type=email]:focus,
-.pure-form input[type=url]:focus,
-.pure-form input[type=date]:focus,
-.pure-form input[type=month]:focus,
-.pure-form input[type=time]:focus,
-.pure-form input[type=datetime]:focus,
-.pure-form input[type=datetime-local]:focus,
-.pure-form input[type=week]:focus,
-.pure-form input[type=number]:focus,
-.pure-form input[type=search]:focus,
-.pure-form input[type=tel]:focus,
-.pure-form input[type=color]:focus,
-.pure-form select:focus,
-.pure-form textarea:focus {
-	outline: 0;
-	border-color: #129FEA
-}
-
-.pure-form input:not([type]):focus {
-	outline: 0;
-	border-color: #129FEA
-}
-
-.pure-form input[type=file]:focus,
-.pure-form input[type=radio]:focus,
-.pure-form input[type=checkbox]:focus {
-	outline: thin solid #129FEA;
-	outline: 1px auto #129FEA
-}
-
-.pure-form .pure-checkbox,
-.pure-form .pure-radio {
-	margin: .5em 0;
-	display: block
-}
-
-.pure-form input[type=text][disabled],
-.pure-form input[type=password][disabled],
-.pure-form input[type=email][disabled],
-.pure-form input[type=url][disabled],
-.pure-form input[type=date][disabled],
-.pure-form input[type=month][disabled],
-.pure-form input[type=time][disabled],
-.pure-form input[type=datetime][disabled],
-.pure-form input[type=datetime-local][disabled],
-.pure-form input[type=week][disabled],
-.pure-form input[type=number][disabled],
-.pure-form input[type=search][disabled],
-.pure-form input[type=tel][disabled],
-.pure-form input[type=color][disabled],
-.pure-form select[disabled],
-.pure-form textarea[disabled] {
-	cursor: not-allowed;
-	background-color: #eaeded;
-	color: #cad2d3
-}
-
-.pure-form input:not([type])[disabled] {
-	cursor: not-allowed;
-	background-color: #eaeded;
-	color: #cad2d3
-}
-
-.pure-form input[readonly],
-.pure-form select[readonly],
-.pure-form textarea[readonly] {
-	background-color: #eee;
-	color: #777;
-	border-color: #ccc
-}
-
-.pure-form input:focus:invalid,
-.pure-form textarea:focus:invalid,
-.pure-form select:focus:invalid {
-	color: #b94a48;
-	border-color: #e9322d
-}
-
-.pure-form input[type=file]:focus:invalid:focus,
-.pure-form input[type=radio]:focus:invalid:focus,
-.pure-form input[type=checkbox]:focus:invalid:focus {
-	outline-color: #e9322d
-}
-
-.pure-form select {
-	height: 2.25em;
-	border: 1px solid #ccc;
-	background-color: #fff
-}
-
-.pure-form select[multiple] {
-	height: auto
-}
-
-.pure-form label {
-	margin: .5em 0 .2em
-}
-
-.pure-form fieldset {
-	margin: 0;
-	padding: .35em 0 .75em;
-	border: 0
-}
-
-.pure-form legend {
-	display: block;
-	width: 100%;
-	padding: .3em 0;
-	margin-bottom: .3em;
-	color: #333;
-	border-bottom: 1px solid #e5e5e5
-}
-
-.pure-form-stacked input[type=text],
-.pure-form-stacked input[type=password],
-.pure-form-stacked input[type=email],
-.pure-form-stacked input[type=url],
-.pure-form-stacked input[type=date],
-.pure-form-stacked input[type=month],
-.pure-form-stacked input[type=time],
-.pure-form-stacked input[type=datetime],
-.pure-form-stacked input[type=datetime-local],
-.pure-form-stacked input[type=week],
-.pure-form-stacked input[type=number],
-.pure-form-stacked input[type=search],
-.pure-form-stacked input[type=tel],
-.pure-form-stacked input[type=color],
-.pure-form-stacked input[type=file],
-.pure-form-stacked select,
-.pure-form-stacked label,
-.pure-form-stacked textarea {
-	display: block;
-	margin: .25em 0
-}
-
-.pure-form-stacked input:not([type]) {
-	display: block;
-	margin: .25em 0
-}
-
-.pure-form-aligned input,
-.pure-form-aligned textarea,
-.pure-form-aligned select,
-.pure-form-aligned .pure-help-inline,
-.pure-form-message-inline {
-	display: inline-block;
-	*display: inline;
-	*zoom: 1;
-	vertical-align: middle
-}
-
-.pure-form-aligned textarea {
-	vertical-align: top
-}
-
-.pure-form-aligned .pure-control-group {
-	margin-bottom: .5em
-}
-
-.pure-form-aligned .pure-control-group label {
-	text-align: right;
-	display: inline-block;
-	vertical-align: middle;
-	width: 10em;
-	margin: 0 1em 0 0
-}
-
-.pure-form-aligned .pure-controls {
-	margin: 1.5em 0 0 11em
-}
-
-.pure-form input.pure-input-rounded,
-.pure-form .pure-input-rounded {
-	border-radius: 2em;
-	padding: .5em 1em
-}
-
-.pure-form .pure-group fieldset {
-	margin-bottom: 10px
-}
-
-.pure-form .pure-group input,
-.pure-form .pure-group textarea {
-	display: block;
-	padding: 10px;
-	margin: 0 0 -1px;
-	border-radius: 0;
-	position: relative;
-	top: -1px
-}
-
-.pure-form .pure-group input:focus,
-.pure-form .pure-group textarea:focus {
-	z-index: 3
-}
-
-.pure-form .pure-group input:first-child,
-.pure-form .pure-group textarea:first-child {
-	top: 1px;
-	border-radius: 4px 4px 0 0;
-	margin: 0
-}
-
-.pure-form .pure-group input:first-child:last-child,
-.pure-form .pure-group textarea:first-child:last-child {
-	top: 1px;
-	border-radius: 4px;
-	margin: 0
-}
-
-.pure-form .pure-group input:last-child,
-.pure-form .pure-group textarea:last-child {
-	top: -2px;
-	border-radius: 0 0 4px 4px;
-	margin: 0
-}
-
-.pure-form .pure-group button {
-	margin: .35em 0
-}
-
-.pure-form .pure-input-1 {
-	width: 100%
-}
-
-.pure-form .pure-input-2-3 {
-	width: 66%
-}
-
-.pure-form .pure-input-1-2 {
-	width: 50%
-}
-
-.pure-form .pure-input-1-3 {
-	width: 33%
-}
-
-.pure-form .pure-input-1-4 {
-	width: 25%
-}
-
-.pure-form .pure-help-inline,
-.pure-form-message-inline {
-	display: inline-block;
-	padding-left: .3em;
-	color: #666;
-	vertical-align: middle;
-	font-size: .875em
-}
-
-.pure-form-message {
-	display: block;
-	color: #666;
-	font-size: .875em
-}
-
-@media only screen and (max-width :480px) {
-	.pure-form button[type=submit] {
-		margin: .7em 0 0
-	}
-	.pure-form input:not([type]),
-	.pure-form input[type=text],
-	.pure-form input[type=password],
-	.pure-form input[type=email],
-	.pure-form input[type=url],
-	.pure-form input[type=date],
-	.pure-form input[type=month],
-	.pure-form input[type=time],
-	.pure-form input[type=datetime],
-	.pure-form input[type=datetime-local],
-	.pure-form input[type=week],
-	.pure-form input[type=number],
-	.pure-form input[type=search],
-	.pure-form input[type=tel],
-	.pure-form input[type=color],
-	.pure-form label {
-		margin-bottom: .3em;
-		display: block
-	}
-	.pure-group input:not([type]),
-	.pure-group input[type=text],
-	.pure-group input[type=password],
-	.pure-group input[type=email],
-	.pure-group input[type=url],
-	.pure-group input[type=date],
-	.pure-group input[type=month],
-	.pure-group input[type=time],
-	.pure-group input[type=datetime],
-	.pure-group input[type=datetime-local],
-	.pure-group input[type=week],
-	.pure-group input[type=number],
-	.pure-group input[type=search],
-	.pure-group input[type=tel],
-	.pure-group input[type=color] {
-		margin-bottom: 0
-	}
-	.pure-form-aligned .pure-control-group label {
-		margin-bottom: .3em;
-		text-align: left;
-		display: block;
-		width: 100%
-	}
-	.pure-form-aligned .pure-controls {
-		margin: 1.5em 0 0
-	}
-	.pure-form .pure-help-inline,
-	.pure-form-message-inline,
-	.pure-form-message {
-		display: block;
-		font-size: .75em;
-		padding: .2em 0 .8em
-	}
-}
-
-.pure-menu {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box
-}
-
-.pure-menu-fixed {
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 3
-}
-
-.pure-menu-list,
-.pure-menu-item {
-	position: relative
-}
-
-.pure-menu-list {
-	list-style: none;
-	margin: 0;
-	padding: 0
-}
-
-.pure-menu-item {
-	padding: 0;
-	margin: 0;
-	height: 100%
-}
-
-.pure-menu-link,
-.pure-menu-heading {
-	display: block;
-	text-decoration: none;
-	white-space: nowrap
-}
-
-.pure-menu-horizontal {
-	width: 100%;
-	white-space: nowrap
-}
-
-.pure-menu-horizontal .pure-menu-list {
-	display: inline-block
-}
-
-.pure-menu-horizontal .pure-menu-item,
-.pure-menu-horizontal .pure-menu-heading,
-.pure-menu-horizontal .pure-menu-separator {
-	display: inline-block;
-	*display: inline;
-	zoom: 1;
-	vertical-align: middle
-}
-
-.pure-menu-item .pure-menu-item {
-	display: block
-}
-
-.pure-menu-children {
-	display: none;
-	position: absolute;
-	left: 100%;
-	top: 0;
-	margin: 0;
-	padding: 0;
-	z-index: 3
-}
-
-.pure-menu-horizontal .pure-menu-children {
-	left: 0;
-	top: auto;
-	width: inherit
-}
-
-.pure-menu-allow-hover:hover>.pure-menu-children,
-.pure-menu-active>.pure-menu-children {
-	display: block;
-	position: absolute
-}
-
-.pure-menu-has-children>.pure-menu-link:after {
-	padding-left: .5em;
-	content: "\25B8";
-	font-size: small
-}
-
-.pure-menu-horizontal .pure-menu-has-children>.pure-menu-link:after {
-	content: "\25BE"
-}
-
-.pure-menu-scrollable {
-	overflow-y: scroll;
-	overflow-x: hidden
-}
-
-.pure-menu-scrollable .pure-menu-list {
-	display: block
-}
-
-.pure-menu-horizontal.pure-menu-scrollable .pure-menu-list {
-	display: inline-block
-}
-
-.pure-menu-horizontal.pure-menu-scrollable {
-	white-space: nowrap;
-	overflow-y: hidden;
-	overflow-x: auto;
-	-ms-overflow-style: none;
-	-webkit-overflow-scrolling: touch;
-	padding: .5em 0
-}
-
-.pure-menu-horizontal.pure-menu-scrollable::-webkit-scrollbar {
-	display: none
-}
-
-.pure-menu-separator {
-	background-color: #ccc;
-	height: 1px;
-	margin: .3em 0
-}
-
-.pure-menu-horizontal .pure-menu-separator {
-	width: 1px;
-	height: 1.3em;
-	margin: 0 .3em
-}
-
-.pure-menu-heading {
-	text-transform: uppercase;
-	color: #565d64
-}
-
-.pure-menu-link {
-	color: #777
-}
-
-.pure-menu-children {
-	background-color: #fff
-}
-
-.pure-menu-link,
-.pure-menu-disabled,
-.pure-menu-heading {
-	padding: .5em 1em
-}
-
-.pure-menu-disabled {
-	opacity: .5
-}
-
-.pure-menu-disabled .pure-menu-link:hover {
-	background-color: transparent
-}
-
-.pure-menu-active>.pure-menu-link,
-.pure-menu-link:hover,
-.pure-menu-link:focus {
-	background-color: #eee
-}
-
-.pure-menu-selected .pure-menu-link,
-.pure-menu-selected .pure-menu-link:visited {
-	color: #000
-}
-
-.pure-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	empty-cells: show;
-	border: 1px solid #cbcbcb
-}
-
-.pure-table caption {
-	color: #000;
-	font: italic 85%/1 arial, sans-serif;
-	padding: 1em 0;
-	text-align: center
-}
-
-.pure-table td,
-.pure-table th {
-	border-left: 1px solid #cbcbcb;
-	border-width: 0 0 0 1px;
-	font-size: inherit;
-	margin: 0;
-	overflow: visible;
-	padding: .5em 1em
-}
-
-.pure-table td:first-child,
-.pure-table th:first-child {
-	border-left-width: 0
-}
-
-.pure-table thead {
-	background-color: #e0e0e0;
-	color: #000;
-	text-align: left;
-	vertical-align: bottom
-}
-
-.pure-table td {
-	background-color: transparent
-}
-
-.pure-table-odd td {
-	background-color: #f2f2f2
-}
-
-.pure-table-striped tr:nth-child(2n-1) td {
-	background-color: #f2f2f2
-}
-
-.pure-table-bordered td {
-	border-bottom: 1px solid #cbcbcb
-}
-
-.pure-table-bordered tbody>tr:last-child>td {
-	border-bottom-width: 0
-}
-
-.pure-table-horizontal td,
-.pure-table-horizontal th {
-	border-width: 0 0 1px;
-	border-bottom: 1px solid #cbcbcb
-}
-
-.pure-table-horizontal tbody>tr:last-child>td {
-	border-bottom-width: 0
-}		
-	</style>
-    <style>
-        body {
-            padding: 1% 3%;
-            color: rgb(119, 119, 119);
-        }
-        h1 {
-            color: #333
-        }
-        .button {
-            border: none;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        .button-rounded {
-            background-color: #4CAF50;
-            /* Green */
-            
-            border-radius: 12px;
-        }
-        .button-rounded-Pay {
-            background-color: #0000FF;
-            /* Green */
-            
-            border-radius: 12px;
-        }
-        /* The Modal (background) */
-        
-        .modal {
-            display: none;
-            /* Hidden by default */
-            
-            position: fixed;
-            /* Stay in place */
-            
-            z-index: 1;
-            /* sit on top */
-            
-            padding-top: 100px;
-            /* Location of the box */
-            
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            
-            height: 100%;
-            /* Full height */
-            
-            overflow: auto;
-            /* Enable scroll if needed */
-            
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
-        /* Modal content */
-        
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            .html width: 80%;
-        }
-        /* The close Button */
-        
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .pagination li {
-            display: inline-block;
-            padding: 5px;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Giggly Kangaroos Invoicing</h1>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-
-    <script>
-/*global $, window*/
-$.fn.editableTableWidget = function (options) {
-	'use strict';
-	return $(this).each(function () {
-		var buildDefaultOptions = function () {
-				var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
-				opts.editor = opts.editor.clone();
-				return opts;
-			},
-			activeOptions = $.extend(buildDefaultOptions(), options),
-			ARROW_LEFT = 37, ARROW_UP = 38, ARROW_RIGHT = 39, ARROW_DOWN = 40, ENTER = 13, ESC = 27, TAB = 9,
-			element = $(this),
-			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
-			active,
-			showEditor = function (select) {
-				active = element.find('td:focus');
-				if (active.length) {
-					editor.val(active.text())
-						.removeClass('error')
-						.show()
-						.offset(active.offset())
-						.css(active.css(activeOptions.cloneProperties))
-						.width(active.width())
-						.height(active.height())
-						.focus();
-					if (select) {
-						editor.select();
-					}
-				}
-			},
-			setActiveText = function () {
-				var text = editor.val(),
-					evt = $.Event('change'),
-					originalContent;
-				if (active.text() === text || editor.hasClass('error')) {
-					return true;
-				}
-				originalContent = active.html();
-				active.text(text).trigger(evt, text);
-				if (evt.result === false) {
-					active.html(originalContent);
-				}
-			},
-			movement = function (element, keycode) {
-				if (keycode === ARROW_RIGHT) {
-					return element.next('td');
-				} else if (keycode === ARROW_LEFT) {
-					return element.prev('td');
-				} else if (keycode === ARROW_UP) {
-					return element.parent().prev().children().eq(element.index());
-				} else if (keycode === ARROW_DOWN) {
-					return element.parent().next().children().eq(element.index());
-				}
-				return [];
-			};
-		editor.blur(function () {
-			setActiveText();
-			editor.hide();
-		}).keydown(function (e) {
-			if (e.which === ENTER) {
-				setActiveText();
-				editor.hide();
-				active.focus();
-				e.preventDefault();
-				e.stopPropagation();
-			} else if (e.which === ESC) {
-				editor.val(active.text());
-				e.preventDefault();
-				e.stopPropagation();
-				editor.hide();
-				active.focus();
-			} else if (e.which === TAB) {
-				active.focus();
-			} else if (this.selectionEnd - this.selectionStart === this.value.length) {
-				var possibleMove = movement(active, e.which);
-				if (possibleMove.length > 0) {
-					possibleMove.focus();
-					e.preventDefault();
-					e.stopPropagation();
-				}
-			}
-		})
-		.on('input paste', function () {
-			var evt = $.Event('validate');
-			active.trigger(evt, editor.val());
-			if (evt.result === false) {
-				editor.addClass('error');
-			} else {
-				editor.removeClass('error');
-			}
-		});
-		element.on('click keypress dblclick', showEditor)
-		.css('cursor', 'pointer')
-		.keydown(function (e) {
-			var prevent = true,
-				possibleMove = movement($(e.target), e.which);
-			if (possibleMove.length > 0) {
-				possibleMove.focus();
-			} else if (e.which === ENTER) {
-				showEditor(false);
-			} else if (e.which === 17 || e.which === 91 || e.which === 93) {
-				showEditor(true);
-				prevent = false;
-			} else {
-				prevent = false;
-			}
-			if (prevent) {
-				e.stopPropagation();
-				e.preventDefault();
-			}
-		});
-
-		element.find('td').prop('tabindex', 1);
-
-		$(window).on('resize', function () {
-			if (editor.is(':visible')) {
-				editor.offset(active.offset())
-				.width(active.width())
-				.height(active.height());
-			}
-		});
-	});
-
-};
-$.fn.editableTableWidget.defaultOptions = {
-	cloneProperties: ['padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
-					  'text-align', 'font', 'font-size', 'font-family', 'font-weight',
-					  'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
-	editor: $('<input>')
-};
-
-</script>
-
-<pre id="content"></pre>
-
-    <table id="tblAction" class="pure-table pure-table-bordered">
-        <tbody>
+   <head>
+      <meta charset="utf-8">
+      <title>Giggly Kangaroos Invoicing</title>
+      <style>
+         html {
+         font-family: sans-serif;
+         -ms-text-size-adjust: 100%;
+         -webkit-text-size-adjust: 100%
+         }
+         body {
+         margin: 0
+         }
+         article,
+         aside,
+         details,
+         figcaption,
+         figure,
+         footer,
+         header,
+         hgroup,
+         main,
+         menu,
+         nav,
+         section,
+         summary {
+         display: block
+         }
+         audio,
+         canvas,
+         progress,
+         video {
+         display: inline-block;
+         vertical-align: baseline
+         }
+         audio:not([controls]) {
+         display: none;
+         height: 0
+         }
+         [hidden],
+         template {
+         display: none
+         }
+         a {
+         background-color: transparent
+         }
+         a:active,
+         a:hover {
+         outline: 0
+         }
+         abbr[title] {
+         border-bottom: 1px dotted
+         }
+         b,
+         strong {
+         font-weight: 700
+         }
+         dfn {
+         font-style: italic
+         }
+         h1 {
+         font-size: 2em;
+         margin: .67em 0
+         }
+         mark {
+         background: #ff0;
+         color: #000
+         }
+         small {
+         font-size: 80%
+         }
+         sub,
+         sup {
+         font-size: 75%;
+         line-height: 0;
+         position: relative;
+         vertical-align: baseline
+         }
+         sup {
+         top: -.5em
+         }
+         sub {
+         bottom: -.25em
+         }
+         img {
+         border: 0
+         }
+         svg:not(:root) {
+         overflow: hidden
+         }
+         figure {
+         margin: 1em 40px
+         }
+         hr {
+         -moz-box-sizing: content-box;
+         box-sizing: content-box;
+         height: 0
+         }
+         pre {
+         overflow: auto
+         }
+         code,
+         kbd,
+         pre,
+         samp {
+         font-family: monospace, monospace;
+         font-size: 1em
+         }
+         button,
+         input,
+         optgroup,
+         select,
+         textarea {
+         color: inherit;
+         font: inherit;
+         margin: 0
+         }
+         button {
+         overflow: visible
+         }
+         button,
+         select {
+         text-transform: none
+         }
+         button,
+         html input[type=button],
+         input[type=reset],
+         input[type=submit] {
+         -webkit-appearance: button;
+         cursor: pointer
+         }
+         button[disabled],
+         html input[disabled] {
+         cursor: default
+         }
+         button::-moz-focus-inner,
+         input::-moz-focus-inner {
+         border: 0;
+         padding: 0
+         }
+         input {
+         line-height: normal
+         }
+         input[type=checkbox],
+         input[type=radio] {
+         box-sizing: border-box;
+         padding: 0
+         }
+         input[type=number]::-webkit-inner-spin-button,
+         input[type=number]::-webkit-outer-spin-button {
+         height: auto
+         }
+         input[type=search] {
+         -webkit-appearance: textfield;
+         -moz-box-sizing: content-box;
+         -webkit-box-sizing: content-box;
+         box-sizing: content-box
+         }
+         input[type=search]::-webkit-search-cancel-button,
+         input[type=search]::-webkit-search-decoration {
+         -webkit-appearance: none
+         }
+         fieldset {
+         border: 1px solid silver;
+         margin: 0 2px;
+         padding: .35em .625em .75em
+         }
+         legend {
+         border: 0;
+         padding: 0
+         }
+         textarea {
+         overflow: auto
+         }
+         optgroup {
+         font-weight: 700
+         }
+         table {
+         border-collapse: collapse;
+         border-spacing: 0
+         }
+         td,
+         th {
+         padding: 0
+         }
+         .hidden,
+         [hidden] {
+         display: none!important
+         }
+         .pure-img {
+         max-width: 100%;
+         height: auto;
+         display: block
+         }
+         .pure-g {
+         letter-spacing: -.31em;
+         *letter-spacing: normal;
+         *word-spacing: -.43em;
+         text-rendering: optimizespeed;
+         font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+         display: -webkit-flex;
+         -webkit-flex-flow: row wrap;
+         display: -ms-flexbox;
+         -ms-flex-flow: row wrap;
+         -ms-align-content: flex-start;
+         -webkit-align-content: flex-start;
+         align-content: flex-start
+         }
+         .opera-only :-o-prefocus,
+         .pure-g {
+         word-spacing: -.43em
+         }
+         .pure-u {
+         display: inline-block;
+         *display: inline;
+         zoom: 1;
+         letter-spacing: normal;
+         word-spacing: normal;
+         vertical-align: top;
+         text-rendering: auto
+         }
+         .pure-g [class *="pure-u"] {
+         font-family: sans-serif
+         }
+         .pure-u-1,
+         .pure-u-1-1,
+         .pure-u-1-2,
+         .pure-u-1-3,
+         .pure-u-2-3,
+         .pure-u-1-4,
+         .pure-u-3-4,
+         .pure-u-1-5,
+         .pure-u-2-5,
+         .pure-u-3-5,
+         .pure-u-4-5,
+         .pure-u-5-5,
+         .pure-u-1-6,
+         .pure-u-5-6,
+         .pure-u-1-8,
+         .pure-u-3-8,
+         .pure-u-5-8,
+         .pure-u-7-8,
+         .pure-u-1-12,
+         .pure-u-5-12,
+         .pure-u-7-12,
+         .pure-u-11-12,
+         .pure-u-1-24,
+         .pure-u-2-24,
+         .pure-u-3-24,
+         .pure-u-4-24,
+         .pure-u-5-24,
+         .pure-u-6-24,
+         .pure-u-7-24,
+         .pure-u-8-24,
+         .pure-u-9-24,
+         .pure-u-10-24,
+         .pure-u-11-24,
+         .pure-u-12-24,
+         .pure-u-13-24,
+         .pure-u-14-24,
+         .pure-u-15-24,
+         .pure-u-16-24,
+         .pure-u-17-24,
+         .pure-u-18-24,
+         .pure-u-19-24,
+         .pure-u-20-24,
+         .pure-u-21-24,
+         .pure-u-22-24,
+         .pure-u-23-24,
+         .pure-u-24-24 {
+         display: inline-block;
+         *display: inline;
+         zoom: 1;
+         letter-spacing: normal;
+         word-spacing: normal;
+         vertical-align: top;
+         text-rendering: auto
+         }
+         .pure-u-1-24 {
+         width: 4.1667%;
+         *width: 4.1357%
+         }
+         .pure-u-1-12,
+         .pure-u-2-24 {
+         width: 8.3333%;
+         *width: 8.3023%
+         }
+         .pure-u-1-8,
+         .pure-u-3-24 {
+         width: 12.5%;
+         *width: 12.469%
+         }
+         .pure-u-1-6,
+         .pure-u-4-24 {
+         width: 16.6667%;
+         *width: 16.6357%
+         }
+         .pure-u-1-5 {
+         width: 20%;
+         *width: 19.969%
+         }
+         .pure-u-5-24 {
+         width: 20.8333%;
+         *width: 20.8023%
+         }
+         .pure-u-1-4,
+         .pure-u-6-24 {
+         width: 25%;
+         *width: 24.969%
+         }
+         .pure-u-7-24 {
+         width: 29.1667%;
+         *width: 29.1357%
+         }
+         .pure-u-1-3,
+         .pure-u-8-24 {
+         width: 33.3333%;
+         *width: 33.3023%
+         }
+         .pure-u-3-8,
+         .pure-u-9-24 {
+         width: 37.5%;
+         *width: 37.469%
+         }
+         .pure-u-2-5 {
+         width: 40%;
+         *width: 39.969%
+         }
+         .pure-u-5-12,
+         .pure-u-10-24 {
+         width: 41.6667%;
+         *width: 41.6357%
+         }
+         .pure-u-11-24 {
+         width: 45.8333%;
+         *width: 45.8023%
+         }
+         .pure-u-1-2,
+         .pure-u-12-24 {
+         width: 50%;
+         *width: 49.969%
+         }
+         .pure-u-13-24 {
+         width: 54.1667%;
+         *width: 54.1357%
+         }
+         .pure-u-7-12,
+         .pure-u-14-24 {
+         width: 58.3333%;
+         *width: 58.3023%
+         }
+         .pure-u-3-5 {
+         width: 60%;
+         *width: 59.969%
+         }
+         .pure-u-5-8,
+         .pure-u-15-24 {
+         width: 62.5%;
+         *width: 62.469%
+         }
+         .pure-u-2-3,
+         .pure-u-16-24 {
+         width: 66.6667%;
+         *width: 66.6357%
+         }
+         .pure-u-17-24 {
+         width: 70.8333%;
+         *width: 70.8023%
+         }
+         .pure-u-3-4,
+         .pure-u-18-24 {
+         width: 75%;
+         *width: 74.969%
+         }
+         .pure-u-19-24 {
+         width: 79.1667%;
+         *width: 79.1357%
+         }
+         .pure-u-4-5 {
+         width: 80%;
+         *width: 79.969%
+         }
+         .pure-u-5-6,
+         .pure-u-20-24 {
+         width: 83.3333%;
+         *width: 83.3023%
+         }
+         .pure-u-7-8,
+         .pure-u-21-24 {
+         width: 87.5%;
+         *width: 87.469%
+         }
+         .pure-u-11-12,
+         .pure-u-22-24 {
+         width: 91.6667%;
+         *width: 91.6357%
+         }
+         .pure-u-23-24 {
+         width: 95.8333%;
+         *width: 95.8023%
+         }
+         .pure-u-1,
+         .pure-u-1-1,
+         .pure-u-5-5,
+         .pure-u-24-24 {
+         width: 100%
+         }
+         .pure-button {
+         display: inline-block;
+         zoom: 1;
+         line-height: normal;
+         white-space: nowrap;
+         vertical-align: middle;
+         text-align: center;
+         cursor: pointer;
+         -webkit-user-drag: none;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+         user-select: none;
+         -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+         box-sizing: border-box
+         }
+         .pure-button::-moz-focus-inner {
+         padding: 0;
+         border: 0
+         }
+         .pure-button {
+         font-family: inherit;
+         font-size: 100%;
+         padding: .5em 1em;
+         color: #444;
+         color: rgba(0, 0, 0, .8);
+         border: 1px solid #999;
+         border: 0 rgba(0, 0, 0, 0);
+         background-color: #E6E6E6;
+         text-decoration: none;
+         border-radius: 2px
+         }
+         .pure-button-hover,
+         .pure-button:hover,
+         .pure-button:focus {
+         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);
+         background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, .05)), to(rgba(0, 0, 0, .1)));
+         background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1));
+         background-image: -moz-linear-gradient(top, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .1));
+         background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1));
+         background-image: linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1))
+         }
+         .pure-button:focus {
+         outline: 0
+         }
+         .pure-button-active,
+         .pure-button:active {
+         box-shadow: 0 0 0 1px rgba(0, 0, 0, .15) inset, 0 0 6px rgba(0, 0, 0, .2) inset;
+         border-color: #000\9
+         }
+         .pure-button[disabled],
+         .pure-button-disabled,
+         .pure-button-disabled:hover,
+         .pure-button-disabled:focus,
+         .pure-button-disabled:active {
+         border: 0;
+         background-image: none;
+         filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+         filter: alpha(opacity=40);
+         -khtml-opacity: .4;
+         -moz-opacity: .4;
+         opacity: .4;
+         cursor: not-allowed;
+         box-shadow: none
+         }
+         .pure-button-hidden {
+         display: none
+         }
+         .pure-button::-moz-focus-inner {
+         padding: 0;
+         border: 0
+         }
+         .pure-button-primary,
+         .pure-button-selected,
+         a.pure-button-primary,
+         a.pure-button-selected {
+         background-color: #0078e7;
+         color: #fff
+         }
+         .pure-form input[type=text],
+         .pure-form input[type=password],
+         .pure-form input[type=email],
+         .pure-form input[type=url],
+         .pure-form input[type=date],
+         .pure-form input[type=month],
+         .pure-form input[type=time],
+         .pure-form input[type=datetime],
+         .pure-form input[type=datetime-local],
+         .pure-form input[type=week],
+         .pure-form input[type=number],
+         .pure-form input[type=search],
+         .pure-form input[type=tel],
+         .pure-form input[type=color],
+         .pure-form select,
+         .pure-form textarea {
+         padding: .5em .6em;
+         display: inline-block;
+         border: 1px solid #ccc;
+         box-shadow: inset 0 1px 3px #ddd;
+         border-radius: 4px;
+         vertical-align: middle;
+         -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+         box-sizing: border-box
+         }
+         .pure-form input:not([type]) {
+         padding: .5em .6em;
+         display: inline-block;
+         border: 1px solid #ccc;
+         box-shadow: inset 0 1px 3px #ddd;
+         border-radius: 4px;
+         -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+         box-sizing: border-box
+         }
+         .pure-form input[type=color] {
+         padding: .2em .5em
+         }
+         .pure-form input[type=text]:focus,
+         .pure-form input[type=password]:focus,
+         .pure-form input[type=email]:focus,
+         .pure-form input[type=url]:focus,
+         .pure-form input[type=date]:focus,
+         .pure-form input[type=month]:focus,
+         .pure-form input[type=time]:focus,
+         .pure-form input[type=datetime]:focus,
+         .pure-form input[type=datetime-local]:focus,
+         .pure-form input[type=week]:focus,
+         .pure-form input[type=number]:focus,
+         .pure-form input[type=search]:focus,
+         .pure-form input[type=tel]:focus,
+         .pure-form input[type=color]:focus,
+         .pure-form select:focus,
+         .pure-form textarea:focus {
+         outline: 0;
+         border-color: #129FEA
+         }
+         .pure-form input:not([type]):focus {
+         outline: 0;
+         border-color: #129FEA
+         }
+         .pure-form input[type=file]:focus,
+         .pure-form input[type=radio]:focus,
+         .pure-form input[type=checkbox]:focus {
+         outline: thin solid #129FEA;
+         outline: 1px auto #129FEA
+         }
+         .pure-form .pure-checkbox,
+         .pure-form .pure-radio {
+         margin: .5em 0;
+         display: block
+         }
+         .pure-form input[type=text][disabled],
+         .pure-form input[type=password][disabled],
+         .pure-form input[type=email][disabled],
+         .pure-form input[type=url][disabled],
+         .pure-form input[type=date][disabled],
+         .pure-form input[type=month][disabled],
+         .pure-form input[type=time][disabled],
+         .pure-form input[type=datetime][disabled],
+         .pure-form input[type=datetime-local][disabled],
+         .pure-form input[type=week][disabled],
+         .pure-form input[type=number][disabled],
+         .pure-form input[type=search][disabled],
+         .pure-form input[type=tel][disabled],
+         .pure-form input[type=color][disabled],
+         .pure-form select[disabled],
+         .pure-form textarea[disabled] {
+         cursor: not-allowed;
+         background-color: #eaeded;
+         color: #cad2d3
+         }
+         .pure-form input:not([type])[disabled] {
+         cursor: not-allowed;
+         background-color: #eaeded;
+         color: #cad2d3
+         }
+         .pure-form input[readonly],
+         .pure-form select[readonly],
+         .pure-form textarea[readonly] {
+         background-color: #eee;
+         color: #777;
+         border-color: #ccc
+         }
+         .pure-form input:focus:invalid,
+         .pure-form textarea:focus:invalid,
+         .pure-form select:focus:invalid {
+         color: #b94a48;
+         border-color: #e9322d
+         }
+         .pure-form input[type=file]:focus:invalid:focus,
+         .pure-form input[type=radio]:focus:invalid:focus,
+         .pure-form input[type=checkbox]:focus:invalid:focus {
+         outline-color: #e9322d
+         }
+         .pure-form select {
+         height: 2.25em;
+         border: 1px solid #ccc;
+         background-color: #fff
+         }
+         .pure-form select[multiple] {
+         height: auto
+         }
+         .pure-form label {
+         margin: .5em 0 .2em
+         }
+         .pure-form fieldset {
+         margin: 0;
+         padding: .35em 0 .75em;
+         border: 0
+         }
+         .pure-form legend {
+         display: block;
+         width: 100%;
+         padding: .3em 0;
+         margin-bottom: .3em;
+         color: #333;
+         border-bottom: 1px solid #e5e5e5
+         }
+         .pure-form-stacked input[type=text],
+         .pure-form-stacked input[type=password],
+         .pure-form-stacked input[type=email],
+         .pure-form-stacked input[type=url],
+         .pure-form-stacked input[type=date],
+         .pure-form-stacked input[type=month],
+         .pure-form-stacked input[type=time],
+         .pure-form-stacked input[type=datetime],
+         .pure-form-stacked input[type=datetime-local],
+         .pure-form-stacked input[type=week],
+         .pure-form-stacked input[type=number],
+         .pure-form-stacked input[type=search],
+         .pure-form-stacked input[type=tel],
+         .pure-form-stacked input[type=color],
+         .pure-form-stacked input[type=file],
+         .pure-form-stacked select,
+         .pure-form-stacked label,
+         .pure-form-stacked textarea {
+         display: block;
+         margin: .25em 0
+         }
+         .pure-form-stacked input:not([type]) {
+         display: block;
+         margin: .25em 0
+         }
+         .pure-form-aligned input,
+         .pure-form-aligned textarea,
+         .pure-form-aligned select,
+         .pure-form-aligned .pure-help-inline,
+         .pure-form-message-inline {
+         display: inline-block;
+         *display: inline;
+         *zoom: 1;
+         vertical-align: middle
+         }
+         .pure-form-aligned textarea {
+         vertical-align: top
+         }
+         .pure-form-aligned .pure-control-group {
+         margin-bottom: .5em
+         }
+         .pure-form-aligned .pure-control-group label {
+         text-align: right;
+         display: inline-block;
+         vertical-align: middle;
+         width: 10em;
+         margin: 0 1em 0 0
+         }
+         .pure-form-aligned .pure-controls {
+         margin: 1.5em 0 0 11em
+         }
+         .pure-form input.pure-input-rounded,
+         .pure-form .pure-input-rounded {
+         border-radius: 2em;
+         padding: .5em 1em
+         }
+         .pure-form .pure-group fieldset {
+         margin-bottom: 10px
+         }
+         .pure-form .pure-group input,
+         .pure-form .pure-group textarea {
+         display: block;
+         padding: 10px;
+         margin: 0 0 -1px;
+         border-radius: 0;
+         position: relative;
+         top: -1px
+         }
+         .pure-form .pure-group input:focus,
+         .pure-form .pure-group textarea:focus {
+         z-index: 3
+         }
+         .pure-form .pure-group input:first-child,
+         .pure-form .pure-group textarea:first-child {
+         top: 1px;
+         border-radius: 4px 4px 0 0;
+         margin: 0
+         }
+         .pure-form .pure-group input:first-child:last-child,
+         .pure-form .pure-group textarea:first-child:last-child {
+         top: 1px;
+         border-radius: 4px;
+         margin: 0
+         }
+         .pure-form .pure-group input:last-child,
+         .pure-form .pure-group textarea:last-child {
+         top: -2px;
+         border-radius: 0 0 4px 4px;
+         margin: 0
+         }
+         .pure-form .pure-group button {
+         margin: .35em 0
+         }
+         .pure-form .pure-input-1 {
+         width: 100%
+         }
+         .pure-form .pure-input-2-3 {
+         width: 66%
+         }
+         .pure-form .pure-input-1-2 {
+         width: 50%
+         }
+         .pure-form .pure-input-1-3 {
+         width: 33%
+         }
+         .pure-form .pure-input-1-4 {
+         width: 25%
+         }
+         .pure-form .pure-help-inline,
+         .pure-form-message-inline {
+         display: inline-block;
+         padding-left: .3em;
+         color: #666;
+         vertical-align: middle;
+         font-size: .875em
+         }
+         .pure-form-message {
+         display: block;
+         color: #666;
+         font-size: .875em
+         }
+         @media only screen and (max-width :480px) {
+         .pure-form button[type=submit] {
+         margin: .7em 0 0
+         }
+         .pure-form input:not([type]),
+         .pure-form input[type=text],
+         .pure-form input[type=password],
+         .pure-form input[type=email],
+         .pure-form input[type=url],
+         .pure-form input[type=date],
+         .pure-form input[type=month],
+         .pure-form input[type=time],
+         .pure-form input[type=datetime],
+         .pure-form input[type=datetime-local],
+         .pure-form input[type=week],
+         .pure-form input[type=number],
+         .pure-form input[type=search],
+         .pure-form input[type=tel],
+         .pure-form input[type=color],
+         .pure-form label {
+         margin-bottom: .3em;
+         display: block
+         }
+         .pure-group input:not([type]),
+         .pure-group input[type=text],
+         .pure-group input[type=password],
+         .pure-group input[type=email],
+         .pure-group input[type=url],
+         .pure-group input[type=date],
+         .pure-group input[type=month],
+         .pure-group input[type=time],
+         .pure-group input[type=datetime],
+         .pure-group input[type=datetime-local],
+         .pure-group input[type=week],
+         .pure-group input[type=number],
+         .pure-group input[type=search],
+         .pure-group input[type=tel],
+         .pure-group input[type=color] {
+         margin-bottom: 0
+         }
+         .pure-form-aligned .pure-control-group label {
+         margin-bottom: .3em;
+         text-align: left;
+         display: block;
+         width: 100%
+         }
+         .pure-form-aligned .pure-controls {
+         margin: 1.5em 0 0
+         }
+         .pure-form .pure-help-inline,
+         .pure-form-message-inline,
+         .pure-form-message {
+         display: block;
+         font-size: .75em;
+         padding: .2em 0 .8em
+         }
+         }
+         .pure-menu {
+         -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+         box-sizing: border-box
+         }
+         .pure-menu-fixed {
+         position: fixed;
+         left: 0;
+         top: 0;
+         z-index: 3
+         }
+         .pure-menu-list,
+         .pure-menu-item {
+         position: relative
+         }
+         .pure-menu-list {
+         list-style: none;
+         margin: 0;
+         padding: 0
+         }
+         .pure-menu-item {
+         padding: 0;
+         margin: 0;
+         height: 100%
+         }
+         .pure-menu-link,
+         .pure-menu-heading {
+         display: block;
+         text-decoration: none;
+         white-space: nowrap
+         }
+         .pure-menu-horizontal {
+         width: 100%;
+         white-space: nowrap
+         }
+         .pure-menu-horizontal .pure-menu-list {
+         display: inline-block
+         }
+         .pure-menu-horizontal .pure-menu-item,
+         .pure-menu-horizontal .pure-menu-heading,
+         .pure-menu-horizontal .pure-menu-separator {
+         display: inline-block;
+         *display: inline;
+         zoom: 1;
+         vertical-align: middle
+         }
+         .pure-menu-item .pure-menu-item {
+         display: block
+         }
+         .pure-menu-children {
+         display: none;
+         position: absolute;
+         left: 100%;
+         top: 0;
+         margin: 0;
+         padding: 0;
+         z-index: 3
+         }
+         .pure-menu-horizontal .pure-menu-children {
+         left: 0;
+         top: auto;
+         width: inherit
+         }
+         .pure-menu-allow-hover:hover>.pure-menu-children,
+         .pure-menu-active>.pure-menu-children {
+         display: block;
+         position: absolute
+         }
+         .pure-menu-has-children>.pure-menu-link:after {
+         padding-left: .5em;
+         content: "\25B8";
+         font-size: small
+         }
+         .pure-menu-horizontal .pure-menu-has-children>.pure-menu-link:after {
+         content: "\25BE"
+         }
+         .pure-menu-scrollable {
+         overflow-y: scroll;
+         overflow-x: hidden
+         }
+         .pure-menu-scrollable .pure-menu-list {
+         display: block
+         }
+         .pure-menu-horizontal.pure-menu-scrollable .pure-menu-list {
+         display: inline-block
+         }
+         .pure-menu-horizontal.pure-menu-scrollable {
+         white-space: nowrap;
+         overflow-y: hidden;
+         overflow-x: auto;
+         -ms-overflow-style: none;
+         -webkit-overflow-scrolling: touch;
+         padding: .5em 0
+         }
+         .pure-menu-horizontal.pure-menu-scrollable::-webkit-scrollbar {
+         display: none
+         }
+         .pure-menu-separator {
+         background-color: #ccc;
+         height: 1px;
+         margin: .3em 0
+         }
+         .pure-menu-horizontal .pure-menu-separator {
+         width: 1px;
+         height: 1.3em;
+         margin: 0 .3em
+         }
+         .pure-menu-heading {
+         text-transform: uppercase;
+         color: #565d64
+         }
+         .pure-menu-link {
+         color: #777
+         }
+         .pure-menu-children {
+         background-color: #fff
+         }
+         .pure-menu-link,
+         .pure-menu-disabled,
+         .pure-menu-heading {
+         padding: .5em 1em
+         }
+         .pure-menu-disabled {
+         opacity: .5
+         }
+         .pure-menu-disabled .pure-menu-link:hover {
+         background-color: transparent
+         }
+         .pure-menu-active>.pure-menu-link,
+         .pure-menu-link:hover,
+         .pure-menu-link:focus {
+         background-color: #eee
+         }
+         .pure-menu-selected .pure-menu-link,
+         .pure-menu-selected .pure-menu-link:visited {
+         color: #000
+         }
+         .pure-table {
+         border-collapse: collapse;
+         border-spacing: 0;
+         empty-cells: show;
+         border: 1px solid #cbcbcb
+         }
+         .pure-table caption {
+         color: #000;
+         font: italic 85%/1 arial, sans-serif;
+         padding: 1em 0;
+         text-align: center
+         }
+         .pure-table td,
+         .pure-table th {
+         border-left: 1px solid #cbcbcb;
+         border-width: 0 0 0 1px;
+         font-size: inherit;
+         margin: 0;
+         overflow: visible;
+         padding: .5em 1em
+         }
+         .pure-table td:first-child,
+         .pure-table th:first-child {
+         border-left-width: 0
+         }
+         .pure-table thead {
+         background-color: #e0e0e0;
+         color: #000;
+         text-align: left;
+         vertical-align: bottom
+         }
+         .pure-table td {
+         background-color: transparent
+         }
+         .pure-table-odd td {
+         background-color: #f2f2f2
+         }
+         .pure-table-striped tr:nth-child(2n-1) td {
+         background-color: #f2f2f2
+         }
+         .pure-table-bordered td {
+         border-bottom: 1px solid #cbcbcb
+         }
+         .pure-table-bordered tbody>tr:last-child>td {
+         border-bottom-width: 0
+         }
+         .pure-table-horizontal td,
+         .pure-table-horizontal th {
+         border-width: 0 0 1px;
+         border-bottom: 1px solid #cbcbcb
+         }
+         .pure-table-horizontal tbody>tr:last-child>td {
+         border-bottom-width: 0
+         }		
+      </style>
+      <style>
+         body {
+         padding: 1% 3%;
+         color: rgb(119, 119, 119);
+         }
+         h1 {
+         color: #333
+         }
+         .button {
+         border: none;
+         color: white;
+         padding: 20px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         margin: 4px 2px;
+         cursor: pointer;
+         }
+         .button-rounded {
+         background-color: #4CAF50;
+         /* Green */
+         border-radius: 12px;
+         }
+         .button-rounded-Pay {
+         background-color: #0000FF;
+         /* Green */
+         border-radius: 12px;
+         }
+         /* The Modal (background) */
+         .modal {
+         display: none;
+         /* Hidden by default */
+         position: fixed;
+         /* Stay in place */
+         z-index: 1;
+         /* sit on top */
+         padding-top: 100px;
+         /* Location of the box */
+         left: 0;
+         top: 0;
+         width: 100%;
+         /* Full width */
+         height: 100%;
+         /* Full height */
+         overflow: auto;
+         /* Enable scroll if needed */
+         background-color: rgb(0, 0, 0);
+         /* Fallback color */
+         background-color: rgba(0, 0, 0, 0.4);
+         /* Black w/ opacity */
+         }
+         /* Modal content */
+         .modal-content {
+         background-color: #fefefe;
+         margin: auto;
+         padding: 20px;
+         border: 1px solid #888;
+         .html width: 80%;
+         }
+         /* The close Button */
+         .close {
+         color: #aaaaaa;
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+         }
+         .close:hover,
+         .close:focus {
+         color: #000;
+         text-decoration: none;
+         cursor: pointer;
+         }
+         .pagination li {
+         display: inline-block;
+         padding: 5px;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Giggly Kangaroos Invoicing</h1>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+      <script>
+         /*global $, window*/
+         $.fn.editableTableWidget = function (options) {
+         	'use strict';
+         	return $(this).each(function () {
+         		var buildDefaultOptions = function () {
+         				var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
+         				opts.editor = opts.editor.clone();
+         				return opts;
+         			},
+         			activeOptions = $.extend(buildDefaultOptions(), options),
+         			ARROW_LEFT = 37, ARROW_UP = 38, ARROW_RIGHT = 39, ARROW_DOWN = 40, ENTER = 13, ESC = 27, TAB = 9,
+         			element = $(this),
+         			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
+         			active,
+         			showEditor = function (select) {
+         				active = element.find('td:focus');
+         				if (active.length) {
+         					editor.val(active.text())
+         						.removeClass('error')
+         						.show()
+         						.offset(active.offset())
+         						.css(active.css(activeOptions.cloneProperties))
+         						.width(active.width())
+         						.height(active.height())
+         						.focus();
+         					if (select) {
+         						editor.select();
+         					}
+         				}
+         			},
+         			setActiveText = function () {
+         				var text = editor.val(),
+         					evt = $.Event('change'),
+         					originalContent;
+         				if (active.text() === text || editor.hasClass('error')) {
+         					return true;
+         				}
+         				originalContent = active.html();
+         				active.text(text).trigger(evt, text);
+         				if (evt.result === false) {
+         					active.html(originalContent);
+         				}
+         			},
+         			movement = function (element, keycode) {
+         				if (keycode === ARROW_RIGHT) {
+         					return element.next('td');
+         				} else if (keycode === ARROW_LEFT) {
+         					return element.prev('td');
+         				} else if (keycode === ARROW_UP) {
+         					return element.parent().prev().children().eq(element.index());
+         				} else if (keycode === ARROW_DOWN) {
+         					return element.parent().next().children().eq(element.index());
+         				}
+         				return [];
+         			};
+         		editor.blur(function () {
+         			setActiveText();
+         			editor.hide();
+         		}).keydown(function (e) {
+         			if (e.which === ENTER) {
+         				setActiveText();
+         				editor.hide();
+         				active.focus();
+         				e.preventDefault();
+         				e.stopPropagation();
+         			} else if (e.which === ESC) {
+         				editor.val(active.text());
+         				e.preventDefault();
+         				e.stopPropagation();
+         				editor.hide();
+         				active.focus();
+         			} else if (e.which === TAB) {
+         				active.focus();
+         			} else if (this.selectionEnd - this.selectionStart === this.value.length) {
+         				var possibleMove = movement(active, e.which);
+         				if (possibleMove.length > 0) {
+         					possibleMove.focus();
+         					e.preventDefault();
+         					e.stopPropagation();
+         				}
+         			}
+         		})
+         		.on('input paste', function () {
+         			var evt = $.Event('validate');
+         			active.trigger(evt, editor.val());
+         			if (evt.result === false) {
+         				editor.addClass('error');
+         			} else {
+         				editor.removeClass('error');
+         			}
+         		});
+         		element.on('click keypress dblclick', showEditor)
+         		.css('cursor', 'pointer')
+         		.keydown(function (e) {
+         			var prevent = true,
+         				possibleMove = movement($(e.target), e.which);
+         			if (possibleMove.length > 0) {
+         				possibleMove.focus();
+         			} else if (e.which === ENTER) {
+         				showEditor(false);
+         			} else if (e.which === 17 || e.which === 91 || e.which === 93) {
+         				showEditor(true);
+         				prevent = false;
+         			} else {
+         				prevent = false;
+         			}
+         			if (prevent) {
+         				e.stopPropagation();
+         				e.preventDefault();
+         			}
+         		});
+         
+         		element.find('td').prop('tabindex', 1);
+         
+         		$(window).on('resize', function () {
+         			if (editor.is(':visible')) {
+         				editor.offset(active.offset())
+         				.width(active.width())
+         				.height(active.height());
+         			}
+         		});
+         	});
+         
+         };
+         $.fn.editableTableWidget.defaultOptions = {
+         	cloneProperties: ['padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
+         					  'text-align', 'font', 'font-size', 'font-family', 'font-weight',
+         					  'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
+         	editor: $('<input>')
+         };
+         
+      </script>
+      <pre id="content"></pre>
+      <table id="tblAction" class="pure-table pure-table-bordered">
+         <tbody>
             <tr>
-                <td>
-                    <button id="authorize_button" class="button button-rounded">Sign On to Google Account</button>
-                </td>
+               <td>
+                  <button id="authorize_button" class="button button-rounded">Sign On to Google Account</button>
+               </td>
             </tr>
             </thead>
-    </table>
-    <BR>
-    <table id="tblAction" class="pure-table pure-table-bordered">
-        <tbody>
+      </table>
+      <BR>
+      <table id="tblAction" class="pure-table pure-table-bordered">
+         <tbody>
             <tr>
-                <td>
-                    <button class="button button-rounded">New Invoice</button>
-                </td>
-                <td>
-                    <button class="button button-rounded" onclick="showDiv('modalPdtInventory');">List of Inventory</button>
-                </td>
+               <td>
+                  <button class="button button-rounded">New Invoice</button>
+               </td>
+               <td>
+                  <button class="button button-rounded" onclick="showDiv('modalPdtInventory');">List of Inventory</button>
+               </td>
             </tr>
             </thead>
-    </table>
-    <BR>
-    <table id="tblaction" class="pure-table pure-table-bordered">
-        <tbody>
+      </table>
+      <BR>
+      <table id="tblaction" class="pure-table pure-table-bordered">
+         <tbody>
             <tr>
-                <td>
-                    <B>Total:</B>
-                    <input type="text" id="txtTotal" style="text-align: right">
-                </td>
-                <td>
-                    <button class="button button-rounded-Pay">Paid by Cash</button>
-                </td>
-                <td>
-                    <button class="button button-rounded-Pay">Paid by Credit Card</button>
-                </td>
+               <td>
+                  <B>Total:</B>
+                  <input type="text" id="txtTotal" style="text-align: right">
+               </td>
+               <td>
+                  <button class="button button-rounded-Pay">Paid by Cash</button>
+               </td>
+               <td>
+                  <button class="button button-rounded-Pay">Paid by Credit Card</button>
+               </td>
             </tr>
             </thead>
-    </table>
-    <BR>
-    <table id="tb7customerInfo" class="pure-table pure-table-bordered">
-        <tbody>
+      </table>
+      <BR>
+      <table id="tb7customerInfo" class="pure-table pure-table-bordered">
+         <tbody>
             <tr>
-                <td>
-                    <B>Customer Name:</B>
-                    <input type="text" name="txtName">
-                </td>
-                <td>
-                    <B>Number:</B>
-                    <input type="text" name="txtNumber">
-                </td>
-                <td>
-                    <B>Email:</B>
-                    <input type="text" name="txtEmail">
-                </td>
-                <td>
-                    <B>Address:</B>
-                    <input type="text" name="txtAddress">
-                </td>
+               <td>
+                  <B>Customer Name:</B>
+                  <input type="text" name="txtName">
+               </td>
+               <td>
+                  <B>Number:</B>
+                  <input type="text" name="txtNumber">
+               </td>
+               <td>
+                  <B>Email:</B>
+                  <input type="text" name="txtEmail">
+               </td>
+               <td>
+                  <B>Address:</B>
+                  <input type="text" name="txtAddress">
+               </td>
             </tr>
             </thead>
-    </table>
-    <BR>
-    <table id="tblPurchaseInvoice" class="pure-table pure-table-bordered">
-        <thead>
+      </table>
+      <BR>
+      <table id="tblPurchaseInvoice" class="pure-table pure-table-bordered">
+         <thead>
             <tr>
-                <th></th>
-                <th>Product Code</th>
-                <th>Product Desc</th>
-                <th>Qty</th>
-                <th>MRP</th>
-                <th>% discount Applied</th>
-                <th>Sale Price</th>
-                <th>Action</th>
+               <th></th>
+               <th>Product Code</th>
+               <th>Product Desc</th>
+               <th>Qty</th>
+               <th>MRP</th>
+               <th>% discount Applied</th>
+               <th>Sale Price</th>
+               <th>Action</th>
             </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-    <BR>
-    <BR>
-    <BR>
-    <BR>
-    <BR>
-    <BR>
-    <B><U>Only when needed: </U></B>
-    <BR>
-    <table id="tblAdminActions" class="pure-table pure-table-bordered">
-        <tbody>
+         </thead>
+         <tbody></tbody>
+      </table>
+      <BR>
+      <BR>
+      <BR>
+      <BR>
+      <BR>
+      <BR>
+      <B><U>Only when needed: </U></B>
+      <BR>
+      <table id="tblAdminActions" class="pure-table pure-table-bordered">
+         <tbody>
             <tr>
-                <td>
-                    <button id="signout_button" class="button button-rounded">Sign Off of Google Account</button>
-                </td>
-                <td>
-                    <button class="button button-rounded" onclick="LoadProductInfo();">Reload Inventory from Local</button>
-                </td>
-                <td>
-                    <button class="button button-rounded" onclick="showDiv('modalUpdateInventory');">Reload Inventory</button>
-                </td>
+               <td>
+                  <button id="signout_button" class="button button-rounded">Sign Off of Google Account</button>
+               </td>
+               <td>
+                  <button class="button button-rounded" onclick="LoadProductInfo();">Reload Inventory from Local</button>
+               </td>
+               <td>
+                  <button class="button button-rounded" onclick="showDiv('modalUpdateInventory');">Reload Inventory</button>
+               </td>
             </tr>
             </thead>
-    </table>
-
-    <!-- The Modal -->
-    <div id="modalPdtInventory" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
+      </table>
+      <!-- The Modal -->
+      <div id="modalPdtInventory" class="modal">
+         <!-- Modal content -->
+         <div class="modal-content">
             <span class="close" onclick="hideDiv('modalPdtInventory');">&times;</span>
             <div id="divLstPdtInv">
-                <B>Search: </B>
-                <input type="text" class="search" />
-                <ul id="ulPdtList" class="list"> </ul>
-                <ul class="pagination"></ul>
+               <B>Search: </B>
+               <input type="text" class="search" />
+               <ul id="ulPdtList" class="list"> </ul>
+               <ul class="pagination"></ul>
             </div>
-        </div>
-    </div>
-
-    <!-- The Modal -->
-    <div id="modalUpdateInventory" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
+         </div>
+      </div>
+      <!-- The Modal -->
+      <div id="modalUpdateInventory" class="modal">
+         <!-- Modal content -->
+         <div class="modal-content">
             <span class="close" onclick="hideDiv('modalUpdateInventory');">&times;</span>
             <div id="divUpdInv">
-                <B>Enter inventory: </B>
-                <P>
-                    <textarea id="txtUpdatedInv" rows="10" cols="100"></textarea>
-                    <P>
-                        <P>
-                            <button class="button button-rounded" onclick="GetDataFromServerAndStoreLocally();">Reload</button>
+               <B>Enter inventory: </B>
+               <P>
+                  <textarea id="txtUpdatedInv" rows="10" cols="100"></textarea>
+               <P>
+               <P>
+                  <button class="button button-rounded" onclick="GetDataFromServerAndStoreLocally();">Reload</button>
             </div>
-        </div>
-    </div>
-
-    <script>
-        var arrPdtInfo = new Object();
-
-        function GetProductFromDetails(lPdtCode, lPdtDesc, lPdtMRP) {
-            var arrPdtDet = new Object();
-            arrPdtDet['pdtCode'] = lPdtCode;
-            arrPdtDet['pdtDesc'] = lPdtDesc;
-            arrPdtDet['pdtMRP'] = lPdtMRP;
-            return arrPdtDet;
-        }
-
-        function LoadProductInfo() {
-            console.log('Loading From LocalDB');
-            arrPdtInfo = new Object();
-            var store;
-            var DBIndex;
-            var tx;
-            tx = db.transaction(GKinvObjStoreName, "readwrite");
-            store = tx.objectStore(GKinvObjStoreName);
-            DBIndex = store.index(GKinvIdxName);
-            var countRequest = DBIndex.count();
-            countRequest.onsuccess = function() {
-                console.log('Total ROWS: ' + countRequest.result);
-            }
-            DBIndex.openCursor().onsuccess = function(event) {
-                var cursor = event.target.result;
-                if (cursor) {
-                    //console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' value: ' + JSON.stringify(cursor.value));
-                    var pdtInfoJSON = cursor.value; 
-                    arrPdtInfo[pdtInfoJSON["pdtCode"]] = GetProductFromDetails(pdtInfoJSON["pdtCode"], pdtInfoJSON["pdtDesc"], pdtInfoJSON["pdtMRP"]);
-                    cursor.continue();
-                } else {
-                    console.log('Entries all loaded.');
-                };
-            };
-        }
-
-        function AddNewEmptyRow() {
-            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
-
-            var row = tbl.insertRow();
-
-            var cell;
-            cell = row.insertCell();
-            cell.className = "uneditable";
-            cell.innerText = tbl.rows.length - 1;
-
-            cell = row.insertCell();
-            cell.className = "pdtCode";
-
-            cell = row.insertCell();
-            cell.className = "uneditable";
-
-            cell = row.insertCell();
-            cell.className = "pdtQty";
-            cell.style, textAlign = 'right';
-
-            cell = row.insertCell();
-            cell.className = "uneditable";
-            cell.style.textAlign = 'right';
-
-            cell = row.insertCell();
-            cell.className = "pdtDiscAppl";
-            cell.style.textAlign = 'right';
-
-            cell = row.insertCell();
-            cell.className = "pdtSP";
-            cell.style.textAlign = 'right';
-
-            cell = row.insertCell();
-            cell.innerText = "Delete";
-
-            row.offsetHeight = tbl.rows[0].offsetHeight;
-
-            //set events for new rows... 
-            SetTableForUse();
-        }
-
-        function HandleNewPdtBought(pdtCodeCell, lPdtCode) {
-            pdtDet = arrPdtInfo[lPdtCode];
-            var pdtDesc = 'Generic',
-                pdtMRP = '1';
-            if (pdtDet != undefined) {
-                pdtDesc = pdtDet['pdtDesc'];
-                pdtMRP = pdtDet['pdtMRP'];
-            }
-            var parentRow = pdtCodeCell.parentNode;
-            parentRow.cells[2].innerText = pdtDesc;
-            parentRow.cells[3].innerText = '1';
-            parentRow.cells[4].innerText = pdtMRP;
-            parentRow.cells[5].innerText = '0';
-            parentRow.cells[6].innerText = pdtMRP;
-            parentRow.cells[7].innerText = 'Delete';
-
-            UpdateInvoiceTotal();
-            //only add new row when the one being worked upon is the last row...
-            var lastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
-            if (lastrow == parentRow) {
-                AddNewEmptyRow();
-                Tastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
-            }
-            setTimeout(function() {
-                lastrow.cells[1].focus();
-            }, 100);
-        }
-
-        function HandleQtyChanged(pdtcodecell, lNewQty) {
-            var parentRow = pdtcodecell.parentNode;
-            var lPdtQty = Number(lNewQty);
-            var lPdtMRP = Number(parentRow.cells[4].innerText);
-            var lPdtdisc = Number(parentRow.cells[5].innerText);
-
-            parentRow.cells[6].innerText = Math.round(lPdtQty * lPdtMRP * ((100 - lPdtdisc) / 100));
-            UpdateInvoiceTotal();
-        }
-
-        function HandleDiscApplChanged(pdtcodecell, lNewDisc) {
-            var parentRow = pdtcodecell.parentNode;
-            var lPdtQty = Number(parentRow.cells[3].innerText);
-            var lPdtMRP = Number(parentRow.cells[4].innerText);
-            var lPdtdisc = Number(lNewDisc);
-            parentRow.cells[6].innerText = Math.round(lPdtQty * lPdtMRP * ((100 - lPdtdisc) / 100));
-            UpdateInvoiceTotal();
-        }
-
-        function HandleSPChanged(pdtCodeCell, lNewsP) {
-            var parentRow = pdtCodeCell.parentNode;
-            var lPdtQty = Number(parentRow.cells[3].innerText);
-            var lPdtMRP = Number(parentRow.cells[4].innerText);
-            var lPdtSP = Number(lNewsP);
-            parentRow.cells[5].innerText = Math.round((lPdtMRP - (lPdtSP / lPdtQty)) / lPdtMRP * 100);
-            UpdateInvoiceTotal();
-        }
-
-        function UpdateInvoiceTotal() {
-            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
-                var i, totofInvoice = 0;
-
-                for (i = 0; i < tbl.rows.length; i++) {
-
-                    totofInvoice += Number(tbl.rows[i].cells[6].innerText);
-
-                }
-
-                var txtTotal = document.getElementById("txtTotal"); txtTotal.value = totofInvoice;
-
-            }
-
-            function Init() {
-                StartGoogleSignOnAPIs();
-                
-                let create_promise = new Promise(function(resolve, reject) {
-                    CreateDB(resolve, reject);
-                });
-                create_promise.then(
-                        function() {
-                            LoadProductInfo();
-                            AddNewEmptyRow();
-                            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0]; setTimeout(function() {
-                            tbl.rows[0].cells[1].focus();
-                        }, 100);
-                    },
-                    function() {
-                        console.log('DB Creation failed at Init. FATAL..');
-                    }
-            )
-        }
-
-        function SetTableForUse() {
-            //make table editable 
-            $('#tblPurchaseInvoice').editableTableWidget();
-            //make cells marked as uneditable - uneditable
-            $('#tblPurchaseInvoice td.uneditable').on('change', function(evt, newvalue) {
-                return false;
-            });
-            //change Qty, MRP, Discount, SP on product change
-            $('#tblPurchaseInvoice td.pdtCode').on('change', function(evt, newValue) {
-                HandleNewPdtBought(evt.target, newValue);
-            });
-            //change Qty, MRP, Discount, SP on product change
-            $('#tblPurchaseInvoice td.pdtQty').on('change', function(evt, newvalue) {
-                HandleQtyChanged(evt.target, newvalue);
-            }); //change Qty, MRP, Discount, SP on product change
-            $('#tblPurchaseInvoice td.pdtDiscAppl').on('change', function(evt, newvalue) {
-                HandleDiscApplChanged(evt.target, newvalue);
-            });
-            //change Qty, MRP, Discount, SP on product change
-            $('#tblPurchaseInvoice td.pdtSP').on('change', function(evt, newvalue) {
-                HandleSPChanged(evt.target, newvalue); 
-            });
-        }
-    </script>
-
-
-    <script>
-        var db;
-        var GKdbName = "GKInventoryDB";
-        
-        var GKinvObjStoreName = "GKInventory";
-        var GKinvIdxName = "pdtCode";
-        var GKinvIdxColName = "pdtCode";
-
-        var GKconfigObjStoreName = "GKConfig";
-        var GKconfigIdxName = "configKeyIdx";
-        var GKconfigIdxColName = "configKey";
-
-        function deleteAllObjStrs() {
-            db.deleteObjectStore(GKinvObjStoreName);
-            db.deleteObjectStore(GKconfigObjStoreName);
-        }
-        
-        function createAllObjStrs() {
-            var store;
-            var DBIndex;
-
-            store = db.createObjectStore(GKinvObjStoreName, {
-                keyPath: GKinvIdxColName
-            });
-            DBIndex = store.createIndex(GKinvIdxName, [GKinvIdxColName]);
-
-            store = db.createObjectStore(GKconfigObjStoreName, {
-                keyPath: GKconfigIdxColName
-            });
-            DBIndex = store.createIndex(GKconfigIdxName, [GKconfigIdxColName]);
-        }
-        
-        function CreateDB(resolve, reject) {
-            console.log('Starting DB creation');
-            // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
-            var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-            // Open (or create) the database 
-            var open = indexedDB.open(GKdbName, 4);
-            // Create the schema 
-            open.onupgradeneeded = function() {
-                console.log('DB being upgraded');
-                //create new db... 
-                db = open.result;
-                try {
-                    deleteAllObjStrs();
-                } catch (e) {}
-                
-                createAllObjStrs();
-
-                console.log('DB upgrade Done');
-                //resolve();
-            }
-            open.onsuccess = function() {
-                console.log('DB Exists');
-                db = open.result;
-                console.log('DB Opened for use');
-                resolve();
-            }
-        }
-
-        function DeletedB(resolve, reject) {
-            console.log('Deleting DB');
-            // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
-            var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-            // Open (or create) the database 
-            try {
-                db.close();
-            } catch (e) {}
-            var DBDeleteRequest = indexedDB.deleteDatabase(GKdbName);
-            DBDeleteRequest.onerror = function(event) {
-                console.log("Error deleting database.");
-                resolve();
-            };
-
-            DBDeleteRequest.onsuccess = function(event) {
-                console.log("Database deleted successfully ");
-                resolve();
-            }
-        }
-
-        function resets(open) {
-            //create new db... 
-            db = open.result;
-            try {
-                deleteAllObjStrs();
-            } catch (e) {}
-            
-            createAllObjStrs();
-            console.log('DB reset Done');
-        }
-
-        function InsertProductInfoIntoDB(lPdtcode, lPdtDesc, lPdtMRP, resolve, reject) {
-            console.log('Starting to Store Data: ');
-            var allDataFieldsForJSON = {};
-            allDataFieldsForJSON["pdtCode"] = lPdtcode;
-            allDataFieldsForJSON["pdtDesc"] = lPdtDesc;
-            allDataFieldsForJSON["pdtMRP"] = lPdtMRP;
-            console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
-            var store;
-            var DBIndex;
-            var tx;
-            tx = db.transaction(GKinvObjStoreName, "readwrite");
-            store = tx.objectStore(GKinvObjStoreName);
-            DBIndex = store.index(GKinvIdxName);
-            var newDataAdded = store.put(allDataFieldsForJSON);
-            console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
-            newDataAdded.onsuccess = function() {
-                console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
-                resolve();
-            };
-            newDataAdded.onerror = function(event) {
-                console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
-                resolve();
-            }
-        };
-
-        function DoDataLoadFromArray(Arrofdata, currentCounterToProcess) {
-            console.log('Now Starting with Row: ' + currentCounterToProcess);
-            if (Arrofdata.length > currentCounterToProcess) {
-                var rowBeingProcessed = Arrofdata[currentCounterToProcess];
-                console.log('Data Available. Storing in DB: ' + rowBeingProcessed['pdtCode'] + " FOR ROW " + currentCounterToProcess);
-                let promise_InsertToDB = new Promise(function(resolve, reject) {
-                    InsertProductInfoIntoDB(rowBeingProcessed['pdtCode'], rowBeingProcessed['pdtDesc'], rowBeingProcessed['pdtMRP'], resolve, reject);
-                });
-                promise_InsertToDB.then(
-                    function() {
-                        currentCounterToProcess++;
-                        DoDataLoadFromArray(Arrofdata, currentCounterToProcess);
-                    },
-                    function() {}
-                )
-            } else {
-                console.log('COMMENT THIS LINE --- Testing for what is in DB right now');
-                displayDataByIndex();
-                LoadProductInfo(); //to load the fresh inventory into memory for use immediately...
-                //also clear inventory div list... so it can refresh later
-                var ulFordtInventory = document.getElementById('ulPdtList');
-                ulFordtInventory.innerHTML = "";
-            }
-        }
-
-        function GetDataFromServerAndStoreLocally() {
-            console.log('setting DB'); //Create DB
-            let del_promise = new Promise(function(resolve, reject) {
-                DeletedB(resolve, reject);
-            });
-            del_promise.then(
-
-                function () {
-                    let create_promise = new Promise(function(resolve, reject) {
-                        CreateDB(resolve, reject);
-                    });
-                    create_promise.then(
-
-                        function() {
-                            //Load Data from server
-                            console.log('Getting data from server');
-                            var arrPdtInfo = new Array();
-                            var txtNewInv = document.getElementById("txtUpdatedInv").value;
-                            var totInvRows = txtNewInv.split("\n");
-                            var eachInvRowDtl;
-                            for (i = 1; i < totInvRows.length; i++) {
-                                eachInvRowDtl = totInvRows[i].split("\t");
-                                arrPdtInfo[i - 1] = GetProductFromDetails(eachInvRowDtl[0], eachInvRowDtl[3], eachInvRowDtl[1]);
-                            }
-                            console.log('Received data from server ');
-                            DoDataLoadFromArray(
-                                arrPdtInfo, 0);
-                        },
-                        function() {
-                            console.log('DB Creation failed.FATAL.. ');
-                        }
-                    )
-                },
-                function() {
-                    console.log('DB Deletion failed. FATAL..');
-                }
-            )
-        }
-
-        function deleteOldSheetIDsFromCOnfig(resolve, reject) {
-            var tx = db.transaction(GKconfigObjStoreName,"readwrite");
-            var estore = tx.objectStore(GKconfigObjStoreName);
-            var tagIndex = estore.index(GKconfigIdxName);
-            
-            var pdestroy = tagIndex.openKeyCursor(IDBKeyRange.only('SheetID')); 
-            pdestroy.onsuccess = function() {
-                var cursor = pdestroy.result;
-                if (cursor) {
-                    pstore.delete(cursor.primaryKey);
-                    cursor.continue;
-                }
-            }
-            pdestroy.onerror = function() {
-                console.log("Deletion attempt NG");
-            }
-            resolve();
-        }
-
-        function InsertSheetInfoInConfigIntoDB(lSheetID, resolve, reject) {
-            console.log('Starting to Store Sheet ID: ');
-            
-            //first delete existing keys...
-            let promise_deleteOldSheetIDsFromCOnfig = new Promise (function (resolve, reject) {
-                deleteOldSheetIDsFromCOnfig(resolve, reject);
-            });
-            promise_deleteOldSheetIDsFromCOnfig.then (function () {
-                var allDataFieldsForJSON = {};
-                allDataFieldsForJSON[GKconfigIdxColName] = 'SheetID';
-                allDataFieldsForJSON['ConfigValue'] = lSheetID;
-                console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
-                var store;
-                var DBIndex;
-                var tx;
-
-                tx = db.transaction(GKconfigObjStoreName, "readwrite");
-                store = tx.objectStore(GKconfigObjStoreName);
-                DBIndex = store.index(GKconfigIdxName);
-                var newDataAdded = store.put(allDataFieldsForJSON);
-                console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
-                newDataAdded.onsuccess = function() {
-                    console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
-                    resolve();
-                };
-                newDataAdded.onerror = function(event) {
-                    console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
-                    resolve();
-                }
-            }, function () {
-            });
-        };        
-
-        function GetSheetInfoInConfigFromDB(resolve, reject) {
-            console.log('Loading SheetInfo From LocalDB');
-            arrPdtInfo = new Object();
-            var store;
-            var DBIndex;
-            var tx;
-            tx = db.transaction(GKconfigObjStoreName, "readwrite");
-            store = tx.objectStore(GKconfigObjStoreName);
-            DBIndex = store.index(GKconfigIdxName);
-
-            // Query the data 
-            var akey = 'SheetID';
-            var getAROWForAkey;
-            getAROWForAkey = DBIndex.getKey(akey);
-            getAROWForAkey.onsuccess = function() {
-                console.log('getting by id (' + akey + '): '+ JSON.stringify( getAROWForAkey.result ) ) ;
-
-                DBIndex.openCursor().onsuccess = function(event) {
-                    var cursor = event.target.result;
-                    if(cursor) {
-                        console.log('sheetid found: ' + cursor.value.ConfigValue);    
-                        resolve(cursor.value.ConfigValue);
-                    } else {
-                      console.log('no sheetid found.');    
-                    }
-                  };
-            };
-            getAROWForAkey.onerror = function() {
-                console.log('getting by id. (' + akey + ') Failed ');
-            };
-        }
-        
-        // for testing/debugging... 
-        function displayDataByIndex() {
-            console.log('Testing for what is in DB right now');
-            var store;
-            var DBIndex;
-            var tx;
-            tx = db.transaction(GKinvObjStoreName, "readwrite");
-            store = tx.objectStore(GKinvObjStoreName);
-            DBIndex = store.index(GKinvIdxName);
-            //store.clear();
-            var countRequest = DBIndex.count();
-            countRequest.onsuccess = function() {
-                console.log('Total Rows: ' + countRequest.result);
-            }
-            console.log(store.keyPath);
-            DBIndex.openCursor().onsuccess = function(event) {
-                var cursor = event.target.result;
-                if (cursor) {
-                    console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' Value: ' + JSON.stringify(cursor.value));
-                    //RandomRowTest (cursor.value.DataDate);
-                    cursor.continue();
-                } else {
-                    console.log('Entries all displayed.');
-                }
-            };
-        };
-
-        function RandomRowTest(someCursorkeyForTest) {
-            var store;
-            var DBIndex;
-            var tx;
-            tx = db.transaction(GKinvObjStoreName, "readwrite");
-            store = tx.objectStore(GKinvObjStoreName);
-            DBIndex = store.index(GKinvIdxName);
-            // Query the data 
-            var áDate;
-            akey = someCursorkeyForTest;
-            akey = "125";
-            var aJSONForKey = {};
-            aJSONForkey[GKinvIdxColName] = akey;
-            var getAROWForAkey;
-            getAROWForAkey = DBÍndex.get(akey);
-            getAROWFOCAKey = store.get(akey);
-            getArowForAkey.onsuccess = function() {
-                console.log('getting by id (' + akey + '): '+ JSON.stringify( getArowForAkey ) ) ;
-            };
-            getARowForAkey.onerror = function() {
-                console.log('getting by id. (' + akey + ') Failed ');
-            };
-        }
-    </script>
-    <script>
-        // Get the <span> element that closes the modal
-        var btnDivclose = document.getElementsByClassName("close")[0];
-        // when the user clicks the button, open the modal 
-
-        function showDiv(divID) {
-            var divModalPdtInventory = document.getElementById(divID);
-            divModalPdtInventory.style.display = "block";
-            PrepareListForDisplay();
-        }
-
-        function PrepareListForDisplay() {
-                //load list
-                var ulForPdtInventory = document.getElementById('ulPdtList');
-                var ulLength = ulForPdtInventory.getElementsByTagName("li").length;
-                if (ulLength > 0) return;
-                var pdtDet, li, p, lstItmtxt;
-                for (var property in arrPdtInfo) {
-                    if (arrPdtInfo.hasOwnProperty(property)) {
-                        // create list... 
-                        pdtDet = arrPdtInfo[property];
-                        if (pdtDet != undefined) {
-                            lstItmtxt = "<B>Code: </B>";
-                            lstItmtxt += property;
-                            lstItmtxt += " <B>Qty: </B>";
-                            lstItmtxt += "?";
-                            lstItmtxt += " <B>MRP: </B>";
-                            lstItmtxt += pdtDet['pdtMRP'];
-                            lstItmtxt += " <B>Desc: </B>"
-                            lstItmtxt += pdtDet['pdtDesc'];
-                            li = document.createElement("li");
-                            p = document.createElement("p");
-                            p.innerHTML = lstItmtxt;
-                            p.className = "pdtDescForSearch";
-                            li.appendChild(p);
-                            ulForPdtInventory.appendChild(li);
-                        }
-                    }
-                }
-                //make list searchable... 
-                var searchableListPdtiny = new List('divLstPdtInv', {
-                    valueNames: ['pdtDescForSearch'],
-                    page: 10,
-                    pagination: true
-                });
-            }
-            // when the user clicks on <span> (x), close the modal 
-        function hideDiv(diVID) {
-                var divModalPdtInventory = document.getElementById(diVID);
-                divModalPdtInventory.style.display = "none";
-            }
-            // when the user clicks anywhere outside of the modal, close it
-            // window.onclick = function(event) {
-            //        if (event.target == modal) {
-            //            divmodal PdtInventory.style.display = "none";
-            //}
-            //}
-    </script>
-
-                
-
-    <script type="text/javascript">
-      
-      let urlParams = new URLSearchParams(window.location.search);
-      urlParams = new URLSearchParams(window.location.search);
-
-      // Client ID and API key from the Developer Console
-      var CLIENT_ID = urlParams.get('ClientID');
-      var API_KEY = urlParams.get('APIKey');
-
-      // Array of API discovery doc URLs for APIs used by the quickstart
-      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      //var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
-      var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
-
-      var authorizeButton = document.getElementById('authorize_button');
-      var signoutButton = document.getElementById('signout_button');
-
-      /**
-       *  On load, called to load the auth2 library and API client library.
-       */
-      function StartGoogleSignOnAPIs() {
-        gapi.load('client:auth2', initGoogleSignOnAPIs);
-      }
-
-      /**
-       *  Initializes the API client library and sets up sign-in state
-       *  listeners.
-       */
-      function initGoogleSignOnAPIs() {
-        gapi.client.init({
-          apiKey: API_KEY,
-          clientId: CLIENT_ID,
-          discoveryDocs: DISCOVERY_DOCS,
-          scope: SCOPES
-        }).then(function () {
-          // Listen for sign-in state changes.
-          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-          // Handle the initial sign-in state.
-          signoutButton.onclick = handleSignoutClick;
-          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          authorizeButton.onclick = handleAuthClick;
-        });
-      }
-
-      /**
-       *  Sign in the user upon button click.
-       */
-      function handleAuthClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
-      }
-
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick(event) {
-        gapi.auth2.getAuthInstance().signOut();
-      }
-
-      
-      /**
-       *  Called when the signed in status changes, to update the UI
-       *  appropriately. After a sign-in, the API is called.
-       */
-      function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-          authorizeButton.style.display = 'none';
-          signoutButton.style.display = 'block';
-          startWorkPostLogon();
-        } else {
-          authorizeButton.style.display = 'block';
-          signoutButton.style.display = 'none';
-        }
-      }
-        
-      function startWorkPostLogon() {
-        var sheetID = '';
-        
-        let promise_GetSheetInfoInConfigFromDB = new Promise(function(resolve, reject) {
-            GetSheetInfoInConfigFromDB(resolve, reject);
-        });
-        
-        promise_GetSheetInfoInConfigFromDB.then(function(response) {
-            sheetID = response;
-            var fileExistsOnGoogle = false;
-            if (sheetID != undefined) {
-                //file id is in DB... But does it exist on Google?
-                let promise_doesFileExistOnGoogle = new Promise(function(resolve, reject) {
-                    doesFileExistOnGoogle(sheetID, resolve, reject);
-                });
-                promise_doesFileExistOnGoogle.then (function (response) {
-                   fileExistsOnGoogle = response;
-                    handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
-                }, function () {
-                });
-            }
-            else {
-                fileExistsOnGoogle = false;
-                handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
-            }
-            
-        }, function(reason) {
-        });
-      }
-
-        function handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle ) {
-            if ( fileExistsOnGoogle ) {
-                //use already existing sheet.. and append to it...
-                ReadAndDisplaySheetContents (sheetID);
-            }
-            else {
-               //create new sheet and append to it...
-
-                let promise_createSheet = new Promise(function(resolve, reject) {
-                    createSheet(resolve, reject);
-                });
-
-                promise_createSheet.then(function(response) {
-                    sheetID =  response;
-
-                    //store sheetID in DB for use for next time...
-                    let promise_InsertToDB = new Promise(function(resolve, reject) {
-                        InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
-                    });
-                    promise_InsertToDB.then(
-                        function() {
-                            ReadAndDisplaySheetContents(sheetID);
-                        },
-                        function() {}
-                    )
-                }, function(reason) {
-                });
-            }
-        }
-    function createSheet(resolve, reject) {
-      var spreadsheetBody = {
-        // TODO: Add desired properties to the request body.
-      };
-
-      var newSSProps = {
-          "sheets": [
-            {
-              "properties": {
-                  "title": "Sales",
-                "gridProperties": {
-                  "columnCount": 6,
-                  "rowCount": 1
-                }
-              },
-            "data": 
-              [
-                {
-                  "rowData": 
-                  [
-                    {
-                      "values": 
-                      [
-                        {"userEnteredValue": {"numberValue": 1}},
-                        {"userEnteredValue": {"numberValue": 2}},
-                        {"userEnteredValue": {"numberValue": 3}}
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "title": "filename"
-          }
-        };
-
-        var request = gapi.client.sheets.spreadsheets.create(spreadsheetBody, newSSProps);
-      
-      request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result.spreadsheetId);
-        resolve(response.result.spreadsheetId);
-      }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-        resolve();
-      });
-    }
-
-        
-      /**
-       * Append a pre element to the body containing the given message
-       * as its text node. Used to display the results of the API call.
-       *
-       * @param {string} message Text to be placed in pre element.
-       */
-      function appendPre(message) {
-        var pre = document.getElementById('content');
-        var textContent = document.createTextNode(message + '\n');
-        pre.appendChild(textContent);
-      }
-      
-      function doesFileExistOnGoogle(sheetID, resolve, reject) {
-          gapi.client.sheets.spreadsheets.values.get({
-              spreadsheetId: sheetID , 
-              range: 'Sales!A1:B1'
-          }).then(function(response) {
-              resolve(true);
-          }, function(response) {
-              resolve(false);
-          });
-      }
-
-      /**
-       * Print the names and majors of students in a sample spreadsheet:
-       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-       */
-      function ReadAndDisplaySheetContents(sheetID) {
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: sheetID , 
-          range: 'Sales!A1:B1'
-        }).then(function(response) {
-          var range = response.result;
-          if (range.values.length > 0) {
-            appendPre('Name, Major:');
-            for (i = 0; i < range.values.length; i++) {
-              var row = range.values[i];
-              // Print columns A and E, which correspond to indices 0 and 4.
-              appendPre(row[0] + ', ' + row[4]);
-            }
-          } else {
-            appendPre('No data found.');
-          }
-        }, function(response) {
-          appendPre('Error: ' + response.result.error.message);
-        });
-      }
-
-    </script>
-                
-    <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};Init()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
-</body>
-
+         </div>
+      </div>
+      <script>
+         var arrPdtInfo = new Object();
+         
+         function GetProductFromDetails(lPdtCode, lPdtDesc, lPdtMRP) {
+             var arrPdtDet = new Object();
+             arrPdtDet['pdtCode'] = lPdtCode;
+             arrPdtDet['pdtDesc'] = lPdtDesc;
+             arrPdtDet['pdtMRP'] = lPdtMRP;
+             return arrPdtDet;
+         }
+         
+         function LoadProductInfo() {
+             console.log('Loading From LocalDB');
+             arrPdtInfo = new Object();
+             var store;
+             var DBIndex;
+             var tx;
+             tx = db.transaction(GKinvObjStoreName, "readwrite");
+             store = tx.objectStore(GKinvObjStoreName);
+             DBIndex = store.index(GKinvIdxName);
+             var countRequest = DBIndex.count();
+             countRequest.onsuccess = function() {
+                 console.log('Total ROWS: ' + countRequest.result);
+             }
+             DBIndex.openCursor().onsuccess = function(event) {
+                 var cursor = event.target.result;
+                 if (cursor) {
+                     //console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' value: ' + JSON.stringify(cursor.value));
+                     var pdtInfoJSON = cursor.value; 
+                     arrPdtInfo[pdtInfoJSON["pdtCode"]] = GetProductFromDetails(pdtInfoJSON["pdtCode"], pdtInfoJSON["pdtDesc"], pdtInfoJSON["pdtMRP"]);
+                     cursor.continue();
+                 } else {
+                     console.log('Entries all loaded.');
+                 };
+             };
+         }
+         
+         function AddNewEmptyRow() {
+             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+         
+             var row = tbl.insertRow();
+         
+             var cell;
+             cell = row.insertCell();
+             cell.className = "uneditable";
+             cell.innerText = tbl.rows.length - 1;
+         
+             cell = row.insertCell();
+             cell.className = "pdtCode";
+         
+             cell = row.insertCell();
+             cell.className = "uneditable";
+         
+             cell = row.insertCell();
+             cell.className = "pdtQty";
+             cell.style, textAlign = 'right';
+         
+             cell = row.insertCell();
+             cell.className = "uneditable";
+             cell.style.textAlign = 'right';
+         
+             cell = row.insertCell();
+             cell.className = "pdtDiscAppl";
+             cell.style.textAlign = 'right';
+         
+             cell = row.insertCell();
+             cell.className = "pdtSP";
+             cell.style.textAlign = 'right';
+         
+             cell = row.insertCell();
+             cell.innerText = "Delete";
+         
+             row.offsetHeight = tbl.rows[0].offsetHeight;
+         
+             //set events for new rows... 
+             SetTableForUse();
+         }
+         
+         function HandleNewPdtBought(pdtCodeCell, lPdtCode) {
+             pdtDet = arrPdtInfo[lPdtCode];
+             var pdtDesc = 'Generic',
+                 pdtMRP = '1';
+             if (pdtDet != undefined) {
+                 pdtDesc = pdtDet['pdtDesc'];
+                 pdtMRP = pdtDet['pdtMRP'];
+             }
+             var parentRow = pdtCodeCell.parentNode;
+             parentRow.cells[2].innerText = pdtDesc;
+             parentRow.cells[3].innerText = '1';
+             parentRow.cells[4].innerText = pdtMRP;
+             parentRow.cells[5].innerText = '0';
+             parentRow.cells[6].innerText = pdtMRP;
+             parentRow.cells[7].innerText = 'Delete';
+         
+             UpdateInvoiceTotal();
+             //only add new row when the one being worked upon is the last row...
+             var lastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
+             if (lastrow == parentRow) {
+                 AddNewEmptyRow();
+                 Tastrow = parentRow.parentNode.rows[parentRow.parentNode.rows.length - 1];
+             }
+             setTimeout(function() {
+                 lastrow.cells[1].focus();
+             }, 100);
+         }
+         
+         function HandleQtyChanged(pdtcodecell, lNewQty) {
+             var parentRow = pdtcodecell.parentNode;
+             var lPdtQty = Number(lNewQty);
+             var lPdtMRP = Number(parentRow.cells[4].innerText);
+             var lPdtdisc = Number(parentRow.cells[5].innerText);
+         
+             parentRow.cells[6].innerText = Math.round(lPdtQty * lPdtMRP * ((100 - lPdtdisc) / 100));
+             UpdateInvoiceTotal();
+         }
+         
+         function HandleDiscApplChanged(pdtcodecell, lNewDisc) {
+             var parentRow = pdtcodecell.parentNode;
+             var lPdtQty = Number(parentRow.cells[3].innerText);
+             var lPdtMRP = Number(parentRow.cells[4].innerText);
+             var lPdtdisc = Number(lNewDisc);
+             parentRow.cells[6].innerText = Math.round(lPdtQty * lPdtMRP * ((100 - lPdtdisc) / 100));
+             UpdateInvoiceTotal();
+         }
+         
+         function HandleSPChanged(pdtCodeCell, lNewsP) {
+             var parentRow = pdtCodeCell.parentNode;
+             var lPdtQty = Number(parentRow.cells[3].innerText);
+             var lPdtMRP = Number(parentRow.cells[4].innerText);
+             var lPdtSP = Number(lNewsP);
+             parentRow.cells[5].innerText = Math.round((lPdtMRP - (lPdtSP / lPdtQty)) / lPdtMRP * 100);
+             UpdateInvoiceTotal();
+         }
+         
+         function UpdateInvoiceTotal() {
+             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+                 var i, totofInvoice = 0;
+         
+                 for (i = 0; i < tbl.rows.length; i++) {
+         
+                     totofInvoice += Number(tbl.rows[i].cells[6].innerText);
+         
+                 }
+         
+                 var txtTotal = document.getElementById("txtTotal"); txtTotal.value = totofInvoice;
+         
+             }
+         
+             function Init() {
+                 StartGoogleSignOnAPIs();
+                 
+                 let create_promise = new Promise(function(resolve, reject) {
+                     CreateDB(resolve, reject);
+                 });
+                 create_promise.then(
+                         function() {
+                             LoadProductInfo();
+                             AddNewEmptyRow();
+                             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0]; setTimeout(function() {
+                             tbl.rows[0].cells[1].focus();
+                         }, 100);
+                     },
+                     function() {
+                         console.log('DB Creation failed at Init. FATAL..');
+                     }
+             )
+         }
+         
+         function SetTableForUse() {
+             //make table editable 
+             $('#tblPurchaseInvoice').editableTableWidget();
+             //make cells marked as uneditable - uneditable
+             $('#tblPurchaseInvoice td.uneditable').on('change', function(evt, newvalue) {
+                 return false;
+             });
+             //change Qty, MRP, Discount, SP on product change
+             $('#tblPurchaseInvoice td.pdtCode').on('change', function(evt, newValue) {
+                 HandleNewPdtBought(evt.target, newValue);
+             });
+             //change Qty, MRP, Discount, SP on product change
+             $('#tblPurchaseInvoice td.pdtQty').on('change', function(evt, newvalue) {
+                 HandleQtyChanged(evt.target, newvalue);
+             }); //change Qty, MRP, Discount, SP on product change
+             $('#tblPurchaseInvoice td.pdtDiscAppl').on('change', function(evt, newvalue) {
+                 HandleDiscApplChanged(evt.target, newvalue);
+             });
+             //change Qty, MRP, Discount, SP on product change
+             $('#tblPurchaseInvoice td.pdtSP').on('change', function(evt, newvalue) {
+                 HandleSPChanged(evt.target, newvalue); 
+             });
+         }
+      </script>
+      <script>
+         var db;
+         var GKdbName = "GKInventoryDB";
+         
+         var GKinvObjStoreName = "GKInventory";
+         var GKinvIdxName = "pdtCode";
+         var GKinvIdxColName = "pdtCode";
+         
+         var GKconfigObjStoreName = "GKConfig";
+         var GKconfigIdxName = "configKeyIdx";
+         var GKconfigIdxColName = "configKey";
+         
+         function deleteAllObjStrs() {
+             db.deleteObjectStore(GKinvObjStoreName);
+             db.deleteObjectStore(GKconfigObjStoreName);
+         }
+         
+         function createAllObjStrs() {
+             var store;
+             var DBIndex;
+         
+             store = db.createObjectStore(GKinvObjStoreName, {
+                 keyPath: GKinvIdxColName
+             });
+             DBIndex = store.createIndex(GKinvIdxName, [GKinvIdxColName]);
+         
+             store = db.createObjectStore(GKconfigObjStoreName, {
+                 keyPath: GKconfigIdxColName
+             });
+             DBIndex = store.createIndex(GKconfigIdxName, [GKconfigIdxColName]);
+         }
+         
+         function CreateDB(resolve, reject) {
+             console.log('Starting DB creation');
+             // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
+             var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+             // Open (or create) the database 
+             var open = indexedDB.open(GKdbName, 4);
+             // Create the schema 
+             open.onupgradeneeded = function() {
+                 console.log('DB being upgraded');
+                 //create new db... 
+                 db = open.result;
+                 try {
+                     deleteAllObjStrs();
+                 } catch (e) {}
+                 
+                 createAllObjStrs();
+         
+                 console.log('DB upgrade Done');
+                 //resolve();
+             }
+             open.onsuccess = function() {
+                 console.log('DB Exists');
+                 db = open.result;
+                 console.log('DB Opened for use');
+                 resolve();
+             }
+         }
+         
+         function DeletedB(resolve, reject) {
+             console.log('Deleting DB');
+             // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
+             var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+             // Open (or create) the database 
+             try {
+                 db.close();
+             } catch (e) {}
+             var DBDeleteRequest = indexedDB.deleteDatabase(GKdbName);
+             DBDeleteRequest.onerror = function(event) {
+                 console.log("Error deleting database.");
+                 resolve();
+             };
+         
+             DBDeleteRequest.onsuccess = function(event) {
+                 console.log("Database deleted successfully ");
+                 resolve();
+             }
+         }
+         
+         function resets(open) {
+             //create new db... 
+             db = open.result;
+             try {
+                 deleteAllObjStrs();
+             } catch (e) {}
+             
+             createAllObjStrs();
+             console.log('DB reset Done');
+         }
+         
+         function InsertProductInfoIntoDB(lPdtcode, lPdtDesc, lPdtMRP, resolve, reject) {
+             console.log('Starting to Store Data: ');
+             var allDataFieldsForJSON = {};
+             allDataFieldsForJSON["pdtCode"] = lPdtcode;
+             allDataFieldsForJSON["pdtDesc"] = lPdtDesc;
+             allDataFieldsForJSON["pdtMRP"] = lPdtMRP;
+             console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
+             var store;
+             var DBIndex;
+             var tx;
+             tx = db.transaction(GKinvObjStoreName, "readwrite");
+             store = tx.objectStore(GKinvObjStoreName);
+             DBIndex = store.index(GKinvIdxName);
+             var newDataAdded = store.put(allDataFieldsForJSON);
+             console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
+             newDataAdded.onsuccess = function() {
+                 console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
+                 resolve();
+             };
+             newDataAdded.onerror = function(event) {
+                 console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
+                 resolve();
+             }
+         };
+         
+         function DoDataLoadFromArray(Arrofdata, currentCounterToProcess) {
+             console.log('Now Starting with Row: ' + currentCounterToProcess);
+             if (Arrofdata.length > currentCounterToProcess) {
+                 var rowBeingProcessed = Arrofdata[currentCounterToProcess];
+                 console.log('Data Available. Storing in DB: ' + rowBeingProcessed['pdtCode'] + " FOR ROW " + currentCounterToProcess);
+                 let promise_InsertToDB = new Promise(function(resolve, reject) {
+                     InsertProductInfoIntoDB(rowBeingProcessed['pdtCode'], rowBeingProcessed['pdtDesc'], rowBeingProcessed['pdtMRP'], resolve, reject);
+                 });
+                 promise_InsertToDB.then(
+                     function() {
+                         currentCounterToProcess++;
+                         DoDataLoadFromArray(Arrofdata, currentCounterToProcess);
+                     },
+                     function() {}
+                 )
+             } else {
+                 console.log('COMMENT THIS LINE --- Testing for what is in DB right now');
+                 displayDataByIndex();
+                 LoadProductInfo(); //to load the fresh inventory into memory for use immediately...
+                 //also clear inventory div list... so it can refresh later
+                 var ulFordtInventory = document.getElementById('ulPdtList');
+                 ulFordtInventory.innerHTML = "";
+             }
+         }
+         
+         function GetDataFromServerAndStoreLocally() {
+             console.log('setting DB'); //Create DB
+             let del_promise = new Promise(function(resolve, reject) {
+                 DeletedB(resolve, reject);
+             });
+             del_promise.then(
+         
+                 function () {
+                     let create_promise = new Promise(function(resolve, reject) {
+                         CreateDB(resolve, reject);
+                     });
+                     create_promise.then(
+         
+                         function() {
+                             //Load Data from server
+                             console.log('Getting data from server');
+                             var arrPdtInfo = new Array();
+                             var txtNewInv = document.getElementById("txtUpdatedInv").value;
+                             var totInvRows = txtNewInv.split("\n");
+                             var eachInvRowDtl;
+                             for (i = 1; i < totInvRows.length; i++) {
+                                 eachInvRowDtl = totInvRows[i].split("\t");
+                                 arrPdtInfo[i - 1] = GetProductFromDetails(eachInvRowDtl[0], eachInvRowDtl[3], eachInvRowDtl[1]);
+                             }
+                             console.log('Received data from server ');
+                             DoDataLoadFromArray(
+                                 arrPdtInfo, 0);
+                         },
+                         function() {
+                             console.log('DB Creation failed.FATAL.. ');
+                         }
+                     )
+                 },
+                 function() {
+                     console.log('DB Deletion failed. FATAL..');
+                 }
+             )
+         }
+         
+         function deleteOldSheetIDsFromCOnfig(resolve, reject) {
+             var tx = db.transaction(GKconfigObjStoreName,"readwrite");
+             var estore = tx.objectStore(GKconfigObjStoreName);
+             var tagIndex = estore.index(GKconfigIdxName);
+             
+             var pdestroy = tagIndex.openKeyCursor(IDBKeyRange.only('SheetID')); 
+             pdestroy.onsuccess = function() {
+                 var cursor = pdestroy.result;
+                 if (cursor) {
+                     pstore.delete(cursor.primaryKey);
+                     cursor.continue;
+                 }
+                 resolve();
+             }
+             pdestroy.onerror = function() {
+                 console.log("Deletion attempt NG");
+                 resolve();
+             }
+         }
+         
+         function InsertSheetInfoInConfigIntoDB(lSheetID, resolve, reject) {
+             console.log('Starting to Store Sheet ID: ');
+             
+             //first delete existing keys...
+             let promise_deleteOldSheetIDsFromCOnfig = new Promise (function (resolve, reject) {
+                 deleteOldSheetIDsFromCOnfig(resolve, reject);
+             });
+             promise_deleteOldSheetIDsFromCOnfig.then (function () {
+                 var allDataFieldsForJSON = {};
+                 allDataFieldsForJSON[GKconfigIdxColName] = 'SheetID';
+                 allDataFieldsForJSON['ConfigValue'] = lSheetID;
+                 console.log('JSON for Data Created: ' + JSON.stringify(allDataFieldsForJSON));
+                 var store;
+                 var DBIndex;
+                 var tx;
+         
+                 tx = db.transaction(GKconfigObjStoreName, "readwrite");
+                 store = tx.objectStore(GKconfigObjStoreName);
+                 DBIndex = store.index(GKconfigIdxName);
+                 var newDataAdded = store.put(allDataFieldsForJSON);
+                 console.log('JSON saved in DB: ' + JSON.stringify(allDataFieldsForJSON));
+                 newDataAdded.onsuccess = function() {
+                     console.log('JSON saved in DB successfully: ' + JSON.stringify(allDataFieldsForJSON));
+                     resolve();
+                 };
+                 newDataAdded.onerror = function(event) {
+                     console.log('JSON saved in DB FAILED: ' + JSON.stringify(allDataFieldsForJSON));
+                     resolve();
+                 }
+             }, function () {
+                     resolve();
+             });
+         };        
+         
+         function GetSheetInfoInConfigFromDB(resolve, reject) {
+             console.log('Loading SheetInfo From LocalDB');
+             arrPdtInfo = new Object();
+             var store;
+             var DBIndex;
+             var tx;
+             tx = db.transaction(GKconfigObjStoreName, "readwrite");
+             store = tx.objectStore(GKconfigObjStoreName);
+             DBIndex = store.index(GKconfigIdxName);
+         
+             // Query the data 
+             var akey = 'SheetID';
+             var getAROWForAkey;
+             getAROWForAkey = DBIndex.getKey(akey);
+             getAROWForAkey.onsuccess = function() {
+                 console.log('getting by id (' + akey + '): '+ JSON.stringify( getAROWForAkey.result ) ) ;
+         
+                 DBIndex.openCursor().onsuccess = function(event) {
+                     var cursor = event.target.result;
+                     if(cursor) {
+                         console.log('sheetid found: ' + cursor.value.ConfigValue);    
+                         resolve(cursor.value.ConfigValue);
+                     } else {
+                       console.log('no sheetid found.');    
+                       resolve(undefined);
+                     }
+                   };
+             };
+             getAROWForAkey.onerror = function() {
+                 console.log('getting by id. (' + akey + ') Failed ');
+                 resolve(undefined);
+             };
+         }
+         
+         // for testing/debugging... 
+         function displayDataByIndex() {
+             console.log('Testing for what is in DB right now');
+             var store;
+             var DBIndex;
+             var tx;
+             tx = db.transaction(GKinvObjStoreName, "readwrite");
+             store = tx.objectStore(GKinvObjStoreName);
+             DBIndex = store.index(GKinvIdxName);
+             //store.clear();
+             var countRequest = DBIndex.count();
+             countRequest.onsuccess = function() {
+                 console.log('Total Rows: ' + countRequest.result);
+             }
+             console.log(store.keyPath);
+             DBIndex.openCursor().onsuccess = function(event) {
+                 var cursor = event.target.result;
+                 if (cursor) {
+                     console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' Value: ' + JSON.stringify(cursor.value));
+                     //RandomRowTest (cursor.value.DataDate);
+                     cursor.continue();
+                 } else {
+                     console.log('Entries all displayed.');
+                 }
+             };
+         };
+         
+         function RandomRowTest(someCursorkeyForTest) {
+             var store;
+             var DBIndex;
+             var tx;
+             tx = db.transaction(GKinvObjStoreName, "readwrite");
+             store = tx.objectStore(GKinvObjStoreName);
+             DBIndex = store.index(GKinvIdxName);
+             // Query the data 
+             var áDate;
+             akey = someCursorkeyForTest;
+             akey = "125";
+             var aJSONForKey = {};
+             aJSONForkey[GKinvIdxColName] = akey;
+             var getAROWForAkey;
+             getAROWForAkey = DBÍndex.get(akey);
+             getAROWFOCAKey = store.get(akey);
+             getArowForAkey.onsuccess = function() {
+                 console.log('getting by id (' + akey + '): '+ JSON.stringify( getArowForAkey ) ) ;
+             };
+             getARowForAkey.onerror = function() {
+                 console.log('getting by id. (' + akey + ') Failed ');
+             };
+         }
+      </script>
+      <script>
+         // Get the <span> element that closes the modal
+         var btnDivclose = document.getElementsByClassName("close")[0];
+         // when the user clicks the button, open the modal 
+         
+         function showDiv(divID) {
+             var divModalPdtInventory = document.getElementById(divID);
+             divModalPdtInventory.style.display = "block";
+             PrepareListForDisplay();
+         }
+         
+         function PrepareListForDisplay() {
+                 //load list
+                 var ulForPdtInventory = document.getElementById('ulPdtList');
+                 var ulLength = ulForPdtInventory.getElementsByTagName("li").length;
+                 if (ulLength > 0) return;
+                 var pdtDet, li, p, lstItmtxt;
+                 for (var property in arrPdtInfo) {
+                     if (arrPdtInfo.hasOwnProperty(property)) {
+                         // create list... 
+                         pdtDet = arrPdtInfo[property];
+                         if (pdtDet != undefined) {
+                             lstItmtxt = "<B>Code: </B>";
+                             lstItmtxt += property;
+                             lstItmtxt += " <B>Qty: </B>";
+                             lstItmtxt += "?";
+                             lstItmtxt += " <B>MRP: </B>";
+                             lstItmtxt += pdtDet['pdtMRP'];
+                             lstItmtxt += " <B>Desc: </B>"
+                             lstItmtxt += pdtDet['pdtDesc'];
+                             li = document.createElement("li");
+                             p = document.createElement("p");
+                             p.innerHTML = lstItmtxt;
+                             p.className = "pdtDescForSearch";
+                             li.appendChild(p);
+                             ulForPdtInventory.appendChild(li);
+                         }
+                     }
+                 }
+                 //make list searchable... 
+                 var searchableListPdtiny = new List('divLstPdtInv', {
+                     valueNames: ['pdtDescForSearch'],
+                     page: 10,
+                     pagination: true
+                 });
+             }
+             // when the user clicks on <span> (x), close the modal 
+         function hideDiv(diVID) {
+                 var divModalPdtInventory = document.getElementById(diVID);
+                 divModalPdtInventory.style.display = "none";
+             }
+             // when the user clicks anywhere outside of the modal, close it
+             // window.onclick = function(event) {
+             //        if (event.target == modal) {
+             //            divmodal PdtInventory.style.display = "none";
+             //}
+             //}
+      </script>
+      <script type="text/javascript">
+         let urlParams = new URLSearchParams(window.location.search);
+         urlParams = new URLSearchParams(window.location.search);
+         
+         // Client ID and API key from the Developer Console
+         var CLIENT_ID = urlParams.get('ClientID');
+         var API_KEY = urlParams.get('APIKey');
+         
+         // Array of API discovery doc URLs for APIs used by the quickstart
+         var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+         
+         // Authorization scopes required by the API; multiple scopes can be
+         // included, separated by spaces.
+         //var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+         var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
+         
+         var authorizeButton = document.getElementById('authorize_button');
+         var signoutButton = document.getElementById('signout_button');
+         
+         /**
+          *  On load, called to load the auth2 library and API client library.
+          */
+         function StartGoogleSignOnAPIs() {
+           gapi.load('client:auth2', initGoogleSignOnAPIs);
+         }
+         
+         /**
+          *  Initializes the API client library and sets up sign-in state
+          *  listeners.
+          */
+         function initGoogleSignOnAPIs() {
+           gapi.client.init({
+             apiKey: API_KEY,
+             clientId: CLIENT_ID,
+             discoveryDocs: DISCOVERY_DOCS,
+             scope: SCOPES
+           }).then(function () {
+             // Listen for sign-in state changes.
+             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+         
+             // Handle the initial sign-in state.
+             signoutButton.onclick = handleSignoutClick;
+             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+             authorizeButton.onclick = handleAuthClick;
+           });
+         }
+         
+         /**
+          *  Sign in the user upon button click.
+          */
+         function handleAuthClick(event) {
+           gapi.auth2.getAuthInstance().signIn();
+         }
+         
+         /**
+          *  Sign out the user upon button click.
+          */
+         function handleSignoutClick(event) {
+           gapi.auth2.getAuthInstance().signOut();
+         }
+         
+         
+         /**
+          *  Called when the signed in status changes, to update the UI
+          *  appropriately. After a sign-in, the API is called.
+          */
+         function updateSigninStatus(isSignedIn) {
+           if (isSignedIn) {
+             authorizeButton.style.display = 'none';
+             signoutButton.style.display = 'block';
+             startWorkPostLogon();
+           } else {
+             authorizeButton.style.display = 'block';
+             signoutButton.style.display = 'none';
+           }
+         }
+           
+         function startWorkPostLogon() {
+           var sheetID = '';
+           
+           let promise_GetSheetInfoInConfigFromDB = new Promise(function(resolve, reject) {
+               GetSheetInfoInConfigFromDB(resolve, reject);
+           });
+           
+           promise_GetSheetInfoInConfigFromDB.then(function(response) {
+               sheetID = response;
+               var fileExistsOnGoogle = false;
+               if (sheetID != undefined) {
+                   //file id is in DB... But does it exist on Google?
+                   let promise_doesFileExistOnGoogle = new Promise(function(resolve, reject) {
+                       doesFileExistOnGoogle(sheetID, resolve, reject);
+                   });
+                   promise_doesFileExistOnGoogle.then (function (response) {
+                      fileExistsOnGoogle = response;
+                       handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
+                   }, function () {
+                   });
+               }
+               else {
+                   fileExistsOnGoogle = false;
+                   handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
+               }
+               
+           }, function(reason) {
+           });
+         }
+         
+           function handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle ) {
+               if ( fileExistsOnGoogle ) {
+                   //use already existing sheet.. and append to it...
+                   ReadAndDisplaySheetContents (sheetID);
+               }
+               else {
+                  //create new sheet and append to it...
+         
+                   let promise_createSheet = new Promise(function(resolve, reject) {
+                       createSheet(resolve, reject);
+                   });
+         
+                   promise_createSheet.then(function(response) {
+                       sheetID =  response;
+         
+                       //store sheetID in DB for use for next time...
+                       let promise_InsertToDB = new Promise(function(resolve, reject) {
+                           InsertSheetInfoInConfigIntoDB(sheetID, resolve, reject);
+                       });
+                       promise_InsertToDB.then(
+                           function() {
+                               ReadAndDisplaySheetContents(sheetID);
+                           },
+                           function() {}
+                       )
+                   }, function(reason) {
+                   });
+               }
+           }
+         function createSheet(resolve, reject) {
+         var spreadsheetBody = {
+           // TODO: Add desired properties to the request body.
+         };
+         
+         var newSSProps = {
+             "sheets": [
+               {
+                 "properties": {
+                     "title": "Sales",
+                   "gridProperties": {
+                     "columnCount": 6,
+                     "rowCount": 1
+                   }
+                 },
+               "data": 
+                 [
+                   {
+                     "rowData": 
+                     [
+                       {
+                         "values": 
+                         [
+                           {"userEnteredValue": {"numberValue": 1}},
+                           {"userEnteredValue": {"numberValue": 2}},
+                           {"userEnteredValue": {"numberValue": 3}}
+                         ]
+                       }
+                     ]
+                   }
+                 ]
+               }
+             ],
+             "properties": {
+               "title": "filename"
+             }
+           };
+         
+           var request = gapi.client.sheets.spreadsheets.create(spreadsheetBody, newSSProps);
+         
+         request.then(function(response) {
+           // TODO: Change code below to process the `response` object:
+           console.log(response.result.spreadsheetId);
+           resolve(response.result.spreadsheetId);
+         }, function(reason) {
+           console.error('error: ' + reason.result.error.message);
+           resolve();
+         });
+         }
+         
+           
+         /**
+          * Append a pre element to the body containing the given message
+          * as its text node. Used to display the results of the API call.
+          *
+          * @param {string} message Text to be placed in pre element.
+          */
+         function appendPre(message) {
+           var pre = document.getElementById('content');
+           var textContent = document.createTextNode(message + '\n');
+           pre.appendChild(textContent);
+         }
+         
+         function doesFileExistOnGoogle(sheetID, resolve, reject) {
+             gapi.client.sheets.spreadsheets.values.get({
+                 spreadsheetId: sheetID , 
+                 range: 'Sales!A1:B1'
+             }).then(function(response) {
+                 resolve(true);
+             }, function(response) {
+                 resolve(false);
+             });
+         }
+         
+         /**
+          * Print the names and majors of students in a sample spreadsheet:
+          * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+          */
+         function ReadAndDisplaySheetContents(sheetID) {
+           gapi.client.sheets.spreadsheets.values.get({
+             spreadsheetId: sheetID , 
+             range: 'Sales!A1:B1'
+           }).then(function(response) {
+             var range = response.result;
+             if (range.values.length > 0) {
+               appendPre('Name, Major:');
+               for (i = 0; i < range.values.length; i++) {
+                 var row = range.values[i];
+                 // Print columns A and E, which correspond to indices 0 and 4.
+                 appendPre(row[0] + ', ' + row[4]);
+               }
+             } else {
+               appendPre('No data found.');
+             }
+           }, function(response) {
+             appendPre('Error: ' + response.result.error.message);
+           });
+         }
+         
+      </script>
+      <script async defer src="https://apis.google.com/js/api.js"
+         onload="this.onload=function(){};Init()"
+         onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+   </body>
 </html>
