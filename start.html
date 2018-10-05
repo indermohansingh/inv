@@ -1444,7 +1444,7 @@
          function prepareTableForNewSale() {
              var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
              var i;
-             for (i = tbl.rows.length-1; i > 0; i--) {
+             for (i = tbl.rows.length-1; i >= 0; i--) {
                  tbl.deleteRow(i);
              }
              AddNewEmptyRow();
@@ -1556,6 +1556,8 @@ console.log(JSON.stringify(fullSaleInvoice));
 			 console.log('Sale inserted into DB..');
 			//next store this in google as well...
 			appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
+            //prepare table for new sale...
+            prepareTableForNewSale();
 		},
 		function () {
             			alert('Could not save invoice. Take a screenshot, picture or duplicate this on a register to process later.');
