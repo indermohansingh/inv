@@ -1663,7 +1663,7 @@ console.log(JSON.stringify(fullSaleInvoice));
              // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
              var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
              // Open (or create) the database 
-             var open = indexedDB.open(GKdbName, 4);
+             var open = indexedDB.open(GKdbName, 5);
              // Create the schema 
              open.onupgradeneeded = function() {
                  console.log('DB being upgraded');
