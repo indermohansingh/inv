@@ -1537,7 +1537,7 @@
 	console.log(fullSaleInvoice );
 console.log(JSON.stringify(fullSaleInvoice));
 	let InsertSaleRecIntoDB_promise = new Promise(function(resolve, reject) {
-	         InsertSaleRecIntoDB(fullSaleInvoice);
+	         InsertSaleRecIntoDB(fullSaleInvoice, resolve, reject);
 	});
 	InsertSaleRecIntoDB_promise.then(
 		function () {
