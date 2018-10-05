@@ -1500,10 +1500,10 @@
 	var saleRows = [];
 	fullSaleInvoice.saleID = '' + Math.round(+new Date()/1000) + Math.floor(100000 + Math.random() * 900000);
 	fullSaleInvoice.customer = {};
-	fullSaleInvoice.customer.Name = txtName.value ;
-	fullSaleInvoice.customer.Number = txtNumber.value
-	fullSaleInvoice.customer.Email = txtEmail.value;
-	fullSaleInvoice.customer.Address = txtAddress.value;
+	fullSaleInvoice.customer.Name = document.getElementById("txtName").value ;
+	fullSaleInvoice.customer.Number = document.getElementById("txtNumber").value
+	fullSaleInvoice.customer.Email = document.getElementById("txtEmail").value;
+	fullSaleInvoice.customer.Address = document.getElementById("txtAddress").value;
 	fullSaleInvoice.customer.paymentType = paymentType;
 	fullSaleInvoice.saleRows = saleRows ;
                  for (i = 0; i < tbl.rows.length; i++) {
@@ -1516,7 +1516,7 @@
          		fullSaleInvoice.saleRows [i].SP = fullSaleInvoice.saleRows [i].MRP * (100- fullSaleInvoice.saleRows [i].Disc )/100 * fullSaleInvoice.saleRows [i].Qty ;
                      totofInvoice += fullSaleInvoice.saleRows [i].SP ;
                  }
-	fullSaleInvoice.finalAmount = txtTotal.value;
+	fullSaleInvoice.finalAmount = document.getElementById("txtTotal").value;
 	fullSaleInvoice.topUpDisc= totofInvoice  - fullSaleInvoice.finalAmount;
 	console.log(fullSaleInvoice );
 console.log(JSON.stringify(fullSaleInvoice));
