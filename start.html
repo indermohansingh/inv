@@ -2058,6 +2058,8 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
          function PrepareSalesHistoryListForDisplay() {
                  //load list of sales history
                  var ulForSalesHist = document.getElementById('ulSalesHist');
+                 var ulLength = ulForSalesHist.getElementsByTagName("li").length;
+                 if (ulLength > 0) { while(ulForSalesHist.firstChild) ulForSalesHist.removeChild(ulForSalesHist.firstChild); }
                  var salesHistDet, li, p, lstItmtxt;
              var store;
              var DBIndex;
