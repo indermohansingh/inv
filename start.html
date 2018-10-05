@@ -1245,10 +1245,13 @@
                   <input type="text" id="txtTotal" style="text-align: right">
                </td>
                <td>
-                  <button class="button button-rounded-Pay">Paid by Cash</button>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('Cash');">Paid by Cash</button>
                </td>
                <td>
-                  <button class="button button-rounded-Pay">Paid by Credit Card</button>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('CreditCard');">Paid by Credit Card</button>
+               </td>
+               <td>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('PayTM');">Paid by PayTM</button>
                </td>
             </tr>
             </thead>
@@ -1490,7 +1493,35 @@
                  var txtTotal = document.getElementById("txtTotal"); txtTotal.value = totofInvoice;
          
              }
+         function CreateSaleInvoice(paymentType) {
+             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+             var i, totofInvoice = 0;
+         	var fullSaleInvoice = {};
+	var saleRows = [];
+	fullSaleInvoice.saleID = '' + Math.round(+new Date()/1000) + Math.floor(100000 + Math.random() * 900000);
+	fullSaleInvoice.customer = {};
+	fullSaleInvoice.customer.Name = txtName.value ;
+	fullSaleInvoice.customer.Number = txtNumber.value
+	fullSaleInvoice.customer.Email = txtEmail.value;
+	fullSaleInvoice.customer.Address = txtAddress.value;
+	fullSaleInvoice.customer.paymentType = paymentType;
+	fullSaleInvoice.saleRows = saleRows ;
+                 for (i = 0; i < tbl.rows.length; i++) {
+         		fullSaleInvoice.saleRows [i] = {};
+         		fullSaleInvoice.saleRows [i].ProductCode = tbl.rows[i].cells[1].innerText;
+         		fullSaleInvoice.saleRows [i].ProductDesc =tbl.rows[i].cells[2].innerText;
+         		fullSaleInvoice.saleRows [i].Qty = tbl.rows[i].cells[3].innerText;
+         		fullSaleInvoice.saleRows [i].MRP = tbl.rows[i].cells[4].innerText;
+         		fullSaleInvoice.saleRows [i].Disc = tbl.rows[i].cells[5].innerText;
+         		fullSaleInvoice.saleRows [i].SP = fullSaleInvoice.saleRows [i].MRP * (100- fullSaleInvoice.saleRows [i].Disc )/100 * fullSaleInvoice.saleRows [i].Qty ;
+                     totofInvoice += fullSaleInvoice.saleRows [i].SP ;
+                 }
+	fullSaleInvoice.finalAmount = txtTotal.value;
+	fullSaleInvoice.topUpDisc= totofInvoice  - fullSaleInvoice.finalAmount;
+	console.log(fullSaleInvoice );
+console.log(JSON.stringify(fullSaleInvoice));
          
+}
              function Init() {
                  StartGoogleSignOnAPIs();
                  
