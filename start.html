@@ -1546,13 +1546,52 @@ console.log(JSON.stringify(fullSaleInvoice));
 		function () {
 			 console.log('Sale inserted into DB..');
 			//next store this in google as well...
+			appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
 		},
 		function () {
             			alert('Could not save invoice. Take a screenshot, picture or duplicate this on a register to process later.');
 		}
 	);
 }
-
+function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
+	var i, strEachRow, strAllValues;
+	strAllValues = " [ ";
+	for (i = 0; i < fullSaleInvoice.saleRows.length; i++) {
+		if (i != 0) strAllValues += " , ";
+		strEachRow = " [ ";
+		strEachRow += '"' + fullSaleInvoice.saleID  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleDateTime + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.finalAmount  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.topUpDisc + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.paymentType  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.paymentType  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].ProductCode  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].ProductDesc  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].Qty  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].MRP  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].Disc  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].SP  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.customer.Name   + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.customer.Number  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.customer.Email  + '", ';
+		strEachRow +=  '"' + fullSaleInvoice.customer.Address  + '" ';
+		strEachRow += " ] ";
+		strAllValues += strEachRow ;
+	}
+	strAllValues += " ] ";
+  var responseJson ='{values : ' + strAllValues   + '  }';
+    console.log(responseJson );
+  gapi.client.sheets.spreadsheets.values.append({
+    spreadsheetId: 'spreadSheetId',
+    range: 'A2:B',  
+    resource: responseJson,
+    valueInputOption: 'USER_ENTERED',
+  }).then(function (response) {
+    console.log(response);
+  }, function (response) {
+    console.log('Error: ' + response.result.error.message);
+  });
+}
          function InsertSaleRecIntoDB(saleRecJSON, resolve, reject) {
              console.log('Starting to Store SaleRec: ');
              
@@ -2006,8 +2045,6 @@ console.log(JSON.stringify(fullSaleInvoice));
          function PrepareSalesHistoryListForDisplay() {
                  //load list of sales history
                  var ulForSalesHist = document.getElementById('ulSalesHist');
-                 var ulLength = ulForSalesHist.getElementsByTagName("li").length;
-                 if (ulLength > 0) return;
                  var salesHistDet, li, p, lstItmtxt;
              var store;
              var DBIndex;
@@ -2253,6 +2290,7 @@ console.log(JSON.stringify(fullSaleInvoice));
                            {"userEnteredValue": {"stringValue":  "Top Up Disc"}},
                            {"userEnteredValue": {"stringValue": "Payment Type"}},
                            {"userEnteredValue": {"stringValue": "Product Code"}},
+                           {"userEnteredValue": {"stringValue": "Product Desc"}},
                            {"userEnteredValue": {"stringValue": "Qty"}},
                            {"userEnteredValue": {"stringValue": "MRP"}},
                            {"userEnteredValue": {"stringValue":  "Disc"}},
