@@ -2028,7 +2028,7 @@ console.log(JSON.stringify(fullSaleInvoice));
                  for (i = 0; i < salesHistJSON.saleRows.length; i++) {
                              lstItmtxt = "<B>Sale ID: </B>";
                              lstItmtxt += salesHistJSON.saleID;
-                             lstItmtxt = "<B>Sale Date Time: </B>";
+                             lstItmtxt += "<B>Sale Date Time: </B>";
                              lstItmtxt += salesHistJSON.saleDateTime;
                              lstItmtxt += " <B>Final Amt: </B>";
                              lstItmtxt += salesHistJSON.finalAmount;
@@ -2247,7 +2247,20 @@ console.log(JSON.stringify(fullSaleInvoice));
                        {
                          "values": 
                          [
-                           "Sale ID","Sale Date Time", "Final Amt", "Top Up Disc", "Payment Type", "Product Code", "Product Desc", "Qty", "MRP", "Disc", "SP", "Customer Name", "Customer Email", "Customer Number", "Customer Address"  
+                           {"userEnteredValue": {"numberValue": "Sale ID"}},
+                           {"userEnteredValue": {"numberValue": "Sale Date Time"}},
+                           {"userEnteredValue": {"numberValue": "Final Amt"}},
+                           {"userEnteredValue": {"numberValue":  "Top Up Disc"}},
+                           {"userEnteredValue": {"numberValue": "Payment Type"}},
+                           {"userEnteredValue": {"numberValue": "Product Code"}},
+                           {"userEnteredValue": {"numberValue": "Qty"}},
+                           {"userEnteredValue": {"numberValue": "MRP"}},
+                           {"userEnteredValue": {"numberValue":  "Disc"}},
+                           {"userEnteredValue": {"numberValue": "SP"}},
+                           {"userEnteredValue": {"numberValue": "Customer Name"}},
+                           {"userEnteredValue": {"numberValue": "Customer Email"}},
+                           {"userEnteredValue": {"numberValue": "Customer Number"}},
+                           {"userEnteredValue": {"numberValue":  "Customer Address"}}
 	         ]
                        }
                      ]
