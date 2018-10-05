@@ -2006,12 +2006,15 @@
                    });
                    promise_doesFileExistOnGoogle.then (function (response) {
                       fileExistsOnGoogle = response;
+                       console.log('File exists?: ' + fileExistsOnGoogle);
                        handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
                    }, function () {
+                   console.log('Couldnt figure out if File ID exists in Google: ');
                    });
                }
                else {
                    fileExistsOnGoogle = false;
+                   console.log('File ID doesnt exists in DB: ');
                    handleSheetBasedOnItsGoogleAvailability(sheetID, fileExistsOnGoogle);
                }
                
