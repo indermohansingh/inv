@@ -1359,6 +1359,8 @@
                <input type="text" class="search" />
                <ul id="ulSalesHist" class="list"> </ul>
                <ul class="pagination"></ul>
+               <P>
+                  <button class="button button-rounded" onclick="ClearAllSalesHist();">Clear History</button>
             </div>
          </div>
       </div>
@@ -1532,6 +1534,7 @@
          		fullSaleInvoice.saleRows [i].SP = fullSaleInvoice.saleRows [i].MRP * (100- fullSaleInvoice.saleRows [i].Disc )/100 * fullSaleInvoice.saleRows [i].Qty ;
                      totofInvoice += fullSaleInvoice.saleRows [i].SP ;
                  }
+	fullSaleInvoice.saleDateTime = new Date();
 	fullSaleInvoice.finalAmount = document.getElementById("txtTotal").value;
 	fullSaleInvoice.topUpDisc= totofInvoice  - fullSaleInvoice.finalAmount;
 	console.log(fullSaleInvoice );
@@ -1711,7 +1714,22 @@ console.log(JSON.stringify(fullSaleInvoice));
     resolve();
   };
          }
+
+         function DeleteAllSalesHist() {
+             console.log('Deleting Sales History');
+              var store;
+             var tx;
+             tx = db.transaction(GKsaleRecsObjStoreName, "readwrite");
+             store = tx.objectStore(GKsaleRecsObjStoreName);
+	var storeRequest = store.clear();
+  storeRequest.onsuccess = function(event) {
+  };
+         }
          
+	function ClearAllSalesHist() {
+	DeleteAllSalesHist(); //delete from DB....
+	PrepareSalesHistoryListForDisplay();
+}
          function resets(open) {
              //create new db... 
              db = open.result;
@@ -2010,6 +2028,8 @@ console.log(JSON.stringify(fullSaleInvoice));
                  for (i = 0; i < salesHistJSON.saleRows.length; i++) {
                              lstItmtxt = "<B>Sale ID: </B>";
                              lstItmtxt += salesHistJSON.saleID;
+                             lstItmtxt = "<B>Sale Date Time: </B>";
+                             lstItmtxt += salesHistJSON.saleDateTime;
                              lstItmtxt += " <B>Final Amt: </B>";
                              lstItmtxt += salesHistJSON.finalAmount;
                              lstItmtxt += " <B>TopUP Disc: </B>";
@@ -2217,11 +2237,7 @@ console.log(JSON.stringify(fullSaleInvoice));
              "sheets": [
                {
                  "properties": {
-                     "title": "Sales",
-                   "gridProperties": {
-                     "columnCount": 6,
-                     "rowCount": 1
-                   }
+                     "title": "Sales"
                  },
                "data": 
                  [
@@ -2231,10 +2247,8 @@ console.log(JSON.stringify(fullSaleInvoice));
                        {
                          "values": 
                          [
-                           {"userEnteredValue": {"numberValue": 1}},
-                           {"userEnteredValue": {"numberValue": 2}},
-                           {"userEnteredValue": {"numberValue": 3}}
-                         ]
+                           "Sale ID","Sale Date Time" "Final Amt", "Top Up Disc", "Payment Type", "Product Code", "Product Desc", "Qty", "MRP", "Disc", "SP", "Customer Name", "Customer Email", "Customer Number", "Customer Address"  
+	         ]
                        }
                      ]
                    }
@@ -2242,7 +2256,7 @@ console.log(JSON.stringify(fullSaleInvoice));
                }
              ],
              "properties": {
-               "title": "filename"
+               "title": "GK Sales Info"
              }
            };
          
