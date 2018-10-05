@@ -1523,6 +1523,7 @@
              }
          function CreateSaleInvoice(paymentType) {
              var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+             if (tbl.rows.length <=1) return; 
              var i, totofInvoice = 0;
              var fullSaleInvoice = {};
              var saleRows = [];
