@@ -1315,6 +1315,9 @@
                <td>
                   <button class="button button-rounded" onclick="showDiv('modalUpdateInventory');">Reload Inventory</button>
                </td>
+               <td>
+                  <button class="button button-rounded" onclick="showDiv('modalSalesHistory');">Show Sales History</button>
+               </td>
             </tr>
             </thead>
       </table>
@@ -1343,6 +1346,19 @@
                <P>
                <P>
                   <button class="button button-rounded" onclick="GetDataFromServerAndStoreLocally();">Reload</button>
+            </div>
+         </div>
+      </div>
+      <!-- The Modal -->
+      <div id="modalSalesHistory" class="modal">
+         <!-- Modal content -->
+         <div class="modal-content">
+            <span class="close" onclick="hideDiv('modalSalesHistory');">&times;</span>
+            <div id="divLstSalesHist">
+               <B>Search: </B>
+               <input type="text" class="search" />
+               <ul id="ulSalesHist" class="list"> </ul>
+               <ul class="pagination"></ul>
             </div>
          </div>
       </div>
@@ -1504,9 +1520,9 @@
 	fullSaleInvoice.customer.Number = document.getElementById("txtNumber").value
 	fullSaleInvoice.customer.Email = document.getElementById("txtEmail").value;
 	fullSaleInvoice.customer.Address = document.getElementById("txtAddress").value;
-	fullSaleInvoice.customer.paymentType = paymentType;
+	fullSaleInvoice.paymentType = paymentType;
 	fullSaleInvoice.saleRows = saleRows ;
-                 for (i = 0; i < tbl.rows.length; i++) {
+                 for (i = 0; i < tbl.rows.length-1; i++) {
          		fullSaleInvoice.saleRows [i] = {};
          		fullSaleInvoice.saleRows [i].ProductCode = tbl.rows[i].cells[1].innerText;
          		fullSaleInvoice.saleRows [i].ProductDesc =tbl.rows[i].cells[2].innerText;
@@ -1520,8 +1536,42 @@
 	fullSaleInvoice.topUpDisc= totofInvoice  - fullSaleInvoice.finalAmount;
 	console.log(fullSaleInvoice );
 console.log(JSON.stringify(fullSaleInvoice));
-         
+	let InsertSaleRecIntoDB_promise = new Promise(function(resolve, reject) {
+	         InsertSaleRecIntoDB(fullSaleInvoice);
+	});
+	InsertSaleRecIntoDB_promise.then(
+		function () {
+			 console.log('Sale inserted into DB..');
+			//next store this in google as well...
+		},
+		function () {
+            			alert('Could not save invoice. Take a screenshot, picture or duplicate this on a register to process later.');
+		}
+	);
 }
+
+         function InsertSaleRecIntoDB(saleRecJSON, resolve, reject) {
+             console.log('Starting to Store SaleRec: ');
+             
+                 var store;
+                 var DBIndex;
+                 var tx;
+         
+                 tx = db.transaction(GKsaleRecsObjStoreName, "readwrite");
+                 store = tx.objectStore(GKsaleRecsObjStoreName);
+                 DBIndex = store.index(GKsaleRecsIdxName);
+                 var newDataAdded = store.put(saleRecJSON);
+                 console.log('JSON saved in DB: ' + JSON.stringify(saleRecJSON));
+                 newDataAdded.onsuccess = function() {
+                     console.log('JSON saved in DB successfully: ' + JSON.stringify(saleRecJSON));
+                     resolve();
+                 };
+                 newDataAdded.onerror = function(event) {
+                     console.log('JSON saved in DB FAILED: ' + JSON.stringify(saleRecJSON));
+                     reject();
+                 };
+         };        
+
              function Init() {
                  StartGoogleSignOnAPIs();
                  
@@ -1577,10 +1627,15 @@ console.log(JSON.stringify(fullSaleInvoice));
          var GKconfigObjStoreName = "GKConfig";
          var GKconfigIdxName = "configKeyIdx";
          var GKconfigIdxColName = "configKey";
+
+         var GKsaleRecsObjStoreName = "GKSaleRecs";
+         var GKsaleRecsIdxName = "saleIDIdx";
+         var GKsaleRecsColName = "saleID";
          
          function deleteAllObjStrs() {
              db.deleteObjectStore(GKinvObjStoreName);
              db.deleteObjectStore(GKconfigObjStoreName);
+             db.deleteObjectStore(GKsaleRecsObjStoreName);
          }
          
          function createAllObjStrs() {
@@ -1596,6 +1651,11 @@ console.log(JSON.stringify(fullSaleInvoice));
                  keyPath: GKconfigIdxColName
              });
              DBIndex = store.createIndex(GKconfigIdxName, [GKconfigIdxColName]);
+         
+             store = db.createObjectStore(GKsaleRecsObjStoreName, {
+                 keyPath: GKsaleRecsColName
+             });
+             DBIndex = store.createIndex(GKsaleRecsIdxName, [GKsaleRecsColName]);
          }
          
          function CreateDB(resolve, reject) {
@@ -1886,7 +1946,8 @@ console.log(JSON.stringify(fullSaleInvoice));
          function showDiv(divID) {
              var divModalPdtInventory = document.getElementById(divID);
              divModalPdtInventory.style.display = "block";
-             PrepareListForDisplay();
+             if (divID == 'modalPdtInventory') PrepareListForDisplay();
+             if (divID == 'modalSalesHistory') PrepareSalesHistoryListForDisplay();
          }
          
          function PrepareListForDisplay() {
@@ -1924,6 +1985,78 @@ console.log(JSON.stringify(fullSaleInvoice));
                      pagination: true
                  });
              }
+         function PrepareSalesHistoryListForDisplay() {
+                 //load list of sales history
+                 var ulForSalesHist = document.getElementById('ulSalesHist');
+                 var ulLength = ulForSalesHist.getElementsByTagName("li").length;
+                 if (ulLength > 0) return;
+                 var salesHistDet, li, p, lstItmtxt;
+             var store;
+             var DBIndex;
+             var tx;
+             tx = db.transaction(GKsaleRecsObjStoreName, "readwrite");
+             store = tx.objectStore(GKsaleRecsObjStoreName);
+             DBIndex = store.index(GKsaleRecsIdxName);
+             var countRequest = DBIndex.count();
+             countRequest.onsuccess = function() {
+                 console.log('Total Sales Hist ROWS: ' + countRequest.result);
+             }
+             DBIndex.openCursor().onsuccess = function(event) {
+                 var cursor = event.target.result;
+                 if (cursor) {
+                     //console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' value: ' + JSON.stringify(cursor.value));
+                     var salesHistJSON = cursor.value; 
+                         if (salesHistJSON != undefined) {
+                 for (i = 0; i < salesHistJSON.saleRows.length; i++) {
+                             lstItmtxt = "<B>Sale ID: </B>";
+                             lstItmtxt += salesHistJSON.saleID;
+                             lstItmtxt += " <B>Final Amt: </B>";
+                             lstItmtxt += salesHistJSON.finalAmount;
+                             lstItmtxt += " <B>TopUP Disc: </B>";
+                             lstItmtxt += salesHistJSON.topUpDisc;
+                             lstItmtxt += " <B>Payment Type: </B>";
+                             lstItmtxt += salesHistJSON.paymentType;
+                             lstItmtxt += " <B>Product Code: </B>";
+                             lstItmtxt += salesHistJSON.saleRows [i].ProductCode ;
+                             lstItmtxt += " <B>Product Desc: </B>";
+                             lstItmtxt += salesHistJSON.saleRows [i].ProductDesc;
+                             lstItmtxt += " <B>Qty: </B>";
+                             lstItmtxt += salesHistJSON.saleRows [i].Qty;
+                             lstItmtxt += " <B>MRP: </B>";
+                             lstItmtxt += salesHistJSON.saleRows [i].MRP;
+                             lstItmtxt += " <B>Disc: </B>";
+                             lstItmtxt += salesHistJSON.saleRows [i].Disc;
+                             lstItmtxt += " <B>SP: </B>";
+                             lstItmtxt += salesHistJSON.saleRows [i].SP;
+                             lstItmtxt += " <B>Cust Name: </B>";
+                             lstItmtxt += salesHistJSON.customer.Name;
+                             lstItmtxt += " <B>Cust Email: </B>";
+                             lstItmtxt += salesHistJSON.customer.Email;
+                             lstItmtxt += " <B>Cust Number: </B>";
+                             lstItmtxt += salesHistJSON.customer.Number;
+                             lstItmtxt += " <B>Cust Address: </B>";
+                             lstItmtxt += salesHistJSON.customer.Address;
+                             li = document.createElement("li");
+                             p = document.createElement("p");
+                             p.innerHTML = lstItmtxt;
+                             p.className = "salesHistForSearch";
+                             li.appendChild(p);
+                             ulForSalesHist.appendChild(li);
+	}
+                         }
+                     cursor.continue();
+                 } else {
+                     console.log('Entries all loaded.');
+                 };
+             };
+                 //make list searchable... 
+                 var searchableListPdtiny = new List('divLstSalesHist', {
+                     valueNames: ['salesHistForSearch'],
+                     page: 10,
+                     pagination: true
+                 });
+             }
+
              // when the user clicks on <span> (x), close the modal 
          function hideDiv(diVID) {
                  var divModalPdtInventory = document.getElementById(diVID);
