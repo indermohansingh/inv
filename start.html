@@ -1213,7 +1213,6 @@
          };
          
       </script>
-      <pre id="content"></pre>
       <table id="tblAction" class="pure-table pure-table-bordered">
          <tbody>
             <tr>
@@ -1228,7 +1227,7 @@
          <tbody>
             <tr>
                <td>
-                  <button class="button button-rounded">New Invoice</button>
+                  <button class="button button-rounded" onclick="prepareTableForNewSale();">New Invoice</button>
                </td>
                <td>
                   <button class="button button-rounded" onclick="showDiv('modalPdtInventory');">List of Inventory</button>
@@ -1440,6 +1439,16 @@
          
              //set events for new rows... 
              SetTableForUse();
+         }
+         
+         function prepareTableForNewSale() {
+             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+             var i;
+             for (i = tbl.rows.length-1; i > 0; i--) {
+                 tbl.deleteRow(i);
+             }
+             AddNewEmptyRow();
+             UpdateInvoiceTotal();
          }
          
          function HandleNewPdtBought(pdtCodeCell, lPdtCode) {
@@ -2240,7 +2249,6 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                if ( fileExistsOnGoogle ) {
                    //use already existing sheet.. and append to it...
 	GKgoogleSheetID = sheetID;
-                   ReadAndDisplaySheetContents (sheetID);
                }
                else {
                   //create new sheet and append to it...
@@ -2259,7 +2267,6 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                        });
                        promise_InsertToDB.then(
                            function() {
-                               ReadAndDisplaySheetContents(sheetID);
                            },
                            function() {}
                        )
@@ -2325,19 +2332,6 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
          });
          }
          
-           
-         /**
-          * Append a pre element to the body containing the given message
-          * as its text node. Used to display the results of the API call.
-          *
-          * @param {string} message Text to be placed in pre element.
-          */
-         function appendPre(message) {
-           var pre = document.getElementById('content');
-           var textContent = document.createTextNode(message + '\n');
-           pre.appendChild(textContent);
-         }
-         
          function doesFileExistOnGoogle(sheetID, resolve, reject) {
              gapi.client.sheets.spreadsheets.values.get({
                  spreadsheetId: sheetID , 
@@ -2348,32 +2342,6 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                  resolve(false);
              });
          }
-         
-         /**
-          * Print the names and majors of students in a sample spreadsheet:
-          * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-          */
-         function ReadAndDisplaySheetContents(sheetID) {
-           gapi.client.sheets.spreadsheets.values.get({
-             spreadsheetId: sheetID , 
-             range: 'Sales!A1:B1'
-           }).then(function(response) {
-             var range = response.result;
-             if (range.values.length > 0) {
-               appendPre('Name, Major:');
-               for (i = 0; i < range.values.length; i++) {
-                 var row = range.values[i];
-                 // Print columns A and E, which correspond to indices 0 and 4.
-                 appendPre(row[0] + ', ' + row[4]);
-               }
-             } else {
-               appendPre('No data found.');
-             }
-           }, function(response) {
-             appendPre('Error: ' + response.result.error.message);
-           });
-         }
-         
       </script>
       <script async defer src="https://apis.google.com/js/api.js"
          onload="this.onload=function(){};Init()"
