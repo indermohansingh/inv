@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<h1>Will send a message</h1>
+<button id="sendMsg" onclick="sendMsg();">Send Msg</button>
+<script >
+    function sendMsg(){
+        var extID = 'bgomclenlnghkaoepnbknnpbfaklgpcf';
+        chrome.runtime.sendMessage(extID, {greeting: "hello"}, function(response) {
+          console.log(response.farewell);
+        });
+    }
+    </script>
+</body>
+</html>
