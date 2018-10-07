@@ -1572,14 +1572,15 @@
 function PrintReceiptOfSale(fullSaleInvoice) {
 	var i, strEachRow;
     var strInvoiceText = "";
-	strInvoiceText = " Giggly Kangaroos " + "\n";
+	strInvoiceText = "Giggly Kangaroos " + "\n";
 	strInvoiceText += "Shop No. 16, Palm Beach Arcade, " + "\n";
 	strInvoiceText += "Sector-4, Nerul-W, " + "\n";
 	strInvoiceText += "Navi Mumbai " + "\n";
+	strInvoiceText += " " + "\n";
 	strInvoiceText += "Ph: 93262 00448 " + "\n";
 	strInvoiceText += " " + "\n";
     var saleDateObj = new Date(fullSaleInvoice.saleDateTime);
-    var formattedDateForDisplay = saleDateObj.getDate()+"-"+ (saleDateObj.getMonth() + 1) + " " + saleDateObj.getFullYear();
+    var formattedDateForDisplay = saleDateObj.getDate()+"-"+ (saleDateObj.getMonth() + 1) + "-" + saleDateObj.getFullYear();
     formattedDateForDisplay += " " + saleDateObj.getHours()+":"+saleDateObj.getMinutes(); 
 	strInvoiceText += formattedDateForDisplay + "\n";
 	strInvoiceText += "Invoice No. " + fullSaleInvoice.saleID + "\n";
@@ -1587,10 +1588,10 @@ function PrintReceiptOfSale(fullSaleInvoice) {
 	for (i = 0; i < fullSaleInvoice.saleRows.length; i++) {
     	strInvoiceText += fullSaleInvoice.saleRows [i].ProductCode + "\n";
     	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.substring(0, 30) + "\n";
-    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.Qty + " " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.MRP + "   " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.Disc + "   " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.SP + "\n" ;
+    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.Qty.toString() + " " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.MRP.toString() + "   " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.Disc.toString() + "   " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.SP.toString() + "\n" ;
 	}
 	strInvoiceText += "------------------------------" + "\n";
     strInvoiceText += "Additional Discount: " + fullSaleInvoice.topUpDisc + "\n" ;
