@@ -1556,6 +1556,8 @@
              InsertSaleRecIntoDB_promise.then(
                  function () {
                      console.log('Sale inserted into DB..');
+                     //print the receipt
+                     PrintReceiptOfSale(fullSaleInvoice);
                      //next store this in google as well...
                      appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
                      //prepare table for new sale...
@@ -1566,6 +1568,41 @@
                  }
              );
 }
+
+function PrintReceiptOfSale(fullSaleInvoice) {
+	var i, strEachRow;
+    var strInvoiceText = "";
+	strInvoiceText = " Giggly Kangaroos " + "\n";
+	strInvoiceText += "Shop No. 16, Palm Beach Arcade, " + "\n";
+	strInvoiceText += "Sector-4, Nerul-W, " + "\n";
+	strInvoiceText += "Navi Mumbai " + "\n";
+	strInvoiceText += "Ph: 93262 00448 " + "\n";
+	strInvoiceText += " " + "\n";
+    var saleDateObj = new Date(fullSaleInvoice.saleDateTime);
+    var formattedDateForDisplay = $.datepicker.formatDate("d M yy", saleDateObj);
+    formattedDateForDisplay += " " + saleDateObj.getHours()+":"+saleDateObj.getMinutes(); 
+	strInvoiceText += formattedDateForDisplay + "\n";
+	strInvoiceText += "Invoice No. " + fullSaleInvoice.saleID + "\n";
+	strInvoiceText += "------------------------------" + "\n";
+	for (i = 0; i < fullSaleInvoice.saleRows.length; i++) {
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductCode + "\n";
+    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.substring(0, 30) + "\n";
+    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.Qty + " " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.MRP + "   " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.Disc + "   " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.SP + "\n" ;
+	}
+	strInvoiceText += "------------------------------" + "\n";
+    strInvoiceText += "Additional Discount: " + fullSaleInvoice.topUpDisc + "\n" ;
+    strInvoiceText += "Total: " + fullSaleInvoice.finalAmount + "\n" ;
+    strInvoiceText += "Paid By " + fullSaleInvoice.paymentType + "\n" ;
+    strInvoiceText += "\n\n" ;
+    strInvoiceText += "Thanks for visiting us.\n" ;
+    strInvoiceText += "\n\n" ;
+    console.log(strInvoiceText );
+    alert(strInvoiceText );
+}
+
 function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
 	var i, strEachRow, strAllValues;
 	strAllValues = " [ ";
