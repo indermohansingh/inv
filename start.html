@@ -1580,28 +1580,33 @@ function PrintReceiptOfSale(fullSaleInvoice) {
 	strInvoiceText += "Ph: 93262 00448 " + "\n";
 	strInvoiceText += " " + "\n";
     var saleDateObj = new Date(fullSaleInvoice.saleDateTime);
-    var formattedDateForDisplay = saleDateObj.getDate()+"-"+ (saleDateObj.getMonth() + 1) + "-" + saleDateObj.getFullYear();
-    formattedDateForDisplay += " " + saleDateObj.getHours()+":"+saleDateObj.getMinutes(); 
+    var formattedDateForDisplay = pad(saleDateObj.getDate())+"-"+ pad((saleDateObj.getMonth() + 1)) + "-" + saleDateObj.getFullYear();
+    formattedDateForDisplay += " " + pad(saleDateObj.getHours())+":"+pad(saleDateObj.getMinutes()); 
 	strInvoiceText += formattedDateForDisplay + "\n";
 	strInvoiceText += "Invoice No. " + fullSaleInvoice.saleID + "\n";
 	strInvoiceText += "------------------------------" + "\n";
 	for (i = 0; i < fullSaleInvoice.saleRows.length; i++) {
     	strInvoiceText += fullSaleInvoice.saleRows [i].ProductCode + "\n";
     	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.substring(0, 30) + "\n";
-    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].Qty + " " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].MRP + "   " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].Disc + "   " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].SP + "\n" ;
+    	strInvoiceText += "   -> " + padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].Qty)) + " " ;
+    	strInvoiceText += padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].MRP)) + "   " ;
+    	strInvoiceText += padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].Disc)) + "%   " ;
+    	strInvoiceText += padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].SP)) + "\n" ;
 	}
 	strInvoiceText += "------------------------------" + "\n";
-    strInvoiceText += "Additional Discount: " + fullSaleInvoice.topUpDisc + "\n" ;
-    strInvoiceText += "Total: " + fullSaleInvoice.finalAmount + "\n" ;
+    strInvoiceText += "Additional Discount: " + Math.round(fullSaleInvoice.topUpDisc) + "\n" ;
+    strInvoiceText += "Total: " + Math.round(fullSaleInvoice.finalAmount) + "\n" ;
     strInvoiceText += "Paid By " + fullSaleInvoice.paymentType + "\n" ;
     strInvoiceText += "\n\n" ;
     strInvoiceText += "Thanks for visiting us.\n" ;
     strInvoiceText += "\n\n" ;
     console.log(strInvoiceText );
     alert(strInvoiceText );
+}
+
+function pad(n){return n<10 ? '0'+n : n}
+function padSpaceTo5(n) {
+    return String("     " + n).slice(-5);
 }
 
 function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
