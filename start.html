@@ -1588,10 +1588,10 @@ function PrintReceiptOfSale(fullSaleInvoice) {
 	for (i = 0; i < fullSaleInvoice.saleRows.length; i++) {
     	strInvoiceText += fullSaleInvoice.saleRows [i].ProductCode + "\n";
     	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.substring(0, 30) + "\n";
-    	strInvoiceText += "   -> " + padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].Qty)) + " " ;
-    	strInvoiceText += padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].MRP)) + "   " ;
-    	strInvoiceText += padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].Disc)) + "%   " ;
-    	strInvoiceText += padSpaceTo5(Math.round(fullSaleInvoice.saleRows [i].SP)) + "\n" ;
+    	strInvoiceText += "   -> " + padSpaces(Math.round(fullSaleInvoice.saleRows [i].Qty), 3) + " " ;
+    	strInvoiceText += padSpaces(Math.round(fullSaleInvoice.saleRows [i].MRP), 5) + "   " ;
+    	strInvoiceText += padSpaces(Math.round(fullSaleInvoice.saleRows [i].Disc), 3) + "%   " ;
+    	strInvoiceText += padSpaces(Math.round(fullSaleInvoice.saleRows [i].SP), 5) + "\n" ;
 	}
 	strInvoiceText += "------------------------------" + "\n";
     strInvoiceText += "Additional Discount: " + Math.round(fullSaleInvoice.topUpDisc) + "\n" ;
@@ -1608,8 +1608,8 @@ function PrintReceiptOfSale(fullSaleInvoice) {
 }
 
 function pad(n){return n<10 ? '0'+n : n}
-function padSpaceTo5(n) {
-    return String("     " + n).slice(-5);
+function padSpaces(n, m) {
+    return String("     " + n).slice(-1*m);
 }
 
 function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
