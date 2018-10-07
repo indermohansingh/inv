@@ -13,7 +13,7 @@
          
          // Client ID and API key from the Developer Console
          var appID = urlParams.get('appID');
-        chrome.runtime.sendMessage(appID, {greeting: "hello"}, function(response) {
+        chrome.runtime.sendMessage(appID, {dataToPrint: "hello"}, function(response) {
           console.log(response);
         });
     }
