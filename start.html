@@ -1588,10 +1588,10 @@ function PrintReceiptOfSale(fullSaleInvoice) {
 	for (i = 0; i < fullSaleInvoice.saleRows.length; i++) {
     	strInvoiceText += fullSaleInvoice.saleRows [i].ProductCode + "\n";
     	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.substring(0, 30) + "\n";
-    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].ProductDesc.Qty.toString() + " " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.MRP.toString() + "   " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.Disc.toString() + "   " ;
-    	strInvoiceText += fullSaleInvoice.saleRows [i].ProductDesc.SP.toString() + "\n" ;
+    	strInvoiceText += "   -> " + fullSaleInvoice.saleRows [i].Qty + " " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].MRP + "   " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].Disc + "   " ;
+    	strInvoiceText += fullSaleInvoice.saleRows [i].SP + "\n" ;
 	}
 	strInvoiceText += "------------------------------" + "\n";
     strInvoiceText += "Additional Discount: " + fullSaleInvoice.topUpDisc + "\n" ;
