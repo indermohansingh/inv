@@ -8,8 +8,12 @@
 <button id="sendMsg" onclick="sendMsg();">Send Msg</button>
 <script >
     function sendMsg(){
-        var extID = 'bgomclenlnghkaoepnbknnpbfaklgpcf';
-        chrome.runtime.sendMessage(extID, {greeting: "hello"}, function(response) {
+        let urlParams = new URLSearchParams(window.location.search);
+        urlParams = new URLSearchParams(window.location.search);
+         
+         // Client ID and API key from the Developer Console
+         var appID = urlParams.get('appID');
+        chrome.runtime.sendMessage(appID, {greeting: "hello"}, function(response) {
           console.log(response.farewell);
         });
     }
