@@ -1,0 +1,15 @@
+{
+  "name": "Giggly Kangaroos Print App",
+  "manifest_version": 2,
+  "version": "0.1",
+  "minimum_chrome_version": "40",
+  "externally_connectable": {
+  "matches": ["*://indermohansingh.github.io/*"]
+},
+  "app": {
+    "background": {
+      "scripts": ["bg.js"]
+    }
+  },
+  "permissions": ["fileSystem", "usb", {"usbDevices": [{"vendorId": 1110, "productId": 2056}]}]
+}
