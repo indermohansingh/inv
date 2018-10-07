@@ -1579,7 +1579,7 @@ function PrintReceiptOfSale(fullSaleInvoice) {
 	strInvoiceText += "Ph: 93262 00448 " + "\n";
 	strInvoiceText += " " + "\n";
     var saleDateObj = new Date(fullSaleInvoice.saleDateTime);
-    var formattedDateForDisplay = $.datepicker.formatDate("d M yy", saleDateObj);
+    var formattedDateForDisplay = saleDateObj.getDate()+"-"+ (saleDateObj.getMonth() + 1) + " " + saleDateObj.getFullYear();
     formattedDateForDisplay += " " + saleDateObj.getHours()+":"+saleDateObj.getMinutes(); 
 	strInvoiceText += formattedDateForDisplay + "\n";
 	strInvoiceText += "Invoice No. " + fullSaleInvoice.saleID + "\n";
