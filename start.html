@@ -1244,13 +1244,16 @@
                   <input type="text" id="txtTotal" style="text-align: right">
                </td>
                <td>
-                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('Cash');">Paid by Cash</button>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('Cash', true);">Cash</button>
                </td>
                <td>
-                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('CreditCard');">Paid by Credit Card</button>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('CreditCard', true);">Credit Card</button>
                </td>
                <td>
-                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('PayTM');">Paid by PayTM</button>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('Cash', false);">Cash, No Print</button>
+               </td>
+               <td>
+                  <button class="button button-rounded-Pay" onclick="CreateSaleInvoice('CreditCard', false);">Credit Card, No Print</button>
                </td>
             </tr>
             </thead>
@@ -1521,7 +1524,7 @@
                  var txtTotal = document.getElementById("txtTotal"); txtTotal.value = totofInvoice;
          
              }
-         function CreateSaleInvoice(paymentType) {
+         function CreateSaleInvoice(paymentType, doPrint) {
              var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
              if (tbl.rows.length <=1) return; 
              var i, totofInvoice = 0;
@@ -1557,7 +1560,7 @@
                  function () {
                      console.log('Sale inserted into DB..');
                      //print the receipt
-                     PrintReceiptOfSale(fullSaleInvoice);
+                     if (doPrint) PrintReceiptOfSale(fullSaleInvoice);
                      //next store this in google as well...
                      appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
                      //prepare table for new sale...
