@@ -1436,12 +1436,21 @@
              cell.style.textAlign = 'right';
          
              cell = row.insertCell();
-             cell.innerText = "Delete";
+             cell.innerHTML = "<a href=\"javascript:void(0);\" onclick=\"javascript: deleteSaleRow(this);\">Delete</a>";
          
              row.offsetHeight = tbl.rows[0].offsetHeight;
          
              //set events for new rows... 
              SetTableForUse();
+         }
+         
+         function deleteSaleRow(aTagClicked) {
+            rowToDel = -1;
+            try { rowToDel = aTagClicked.parentNode.parentNode.rowIndex; } catch (e) {console.log (e); }
+            if (rowToDel != -1) {
+                var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+                tbl.deleteRow(rowToDel);
+            }
          }
          
          function prepareTableForNewSale() {
@@ -1473,7 +1482,7 @@
              parentRow.cells[4].innerText = pdtMRP;
              parentRow.cells[5].innerText = '0';
              parentRow.cells[6].innerText = pdtMRP;
-             parentRow.cells[7].innerText = 'Delete';
+             //parentRow.cells[7].innerText = 'Delete';
          
              UpdateInvoiceTotal();
              //only add new row when the one being worked upon is the last row...
