@@ -2067,6 +2067,11 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
              if (divID == 'modalSalesHistory') PrepareSalesHistoryListForDisplay();
          }
          
+         function addItemToCheckout(SKU) {
+            var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
+            tbl.rows[tbl.rows.length - 1].cells[0] = SKU;
+        }
+         
          function PrepareListForDisplay() {
                  //load list
                  var ulForPdtInventory = document.getElementById('ulPdtList');
@@ -2079,7 +2084,7 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                          pdtDet = arrPdtInfo[property];
                          if (pdtDet != undefined) {
                              lstItmtxt = "<B>Code: </B>";
-                             lstItmtxt += property;
+                             lstItmtxt += "<a href=\"javascript: addItemToCheckout('" + property + "');\">" + property + "</a>";
                              lstItmtxt += " <B>Qty: </B>";
                              lstItmtxt += "?";
                              lstItmtxt += " <B>MRP: </B>";
