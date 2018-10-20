@@ -2194,14 +2194,14 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                      cursor.continue();
                  } else {
                      console.log('Entries all loaded.');
+                     //make list searchable... 
+                     var searchableListPdtiny = new List('divLstSalesHist', {
+                         valueNames: ['salesHistForSearch'],
+                         page: 10,
+                         pagination: true
+                     });
                  };
              };
-                 //make list searchable... 
-                 var searchableListPdtiny = new List('divLstSalesHist', {
-                     valueNames: ['salesHistForSearch'],
-                     page: 10,
-                     pagination: true
-                 });
              }
 
              // when the user clicks on <span> (x), close the modal 
