@@ -1451,6 +1451,7 @@
                 var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
                 if (rowToDel != tbl.rows.length ) tbl.deleteRow(rowToDel-1);
             }
+             UpdateInvoiceTotal();
          }
          
          function prepareTableForNewSale() {
