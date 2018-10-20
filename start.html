@@ -1449,7 +1449,7 @@
             try { rowToDel = aTagClicked.parentNode.parentNode.rowIndex; } catch (e) {console.log (e); }
             if (rowToDel != -1) {
                 var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
-                tbl.deleteRow(rowToDel-1);
+                if (rowToDel != tbl.rows.length ) tbl.deleteRow(rowToDel-1);
             }
          }
          
