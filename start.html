@@ -1358,7 +1358,9 @@
             <span class="close" onclick="hideDiv('modalSalesHistory');">&times;</span>
             <div id="divLstSalesHist">
                <B>Search: </B>
-               <input type="text" class="search" />
+               <input type="text" class="search" /> 
+               <textarea id="txtSalesHistoryValues" rows="1" cols="10"></textarea>
+               
                <ul id="ulSalesHist" class="list"> </ul>
                <ul class="pagination"></ul>
                <P>
@@ -2149,40 +2151,56 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
              DBIndex.openCursor().onsuccess = function(event) {
                  var cursor = event.target.result;
                  if (cursor) {
+                       lstItmtxtForClipboard = "";
                      //console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' value: ' + JSON.stringify(cursor.value));
                      var salesHistJSON = cursor.value; 
                          if (salesHistJSON != undefined) {
                  for (i = 0; i < salesHistJSON.saleRows.length; i++) {
                              lstItmtxt = "<B>Sale ID: </B>";
                              lstItmtxt += salesHistJSON.saleID;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.saleID + "\",";
                              lstItmtxt += "<B>Sale Date Time: </B>";
                              lstItmtxt += salesHistJSON.saleDateTime;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.saleDateTime + "\",";
                              lstItmtxt += " <B>Final Amt: </B>";
                              lstItmtxt += salesHistJSON.finalAmount;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.finalAmount + "\",";
                              lstItmtxt += " <B>TopUP Disc: </B>";
                              lstItmtxt += salesHistJSON.topUpDisc;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.topUpDisc + "\",";
                              lstItmtxt += " <B>Payment Type: </B>";
                              lstItmtxt += salesHistJSON.paymentType;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.paymentType + "\",";
                              lstItmtxt += " <B>Product Code: </B>";
                              lstItmtxt += salesHistJSON.saleRows [i].ProductCode ;
+                             lstItmtxtForClipboard += "\"" + addslashes(salesHistJSON.saleRows [i].ProductCode) + "\",";
                              lstItmtxt += " <B>Product Desc: </B>";
                              lstItmtxt += salesHistJSON.saleRows [i].ProductDesc;
+                             lstItmtxtForClipboard += "\"" + addslashes(salesHistJSON.saleRows [i].ProductDesc) + "\",";
                              lstItmtxt += " <B>Qty: </B>";
                              lstItmtxt += salesHistJSON.saleRows [i].Qty;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.saleRows [i].Qty + "\",";
                              lstItmtxt += " <B>MRP: </B>";
                              lstItmtxt += salesHistJSON.saleRows [i].MRP;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.saleRows [i].MRP + "\",";
                              lstItmtxt += " <B>Disc: </B>";
                              lstItmtxt += salesHistJSON.saleRows [i].Disc;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.saleRows [i].Disc + "\",";
                              lstItmtxt += " <B>SP: </B>";
                              lstItmtxt += salesHistJSON.saleRows [i].SP;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.saleRows [i].SP + "\",";
                              lstItmtxt += " <B>Cust Name: </B>";
                              lstItmtxt += salesHistJSON.customer.Name;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.customer.Name + "\",";
                              lstItmtxt += " <B>Cust Email: </B>";
                              lstItmtxt += salesHistJSON.customer.Email;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.customer.Email + "\",";
                              lstItmtxt += " <B>Cust Number: </B>";
                              lstItmtxt += salesHistJSON.customer.Number;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.customer.Number + "\",";
                              lstItmtxt += " <B>Cust Address: </B>";
                              lstItmtxt += salesHistJSON.customer.Address;
+                             lstItmtxtForClipboard += "\"" + salesHistJSON.customer.Address + "\"\n";
                              li = document.createElement("li");
                              p = document.createElement("p");
                              p.innerHTML = lstItmtxt;
@@ -2194,6 +2212,8 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
                      cursor.continue();
                  } else {
                      console.log('Entries all loaded.');
+                     var txtAreaSalesHistoryValues = document.getElementById('txtSalesHistoryValues');
+                     txtAreaSalesHistoryValues.value = lstItmtxtForClipboard;
                      //make list searchable... 
                      var searchableListPdtiny = new List('divLstSalesHist', {
                          valueNames: ['salesHistForSearch'],
