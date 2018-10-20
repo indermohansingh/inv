@@ -2150,8 +2150,8 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
              }
              DBIndex.openCursor().onsuccess = function(event) {
                  var cursor = event.target.result;
+                 lstItmtxtForClipboard = "";
                  if (cursor) {
-                       lstItmtxtForClipboard = "";
                      //console.log('DB Row Found: Key: ' + JSON.stringify(cursor.key) + ' value: ' + JSON.stringify(cursor.value));
                      var salesHistJSON = cursor.value; 
                          if (salesHistJSON != undefined) {
