@@ -2069,7 +2069,8 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
          
          function addItemToCheckout(SKU) {
             var tbl = document.getElementById("tblPurchaseInvoice").getElementsByTagName('tbody')[0];
-            tbl.rows[tbl.rows.length - 1].cells[1] = SKU;
+            tbl.rows[tbl.rows.length - 1].cells[1].innerText = SKU;
+            hideDiv('modalPdtInventory');
         }
          
          function PrepareListForDisplay() {
