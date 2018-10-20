@@ -1560,7 +1560,7 @@
                  function () {
                      console.log('Sale inserted into DB..');
                      //print the receipt
-                     if (doPrint) PrintReceiptOfSale(fullSaleInvoice);
+                     if (doPrint) try { PrintReceiptOfSale(fullSaleInvoice); } catch (e) {console.log(e);}
                      //next store this in google as well...
                      appendNewSalesRowsToGoogleSheet(fullSaleInvoice);
                      //prepare table for new sale...
