@@ -1629,6 +1629,10 @@ function padSpaces(n, m) {
     return String("     " + n).slice(-1*m);
 }
 
+function addslashes (str) {
+    return (str+'').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+}
+
 function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
 	var i, strEachRow, strAllValues;
 	strAllValues = " [ ";
@@ -1640,8 +1644,8 @@ function appendNewSalesRowsToGoogleSheet( fullSaleInvoice  ) {
 		strEachRow +=  '"' + fullSaleInvoice.finalAmount  + '", ';
 		strEachRow +=  '"' + fullSaleInvoice.topUpDisc + '", ';
 		strEachRow +=  '"' + fullSaleInvoice.paymentType  + '", ';
-		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].ProductCode  + '", ';
-		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].ProductDesc  + '", ';
+		strEachRow +=  '"' + addslashes(fullSaleInvoice.saleRows [i].ProductCode)  + '", ';
+		strEachRow +=  '"' + addslashes(fullSaleInvoice.saleRows [i].ProductDesc)  + '", ';
 		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].Qty  + '", ';
 		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].MRP  + '", ';
 		strEachRow +=  '"' + fullSaleInvoice.saleRows [i].Disc  + '", ';
