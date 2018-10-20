@@ -1451,6 +1451,10 @@
                  tbl.deleteRow(i);
              }
              AddNewEmptyRow();
+             document.getElementById("txtName").value = "" ;
+             document.getElementById("txtNumber").value = "" ;
+             document.getElementById("txtEmail").value; = "" ;
+             document.getElementById("txtAddress").value = "" ;
              UpdateInvoiceTotal();
              setTimeout(function() { tbl.rows[0].cells[1].focus();}, 100);
          }
